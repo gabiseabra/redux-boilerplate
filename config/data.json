@@ -1,0 +1,10 @@
+{
+	"@context": "http://schema.org",
+	"@type": "Thing",
+	"name": "Title",
+	"description": "Description",
+	"sameAs": [
+		"https://facebook.com/",
+		"https://google.com/"
+	]
+}

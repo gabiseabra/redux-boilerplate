@@ -1,0 +1,20 @@
+{
+	"env": {
+		"production": {
+			"host": "example.com",
+			"port": 80
+		}
+	},
+	"host": "localhost",
+	"port": 3000,
+	"serverRendering": true,
+	"app": {
+		"head": {
+			"htmlAttributes": {
+				"lang": "en"
+			},
+			"titleTemplate": "%s - Site Title",
+			"defaultTitle": "Default Title"
+		}
+	}
+}
