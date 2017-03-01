@@ -1,7 +1,7 @@
 {
   "name": "react-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "React + Webpack 2 boilerplate",
   "main": "index.js",
   "scripts": {
     "watch": "babel-node webpack/devServer.js",
