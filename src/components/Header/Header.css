@@ -1,4 +1,7 @@
+@import "../../css/colors.css";
+
 .Header {
 	padding: 10px 20px;
-	background: blue;
+	background: var(--primaryColor);
+	color: var(--primaryTextColor);
 }

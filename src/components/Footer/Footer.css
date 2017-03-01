@@ -1,8 +1,7 @@
+@import "../../css/colors.css";
+
 .Footer {
 	padding: 10px 20px;
-	background: blue;
-}
-
-.copy {
-	font-style: italic;
+	background: var(--primaryColor);
+	color: var(--primaryTextColor);
 }
