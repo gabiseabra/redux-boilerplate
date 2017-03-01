@@ -1,5 +1,5 @@
 import { Component, PropTypes } from "react"
-import Profile from "./Profile"
+import Profile from "../lib/Profile"
 
 /**
  * App context provider
