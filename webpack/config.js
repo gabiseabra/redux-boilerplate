@@ -48,7 +48,18 @@ export default {
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
-						{ loader: "css-loader", options: { modules: true, importLoaders: 1 } },
+						{
+							loader: "css-loader",
+							options: {
+								modules: true,
+								importLoaders: 1,
+								localIdentName: (
+									env === "production" ?
+									"[hash:base64:5]" :
+									"[name]_[local]--[hash:base64:5]"
+								)
+							}
+						},
 						{ loader: "postcss-loader" }
 					]
 				})

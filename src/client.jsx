@@ -5,6 +5,7 @@ import Provider from "./app/Provider"
 import routes from "./app/routes"
 
 const appData = JSON.parse(document.getElementById("app").textContent)
+
 const profile = JSON.parse(document.getElementById("data").textContent)
 
 ReactDOM.render(

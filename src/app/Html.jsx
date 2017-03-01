@@ -16,12 +16,16 @@ const Html = ({ data, profile, children }) => {
 				{head.link.toComponent()}
 				{head.script.toComponent()}
 				<link rel="shortcut icon" href="/favicon.ico" />
+				<link rel="stylesheet" href="/dist/app.css" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 				<script id="app" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 				<script id="data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
+				<script type="text/javascript" src="/dist/manifest.js" />
 			</head>
 			<body>
 				<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
+				<script type="text/javascript" src="/dist/vendor.js" />
+				<script type="text/javascript" src="/dist/app.js" />
 			</body>
 		</html>
 	)
@@ -34,3 +38,10 @@ Html.propTypes = {
 }
 
 export default Html
+
+export const render = (data, profile, component) => {
+	const html = ReactDOM.renderToStaticMarkup(
+		<Html data={data} profile={profile}>{component}</Html>
+	);
+	return `<!doctype html>\n${html}`;
+}

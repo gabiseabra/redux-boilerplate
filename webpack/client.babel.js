@@ -1,6 +1,7 @@
 /**
  * Client bundle configuration file
  */
+import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
 import ManifestPlugin from "webpack-manifest-plugin"
@@ -19,7 +20,8 @@ export default merge.smart(config, {
 		app: "./src/client.jsx"
 	},
 	output: {
-		path: "./public/dist"
+		path: path.join(__dirname, "../public/dist"),
+		publicPath: "/dist/"
 	},
 	plugins: [
 		new ManifestPlugin(),
