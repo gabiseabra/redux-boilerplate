@@ -18,8 +18,8 @@ const Html = ({ data, profile, children }) => {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<link rel="stylesheet" href="/dist/app.css" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-				<script id="app" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
-				<script id="data" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
+				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+				<script id="profile" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
 				<script type="text/javascript" src="/dist/manifest.js" />
 			</head>
 			<body>
