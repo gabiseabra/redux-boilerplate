@@ -16,5 +16,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById("app")
 )
-
-console.log(document.getElementById("app"), appData, profile);
