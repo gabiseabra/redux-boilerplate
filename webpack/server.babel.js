@@ -8,14 +8,17 @@ import config from "./config"
 
 export default merge.smart(config, {
 	target: "node",
-	entry: "./src/server.jsx",
+	entry: {
+		server: "./src/server.jsx",
+		api: "./api/server.js"
+	},
 	externals: [
 		/\.json$/,
 		nodeExternals()
 	],
 	output: {
 		path: path.join(__dirname, "../dist"),
-		filename: "server.js",
+		filename: "[name].js",
 		libraryTarget: "commonjs"
 	},
 	node: {
