@@ -16,7 +16,7 @@ app.use(compression())
 
 app.use("/content", content)
 
-app.listen(port, err => {
+server.listen(port, err => {
 	if(err) {
 		console.error(err);
 	}
