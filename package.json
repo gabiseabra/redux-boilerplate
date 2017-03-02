@@ -2,8 +2,8 @@
   "name": "react-boilerplate",
   "version": "1.0.0",
   "description": "React + Webpack 2 boilerplate",
-  "main": "index.js",
   "scripts": {
+    "start": "npm run server",
     "watch": "babel-node webpack/devServer.js",
     "build": "webpack --config=webpack/config.babel.js --progress --colors",
     "build:client": "webpack --config=webpack/client.babel.js --progress --colors",
