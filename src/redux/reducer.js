@@ -1,5 +1,5 @@
 import { combineReducers } from "redux"
-import content from "./content/reducer"
+import { content } from "./modules/reducers"
 
 export default combineReducers({
 	content

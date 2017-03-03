@@ -30,6 +30,7 @@
 		"class-methods-use-this": "off",
 		"no-plusplus": "off",
 		"consistent-return": "off",
+		"generator-star-spacing": [ "error", { "before": true, "after": true } ],
 		"import/no-extraneous-dependencies": "off"
 	}
 }
