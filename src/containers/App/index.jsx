@@ -7,7 +7,7 @@ const App = ({ className, children }, { data }) => (
 	<div className={[ styles.App, className ].join(" ")}>
 		{"head" in data && <Helmet {...data.head} />}
 		<Header />
-		<main>{children}</main>
+		<main className={styles.content}>{children}</main>
 		<Footer />
 	</div>
 )
