@@ -37,4 +37,3 @@ export default function * watch() {
 		takeLatest(posts.LOAD, loadPosts)
 	]
 }
-
