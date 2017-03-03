@@ -4,7 +4,7 @@
   "description": "React + Redux + Webpack 2 boilerplate",
   "scripts": {
     "start": "concurrent --kill-others \"npm run api\" \"npm run server\"",
-    "watch": "babel-node webpack/devServer.js",
+    "watch": "concurrent --kill-others \"babel-node api/server.js\" \"babel-node webpack/devServer.js\"",
     "build": "webpack --config=webpack/config.babel.js --progress --colors",
     "build:client": "webpack --config=webpack/client.babel.js --progress --colors",
     "build:server": "webpack --config=webpack/server.babel.js --progress --colors",
