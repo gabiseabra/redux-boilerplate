@@ -5,6 +5,7 @@ import compression from "compression"
 import favicon from "serve-favicon"
 import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
+import store from "./redux/store"
 import profile from "../config/data.json"
 import config from "../config/app.json"
 
@@ -21,6 +22,7 @@ app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 app.use(appMiddleware({
 	serverRendering: config.serverRendering,
 	data: config.app,
+	store,
 	routes,
 	profile
 }))

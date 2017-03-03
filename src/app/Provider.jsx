@@ -1,14 +1,16 @@
-import { Component, PropTypes } from "react"
+import React, { Component, PropTypes } from "react"
+import { Provider } from "react-redux"
 import Profile from "../lib/Profile"
 
 /**
  * App context provider
  * @class Provider
  */
-export default class Provider extends Component {
+export default class ContextProvider extends Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		profile: PropTypes.object.isRequired,
+		store: PropTypes.object.isRequired,
 		children: PropTypes.node.isRequired
 	}
 
@@ -25,6 +27,11 @@ export default class Provider extends Component {
 	}
 
 	render() {
-		return this.props.children;
+		const { store, children } = this.props;
+		return (
+			<Provider store={store}>
+				{children}
+			</Provider>
+		);
 	}
 }

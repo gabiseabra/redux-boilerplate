@@ -6,6 +6,8 @@ const router = Express.Router()
 
 const directory = path.join(__dirname, "../../content")
 
+const sortArticles = (a, b) => (new Date(a.date) - new Date(b.date))
+
 router.get("/:name?", (req, res, next) => {
 	const file = (req.params.name ? path.join(directory, req.params.name) : directory);
 	if(fs.existsSync(file)) {
@@ -29,8 +31,6 @@ router.get("/:name?", (req, res, next) => {
 		res.status(404).json(undefined);
 	}
 })
-
-const sortArticles = (a, b) => (new Date(a.date) - new Date(b.date))
 
 router.get("/", (req, res) => {
 	const files = fs.readdirSync(directory);

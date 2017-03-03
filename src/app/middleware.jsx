@@ -7,6 +7,7 @@ export default function middleware(config) {
 	const {
 		serverRendering,
 		routes,
+		store,
 		data,
 		profile
 	} = config;
@@ -21,7 +22,7 @@ export default function middleware(config) {
 					res.redirect(302, redirect.pathname + redirect.search);
 				} else if(props) {
 					const component = (
-						<Provider data={data} profile={profile}>
+						<Provider data={data} profile={profile} store={store}>
 							<RouterContext {...props} />
 						</Provider>
 					);
