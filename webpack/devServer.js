@@ -1,6 +1,7 @@
 import path from "path"
 import http from "http"
 import Express from "express"
+import proxy from "express-http-proxy"
 import webpack from "webpack"
 import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
@@ -9,6 +10,10 @@ import profile from "../config/data.json"
 import webpackConfig from "./client.babel"
 
 const port = config.devPort || 8080;
+
+const apiHost = config.apiHost || "localhost"
+
+const apiPort = config.apiPort || 3002
 
 const serverOptions = {
 	contentBase: `http://${config.host}:${port}`,
@@ -33,6 +38,8 @@ const server = http.Server(app)
 app.use(devMiddleware(compiler, serverOptions))
 
 app.use(Express.static(path.join(__dirname, "../public")))
+
+app.use("/api", proxy(`${apiHost}:${apiPort}`))
 
 app.use(appMiddleware({
 	serverRendering: false,

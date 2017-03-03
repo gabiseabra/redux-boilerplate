@@ -4,7 +4,7 @@ import compression from "compression"
 import config from "../config/app.json"
 import { content } from "./modules"
 
-const host = config.apiHost || config.host || "localhost"
+const host = config.apiHost || "localhost"
 
 const port = config.apiPort || 3002
 
