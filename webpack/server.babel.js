@@ -9,7 +9,10 @@ import config from "./config"
 export default merge.smart(config, {
 	target: "node",
 	entry: {
-		server: "./src/server.jsx",
+		server: [
+			"babel-polyfill",
+			"./src/server.jsx"
+		],
 		api: "./api/server.js"
 	},
 	externals: [

@@ -2,12 +2,13 @@ import React from "react"
 import { match, RouterContext } from "react-router"
 import { render } from "./Html"
 import Provider from "./Provider"
+import createStore from "../redux/store"
+import saga from "../redux/saga"
 
 export default function middleware(config) {
 	const {
 		serverRendering,
 		routes,
-		store,
 		data,
 		profile
 	} = config;
@@ -15,6 +16,7 @@ export default function middleware(config) {
 		if(!serverRendering) {
 			res.send(render(data, profile));
 		} else {
+			const store = createStore();
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {
 					res.status(500).send(err.message);
@@ -26,7 +28,11 @@ export default function middleware(config) {
 							<RouterContext {...props} />
 						</Provider>
 					);
-					res.status(200).send(render(data, profile, component));
+					store.runSaga(saga).done
+						.then(() => res.status(200).send(render(data, profile, store, component)))
+						.catch(e => res.status(500).send(e.message));
+					render(data, profile, store, component);
+					store.close();
 				} else {
 					res.status(404).send("Not found");
 				}
