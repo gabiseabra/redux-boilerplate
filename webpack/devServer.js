@@ -15,6 +15,8 @@ const apiHost = config.apiHost || "localhost"
 
 const apiPort = config.apiPort || 3002
 
+const apiUrl = `${apiHost}:${apiPort}`
+
 const serverOptions = {
 	contentBase: `http://${config.host}:${port}`,
 	publicPath: webpackConfig.output.publicPath,
@@ -39,11 +41,12 @@ app.use(devMiddleware(compiler, serverOptions))
 
 app.use(Express.static(path.join(__dirname, "../public")))
 
-app.use("/api", proxy(`${apiHost}:${apiPort}`))
+app.use("/api", proxy(apiUrl))
 
 app.use(appMiddleware({
 	serverRendering: false,
 	data: config.app,
+	apiUrl,
 	profile
 }))
 

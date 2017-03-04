@@ -2,16 +2,19 @@ import React from "react"
 import { match, RouterContext } from "react-router"
 import { render } from "./Html"
 import Provider from "./Provider"
+import ApiClient from "../lib/ApiClient"
 import createStore from "../redux/store"
-import saga from "../redux/saga"
+import createSaga from "../redux/saga"
 
 export default function middleware(config) {
 	const {
+		apiUrl,
 		serverRendering,
 		routes,
 		data,
 		profile
 	} = config;
+	const saga = createSaga(new ApiClient(`http://${apiUrl}`));
 	return (req, res, next) => {
 		if(!serverRendering) {
 			res.send(render(data, profile));
@@ -38,6 +41,6 @@ export default function middleware(config) {
 				}
 			});
 		}
-		next();
+		// next();
 	}
 }

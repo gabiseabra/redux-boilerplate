@@ -13,6 +13,8 @@ const apiHost = config.apiHost || "localhost"
 
 const apiPort = config.apiPort || 3002
 
+const apiUrl = `${apiHost}:${apiPort}`
+
 const app = new Express()
 
 const server = http.Server(app)
@@ -23,11 +25,12 @@ app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 
-app.use("/api", proxy(`${apiHost}:${apiPort}`))
+app.use("/api", proxy(apiUrl))
 
 app.use(appMiddleware({
 	serverRendering: config.serverRendering,
 	data: config.app,
+	apiUrl,
 	routes,
 	profile
 }))
