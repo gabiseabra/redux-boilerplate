@@ -12,10 +12,14 @@ export default merge.smart(config, {
 	entry: {
 		vendor: [
 			"babel-polyfill",
+			"axios",
 			"react",
 			"react-dom",
 			"react-helmet",
-			"react-router"
+			"react-router",
+			"react-redux",
+			"redux",
+			"redux-saga"
 		],
 		app: "./src/client.jsx"
 	},
