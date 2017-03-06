@@ -8,7 +8,7 @@ import ExtractTextPlugin from "extract-text-webpack-plugin"
 const env = process.env.NODE_ENV || "development"
 
 let plugins = [
-	new ExtractTextPlugin("app.css"),
+	new ExtractTextPlugin("main.css"),
 	new webpack.EnvironmentPlugin({ NODE_ENV: env })
 ];
 
@@ -16,10 +16,9 @@ if(env === "production") {
 	// Production options
 	plugins = plugins.concat([
 		new webpack.HashedModuleIdsPlugin(),
-		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
-			sourceMap: true
+			sourceMap: false
 		})
 	])
 } else if(env === "development") {
@@ -30,10 +29,10 @@ if(env === "production") {
 }
 
 export default {
-	devtool: (env === "production" ? "source-map" : "inline-source-map"),
+	devtool: (env === "production" ? undefined : "inline-source-map"),
 	context: path.resolve(__dirname, ".."),
 	output: {
-		filename: (env === "production" ? "[name].[chunkhash].js" : "[name].js")
+		filename: "[name].js"
 	},
 	module: {
 		rules: [
