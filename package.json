@@ -16,20 +16,20 @@
     "server": "node dist/server.js"
   },
   "betterScripts": {
-	"build": {
-		"command": "webpack --config=webpack/config.babel.js --progress --colors -p",
-		"env": {
-			"NODE_ENV": "production"
-		}
-	},
-	"build:client": "webpack --config=webpack/client.babel.js --progress --colors",
-	"build:server": "webpack --config=webpack/server.babel.js --progress --colors",
-	"build:vendor": {
-		"command": "webpack --config=webpack/vendor.babel.js --progress --colors -p",
-		"env": {
-			"NODE_ENV": "production"
-		}
-	}
+    "build": {
+      "command": "webpack --config=webpack/config.babel.js --progress --colors -p",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:client": "webpack --config=webpack/client.babel.js --progress --colors",
+    "build:server": "webpack --config=webpack/server.babel.js --progress --colors",
+    "build:vendor": {
+      "command": "webpack --config=webpack/vendor.babel.js --progress --colors -p",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
   },
   "author": "Gabriela Seabra",
   "license": "MIT",
@@ -38,6 +38,9 @@
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-inline-elements": "^6.22.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-1": "^6.22.0",
