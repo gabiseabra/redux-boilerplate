@@ -2,8 +2,6 @@
 
 .Header {
 	padding: 10px 20px;
-	display: flex;
-	justify-content: space-between;
 	background: var(--primaryColor);
 	color: var(--primaryTextColor);
 }
@@ -11,4 +9,9 @@
 .brand {
 	font-size: 1.4em;
 	white-space: nowrap;
+	float: left;
+}
+
+.nav {
+	float: right;
 }

@@ -6,7 +6,7 @@ import styles from "./Header.css"
 const Header = ({ className }, { data }) => (
 	<header className={[ styles.Header, className ].join(" ")}>
 		<Link to="/" className={styles.brand}>{data.title}</Link>
-		<Nav>
+		<Nav className={styles.nav}>
 			<Link to="/">Home</Link>
 			<Link to="/hello">Hello</Link>
 		</Nav>
