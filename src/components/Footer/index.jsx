@@ -3,7 +3,9 @@ import styles from "./Footer.css"
 
 const Footer = ({ className }) => (
 	<footer className={[ styles.Footer, className ].join(" ")}>
-		{ /* ... */ }
+		<div className={styles.container}>
+			{ /* ... */ }
+		</div>
 	</footer>
 )
 
