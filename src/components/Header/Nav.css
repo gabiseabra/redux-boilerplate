@@ -12,6 +12,7 @@
 	width: var(--handleSize);
 	height: var(--handleSize);
 	z-index: 10;
+	cursor: pointer;
 
 	& span,
 	& span::before,
