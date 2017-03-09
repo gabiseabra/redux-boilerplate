@@ -6,6 +6,15 @@
 	--animation: 200ms ease-in-out;
 }
 
+.icon {
+	composes: background from "../../css/global/links.css";
+
+	&::before,
+	&::after {
+		background: inherit;
+	}
+}
+
 .handle {
 	position: relative;
 	display: none;
@@ -14,20 +23,19 @@
 	z-index: 10;
 	cursor: pointer;
 
-	& span,
-	& span::before,
-	& span::after {
+	& .icon,
+	& .icon::before,
+	& .icon::after {
 		position: absolute;
 		display: block;
 		content: "\0A";
-		background: #333;
 		height: 2px;
 		width: var(--handleSize);
 		text-align: center;
 		border-radius: 2px;
 		transition: all var(--animation);
 	}
-	& span {
+	& .icon {
 		margin-top: var(--handleSpacing);
 
 		&::before { top: -var(--handleSpacing); }
@@ -39,11 +47,11 @@
 }
 
 .active .handle {
-	& span { width: 0; }
-	& span::before { transform: rotate(45deg); }
-	& span::after { transform: rotate(-45deg); }
-	& span::before,
-	& span::after {
+	& .icon { width: 0; }
+	& .icon::before { transform: rotate(45deg); }
+	& .icon::after { transform: rotate(-45deg); }
+	& .icon::before,
+	& .icon::after {
 		top: 0;
 		width: var(--handleSize);
 	}
@@ -83,6 +91,7 @@
 		}
 		& li {
 			display: block;
+			margin: 20px 0;
 			text-align: center;
 			font-size: 1.4em;
 		}

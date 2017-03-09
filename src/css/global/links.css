@@ -2,4 +2,35 @@
 
 a {
 	text-decoration: none;
+	color: var(--primaryColor);
 }
+
+a,
+a:hover,
+a:focus,
+a:active {
+	outline: none;
+	border: none;
+}
+
+.background {
+	background: var(--primaryColor);
+}
+
+.inverse {
+	& a {
+		color: var(--primaryTextColor);
+
+		&:hover {
+			color: color(var(--primaryTextColor) lightness(+5%));
+		}
+	}
+	& .background {
+		background: var(--primaryTextColor);
+
+		&:hover {
+			background: color(var(--primaryTextColor) lightness(+5%));
+		}
+	}
+}
+

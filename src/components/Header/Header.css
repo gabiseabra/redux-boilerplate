@@ -6,6 +6,7 @@
 }
 
 .Header {
+	composes: inverse from "../../css/global/links.css";
 	padding: 10px 20px;
 	background: var(--primaryColor);
 	color: var(--primaryTextColor);

@@ -27,7 +27,7 @@ export default class Nav extends Component {
 					onClick={this.click}
 					title="Menu"
 					tabIndex="0">
-					<span />
+					<span className={styles.icon} />
 				</a>
 				<div className={styles.links}>
 					<ul>
