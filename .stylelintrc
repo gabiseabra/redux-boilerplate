@@ -4,6 +4,15 @@
 		"stylelint-config-css-modules"
 	],
 	"rules": {
-		"indentation": "tab"
+		"indentation": "tab",
+		"rule-empty-line-before": [
+			"always",
+			{
+				"except": [
+					"first-nested",
+					"inside-block-and-after-rule"
+				]
+			}
+		]
 	}
 }

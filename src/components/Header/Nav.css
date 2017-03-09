@@ -1,13 +1,96 @@
-.Nav {
+@import "../../css/colors.css";
 
+:root {
+	--handleSize: 24px;
+	--handleSpacing: calc(var(--handleSize) / 3);
+	--animation: 200ms ease-in-out;
 }
 
 .handle {
+	position: relative;
+	display: none;
+	width: var(--handleSize);
+	height: var(--handleSize);
+	z-index: 10;
 
+	& span,
+	& span::before,
+	& span::after {
+		position: absolute;
+		display: block;
+		content: "\0A";
+		background: #333;
+		height: 2px;
+		width: var(--handleSize);
+		text-align: center;
+		border-radius: 2px;
+		transition: all var(--animation);
+	}
+	& span {
+		margin-top: var(--handleSpacing);
+
+		&::before { top: -var(--handleSpacing); }
+		&::after {
+			bottom: -var(--handleSpacing);
+			width: calc(var(--handleSize) / 100 * 70);
+		}
+	}
+}
+
+.active .handle {
+	& span { width: 0; }
+	& span::before { transform: rotate(45deg); }
+	& span::after { transform: rotate(-45deg); }
+	& span::before,
+	& span::after {
+		top: 0;
+		width: var(--handleSize);
+	}
 }
 
 .links {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+	& ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	& li {
+		display: inline-block;
+		white-space: nowrap;
+		margin: 0 5px;
+	}
+}
+
+@media (max-width: 550px) {
+	.handle {
+		display: block;
+	}
+	.links {
+		position: fixed;
+		display: flex;
+		width: 0;
+		height: 100%;
+		top: 0;
+		right: 0;
+		justify-content: center;
+		align-items: center;
+		background: var(--primaryColor);
+		transition: all var(--animation);
+		& ul {
+			display: none;
+		}
+		& li {
+			display: block;
+			text-align: center;
+			font-size: 1.4em;
+		}
+	}
+	.active {
+		& .links {
+			width: 90%;
+			& ul {
+				display: block;
+			}
+		}
+	}
 }
