@@ -16,6 +16,7 @@ const Html = ({ data, profile, children }) => {
 				{head.link.toComponent()}
 				{head.script.toComponent()}
 				<link rel="shortcut icon" href="/favicon.ico" />
+				<link rel="manifest" href="/manifest.json" />
 				<link rel="stylesheet" href="/dist/main.css" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
