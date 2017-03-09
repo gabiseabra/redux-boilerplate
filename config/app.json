@@ -4,12 +4,6 @@
 	"devPort": 3001,
 	"serverRendering": true,
 	"app": {
-		"head": {
-			"htmlAttributes": {
-				"lang": "en"
-			},
-			"titleTemplate": "%s - Site Title",
-			"defaultTitle": "Default Title"
-		}
+		"title": "React Boilerplate"
 	}
 }

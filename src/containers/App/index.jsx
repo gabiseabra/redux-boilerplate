@@ -5,7 +5,7 @@ import styles from "./App.css"
 
 const App = ({ className, children }, { data }) => (
 	<div className={[ styles.App, className ].join(" ")}>
-		{"head" in data && <Helmet {...data.head} />}
+		<Helmet titleTemplate={data.title} />
 		<Header />
 		<main className={styles.content}>{children}</main>
 		<Footer />
