@@ -16,6 +16,8 @@ body,
 .App {
 	display: flex;
 	flex-direction: column;
+	background: var(--backgroundColor);
+	color: var(--textColor);
 }
 
 .content {
