@@ -5,6 +5,7 @@ import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
+import FontelloPlugin from "fontello-webpack-plugin"
 import config from "./config"
 
 export default merge.smart(config, {
@@ -18,6 +19,9 @@ export default merge.smart(config, {
 		publicPath: "/dist/"
 	},
 	plugins: [
+		new FontelloPlugin({
+			config: require("../src/css/fontello.json")
+		}),
 		new webpack.DllReferencePlugin({
 			manifest: require("../public/dist/react.manifest.json")
 		}),
