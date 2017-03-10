@@ -12,4 +12,14 @@
 	width: 100%;
 	margin: 0 auto;
 	max-width: var(--maxWidth);
+	text-align: center;
+}
+
+.social {
+	margin-bottom: 10px;
+}
+
+.copy {
+	font-size: .85em;
+	font-style: italic;
 }

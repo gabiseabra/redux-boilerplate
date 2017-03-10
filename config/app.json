@@ -4,6 +4,7 @@
 	"devPort": 3001,
 	"serverRendering": true,
 	"app": {
-		"title": "React Boilerplate"
+		"title": "React Boilerplate",
+		"copy": "Gabriela Seabra"
 	}
 }
