@@ -25,7 +25,8 @@ export default merge.smart(config, {
 	plugins: [
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "dist/"
+			publicPath: "dist/",
+			writeToFileEmit: true
 		}),
 		new FontelloPlugin({
 			config: require("../src/css/fontello.json")
