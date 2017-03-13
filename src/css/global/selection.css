@@ -1,0 +1,6 @@
+@import "../colors.css";
+
+*::selection {
+	background: var(--primaryColor);
+	color: var(--primaryTextColor);
+}
