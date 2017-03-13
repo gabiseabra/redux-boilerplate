@@ -17,11 +17,15 @@ const Html = ({ data, profile, store, children }) => {
 				{head.link.toComponent()}
 				{head.script.toComponent()}
 				<link rel="shortcut icon" href="/favicon.ico" />
-				<link rel="stylesheet" href="/dist/app.css" />
+				<link rel="manifest" href="/manifest.json" />
+				<link rel="stylesheet" href="/dist/main.css" />
+				<link rel="stylesheet" href="/dist/icons.css" />
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 				<script id="profile" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
-				<script type="text/javascript" src="/dist/manifest.js" />
+				<script type="text/javascript" src="/dist/common.js" />
+				<script type="text/javascript" src="/dist/react.dll.js" />
+				<script type="text/javascript" src="/dist/main.js" defer />
 			</head>
 			<body>
 				<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
@@ -32,7 +36,6 @@ const Html = ({ data, profile, store, children }) => {
 					dangerouslySetInnerHTML={{
 						__html: `window.__state=${serialize(store.getState())}`
 					}} />}
-				<script type="text/javascript" src="/dist/app.js" />
 			</body>
 		</html>
 	)

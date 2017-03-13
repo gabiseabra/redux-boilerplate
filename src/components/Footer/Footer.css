@@ -1,7 +1,25 @@
 @import "../../css/colors.css";
+@import "../../css/layout.css";
 
 .Footer {
+	composes: inverse from "../../css/global/links.css";
 	padding: 10px 20px;
 	background: var(--primaryColor);
 	color: var(--primaryTextColor);
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	max-width: var(--maxWidth);
+	text-align: center;
+}
+
+.social {
+	margin-bottom: 10px;
+}
+
+.copy {
+	font-size: .85em;
+	font-style: italic;
 }

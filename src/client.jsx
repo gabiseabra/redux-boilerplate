@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Router, browserHistory } from "react-router"
+import * as OfflinePlugin from "offline-plugin/runtime"
 import Provider from "./app/Provider"
 import ApiClient from "./lib/ApiClient"
 import routes from "./app/routes"
@@ -8,6 +9,8 @@ import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 
 const client = new ApiClient("/api")
+
+OfflinePlugin.install()
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 

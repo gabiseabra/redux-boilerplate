@@ -5,10 +5,10 @@ import styles from "./App.css"
 
 const App = ({ className, children }, { data }) => (
 	<div className={[ styles.App, className ].join(" ")}>
-		{"head" in data && <Helmet {...data.head} />}
-		<Header />
+		<Helmet titleTemplate={data.title} />
+		<Header className={styles.header} />
 		<main className={styles.content}>{children}</main>
-		<Footer />
+		<Footer className={styles.footer} />
 	</div>
 )
 

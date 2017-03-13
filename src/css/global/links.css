@@ -1,0 +1,36 @@
+@import "../colors.css";
+
+a,
+.link {
+	text-decoration: none;
+	color: var(--primaryColor);
+
+	&,
+	&:hover,
+	&:focus,
+	&:active {
+		outline: none;
+		border: none;
+	}
+}
+
+.background {
+	background: var(--primaryColor);
+}
+
+.inverse {
+	& a {
+		color: var(--primaryTextColor);
+
+		&:hover {
+			color: color(var(--primaryTextColor) lightness(+5%));
+		}
+	}
+	& .background {
+		background: var(--primaryTextColor);
+
+		&:hover {
+			background: color(var(--primaryTextColor) lightness(+5%));
+		}
+	}
+}

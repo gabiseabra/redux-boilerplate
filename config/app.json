@@ -6,12 +6,7 @@
 	"apiPort": 3002,
 	"serverRendering": true,
 	"app": {
-		"head": {
-			"htmlAttributes": {
-				"lang": "en"
-			},
-			"titleTemplate": "%s - Site Title",
-			"defaultTitle": "Default Title"
-		}
+		"title": "React Boilerplate",
+		"copy": "Gabriela Seabra"
 	}
 }

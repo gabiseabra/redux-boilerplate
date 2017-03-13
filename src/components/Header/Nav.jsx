@@ -19,18 +19,21 @@ export default class Nav extends Component {
 		const { children, className, ...props } = this.props;
 		const { collapsed } = this.state;
 		const classNames = [ styles.Nav, className ];
-		if(collapsed) classNames.push("collapsed");
+		if(!collapsed) classNames.push(styles.active);
 
 		return (
 			<nav className={classNames.join(" ")} {...props}>
 				<a className={styles.handle}
 					onClick={this.click}
+					title="Menu"
 					tabIndex="0">
-					Navigation
+					<span className={styles.icon} />
 				</a>
-				<ul className={styles.links}>
-					{React.Children.map(children, node => <li key={++i}>{node}</li>)}
-				</ul>
+				<div className={styles.links}>
+					<ul>
+						{React.Children.map(children, node => <li key={++i}>{node}</li>)}
+					</ul>
+				</div>
 			</nav>
 		);
 	}
