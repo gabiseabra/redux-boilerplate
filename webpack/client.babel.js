@@ -6,14 +6,11 @@ import webpack from "webpack"
 import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
 import FontelloPlugin from "fontello-webpack-plugin"
+import ManifestPlugin from "webpack-manifest-plugin"
 import config from "./config"
-import vendor from "./vendor.babel"
+import vendorConfig from "./vendor.babel"
 
-const plugins = Object.keys(vendor.entry).map(module => (
-	new webpack.DllReferencePlugin({
-		manifest: require(`../public/dist/${module}.manifest.json`)
-	})
-))
+const vendors = Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`)
 
 export default merge.smart(config, {
 	target: "web",
@@ -26,6 +23,10 @@ export default merge.smart(config, {
 		publicPath: "/dist/"
 	},
 	plugins: [
+		new ManifestPlugin({
+			fileName: "manifest.json",
+			publicPath: "dist/"
+		}),
 		new FontelloPlugin({
 			config: require("../src/css/fontello.json")
 		}),
@@ -35,9 +36,13 @@ export default merge.smart(config, {
 				"/favicon.ico",
 				"/icon.png",
 				"/manifest.json",
-				"/dist/react.dll.js"
+				...vendors
 			]
 		}),
-		...plugins
+		...(vendors.map(fileName => (
+			new webpack.DllReferencePlugin({
+				manifest: require(`../public/${fileName}`)
+			})
+		)))
 	]
 })
