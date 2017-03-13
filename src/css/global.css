@@ -1,2 +1,4 @@
 @import "normalize-css/normalize.css";
 @import "./global/links.css";
+@import "./global/typography.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto|Exo+2");
