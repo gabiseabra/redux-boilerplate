@@ -1,16 +1,17 @@
 @import "../colors.css";
 
-a {
+a,
+.link {
 	text-decoration: none;
 	color: var(--primaryColor);
-}
 
-a,
-a:hover,
-a:focus,
-a:active {
-	outline: none;
-	border: none;
+	&,
+	&:hover,
+	&:focus,
+	&:active {
+		outline: none;
+		border: none;
+	}
 }
 
 .background {
@@ -33,4 +34,3 @@ a:active {
 		}
 	}
 }
-
