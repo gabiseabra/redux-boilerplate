@@ -7,6 +7,13 @@ import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
 import FontelloPlugin from "fontello-webpack-plugin"
 import config from "./config"
+import vendor from "./vendor.babel"
+
+const plugins = Object.keys(vendor.entry).map(module => (
+	new webpack.DllReferencePlugin({
+		manifest: require(`../public/dist/${module}.manifest.json`)
+	})
+))
 
 export default merge.smart(config, {
 	target: "web",
@@ -22,9 +29,6 @@ export default merge.smart(config, {
 		new FontelloPlugin({
 			config: require("../src/css/fontello.json")
 		}),
-		new webpack.DllReferencePlugin({
-			manifest: require("../public/dist/react.manifest.json")
-		}),
 		new webpack.optimize.CommonsChunkPlugin("common"),
 		new OfflinePlugin({
 			externals: [
@@ -33,6 +37,7 @@ export default merge.smart(config, {
 				"/manifest.json",
 				"/dist/react.dll.js"
 			]
-		})
+		}),
+		...plugins
 	]
 })
