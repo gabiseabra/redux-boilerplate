@@ -7,11 +7,15 @@ import webpack from "webpack"
 export default {
 	target: "web",
 	entry: {
+		axios: [ "axios" ],
 		react: [
 			"react",
 			"react-dom",
 			"react-helmet",
-			"react-router"
+			"react-redux",
+			"react-router",
+			"redux",
+			"redux-saga"
 		]
 	},
 	output: {
