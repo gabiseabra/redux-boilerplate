@@ -1,20 +1,14 @@
-import http from "http"
-import Express from "express"
-import compression from "compression"
+import jsonServer from "json-server"
 import config from "../config/app.json"
-import { content } from "./modules"
+import content from "./content"
 
 const host = config.apiHost || "localhost"
 
 const port = config.apiPort || 3002
 
-const app = new Express()
+const server = jsonServer.create()
 
-const server = http.Server(app)
-
-app.use(compression())
-
-app.use("/content", content)
+server.use(jsonServer.router(content))
 
 server.listen(port, err => {
 	if(err) {
