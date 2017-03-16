@@ -1,5 +1,9 @@
 import faker from "faker"
 
+function ucFirst(text) {
+	return text[0].toUpperCase() + text.slice(1).toLowerCase();
+}
+
 const info = {
 	title: "Redux Boilerplate",
 	copy: "Gabriela Seabra"
@@ -8,7 +12,7 @@ const info = {
 const posts = []
 
 for(let i = 0; i < 3; ++i) {
-	const title = faker.lorem.words()
+	const title = ucFirst(faker.lorem.words())
 	const id = faker.helpers.slugify(title)
 
 	posts.push({
