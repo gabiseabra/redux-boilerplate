@@ -3,8 +3,10 @@ import styles from "./Error.css"
 
 const Error = ({ error, errorMessage, retryMessage, onRetry }) => (
 	<div className={styles.Error}>
-		{errorMessage}
-		<div>{error.message}</div>
+		<details>
+			<summary>{errorMessage}</summary>
+			<p>{error.message}</p>
+		</details>
 		{onRetry &&
 		<button className={styles.retry} onClick={onRetry} tabIndex="0">
 			{retryMessage}
