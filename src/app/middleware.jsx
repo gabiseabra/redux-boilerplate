@@ -5,9 +5,9 @@ import Provider from "./Provider"
 import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
-	let manifest;
 	const {
 		serverRendering,
+		manifest,
 		routes,
 		data,
 		profile
@@ -15,17 +15,12 @@ export default function middleware(config) {
 	const render = renderFn.bind(
 		undefined,
 		data,
-		profile
+		profile,
+		new Manifest(manifest)
 	);
 	return (req, res, next) => {
-		if(!manifest) {
-			manifest = new Manifest(
-				require("../../public/dist/manifest.dll.json"),
-				require("../../public/dist/manifest.json")
-			)
-		}
 		if(!serverRendering) {
-			res.send(render(manifest));
+			res.send(render());
 		} else {
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {
@@ -38,7 +33,7 @@ export default function middleware(config) {
 							<RouterContext {...props} />
 						</Provider>
 					);
-					res.status(200).send(render(manifest, component));
+					res.status(200).send(render(component));
 				} else {
 					res.status(404).send("Not found");
 				}

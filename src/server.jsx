@@ -7,6 +7,7 @@ import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
 import profile from "../config/data.json"
 import config from "../config/app.json"
+import manifest from "../public/dist/manifest.json"
 
 const app = new Express()
 
@@ -22,7 +23,8 @@ app.use(appMiddleware({
 	serverRendering: config.serverRendering,
 	data: config.app,
 	routes,
-	profile
+	profile,
+	manifest
 }))
 
 server.listen(config.port, err => {

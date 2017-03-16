@@ -6,7 +6,7 @@ import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
 import config from "../config/app.json"
 import profile from "../config/data.json"
-import webpackConfig from "./client.babel"
+import webpackConfig, { manifestCache } from "./client.babel"
 
 const port = config.devPort || 8080;
 
@@ -37,6 +37,7 @@ app.use(Express.static(path.join(__dirname, "../public")))
 app.use(appMiddleware({
 	serverRendering: false,
 	data: config.app,
+	manifest: manifestCache,
 	profile
 }))
 
