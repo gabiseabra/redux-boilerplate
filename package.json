@@ -55,7 +55,7 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "extract-text-webpack-plugin": "^2.0.0",
-    "fontello-webpack-plugin": "^0.1.1",
+    "fontello-webpack-plugin": "^0.2.0",
     "normalize-css": "^2.3.1",
     "offline-plugin": "^4.6.1",
     "postcss": "^5.2.13",

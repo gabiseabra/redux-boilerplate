@@ -32,7 +32,7 @@ export default {
 		}),
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "dist/",
+			publicPath: "/dist/",
 			cache: manifestCache
 		}),
 		new webpack.optimize.UglifyJsPlugin({
