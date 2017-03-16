@@ -1,4 +1,5 @@
 @import "../../css/global.css";
+@import "../../css/colors.css";
 @import "../../css/layout.css";
 
 html,
@@ -24,9 +25,6 @@ body,
 	flex: 1;
 	width: 100%;
 	margin: 0 auto;
+	padding: 5px 20px;
 	max-width: var(--maxWidth);
-
-	& section {
-		margin: 5px 20px;
-	}
 }
