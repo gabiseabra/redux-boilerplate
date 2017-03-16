@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
 import { Loading } from "../../components"
-import { getPost } from "../../redux/selectors"
+import { getPost, getPostError } from "../../redux/selectors"
 import { load } from "../../redux/modules/content/posts"
 
 class Post extends Component {
@@ -10,6 +10,7 @@ class Post extends Component {
 			name: PropTypes.string.isRequired
 		}).isRequired,
 		post: PropTypes.object,
+		error: PropTypes.instanceOf(Error),
 		load: PropTypes.func.isRequired
 	}
 
@@ -18,9 +19,9 @@ class Post extends Component {
 	}
 
 	render() {
-		const { post } = this.props;
+		const { post, error } = this.props;
 		if(!post) {
-			return (<section><Loading /></section>)
+			return (<section><Loading error={error} /></section>)
 		}
 		return (
 			<section>
@@ -33,7 +34,8 @@ class Post extends Component {
 }
 
 const mapper = (state, { params: { name } }) => ({
-	post: getPost(state, name)
+	post: getPost(state, name),
+	error: getPostError(state, name)
 })
 
 export default connect(mapper, { load })(Post)

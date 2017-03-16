@@ -13,7 +13,7 @@ const posts = []
 
 for(let i = 0; i < 3; ++i) {
 	const title = ucFirst(faker.lorem.words())
-	const id = faker.helpers.slugify(title)
+	const id = faker.helpers.slugify(title).toLowerCase()
 
 	posts.push({
 		description: faker.lorem.paragraph(),

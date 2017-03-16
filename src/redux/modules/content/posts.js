@@ -15,6 +15,11 @@ export default function posts(state = {}, action) {
 				...state,
 				[action.name]: action.data
 			};
+		case FAILURE:
+			return {
+				...state,
+				[action.name]: { err: action.err }
+			}
 		default: return state;
 	}
 }
