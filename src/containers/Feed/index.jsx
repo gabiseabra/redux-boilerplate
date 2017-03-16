@@ -20,8 +20,8 @@ class Feed extends Component {
 
 	renderPost(post) {
 		return (
-			<article key={post.name}>
-				<Link className={styles.post} to={`/posts/${post.id}`}>
+			<article className={styles.post} key={post.name}>
+				<Link to={`/posts/${post.id}`}>
 					<h2>{post.title}</h2>
 				</Link>
 				<p>{post.description}</p>
