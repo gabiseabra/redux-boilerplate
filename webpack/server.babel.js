@@ -8,7 +8,10 @@ import config from "./config"
 
 export default merge.smart(config, {
 	target: "node",
-	entry: "./src/server.jsx",
+	entry: [
+		"babel-polyfill",
+		"./src/server.jsx"
+	],
 	externals: [
 		/\.json$/,
 		nodeExternals()
