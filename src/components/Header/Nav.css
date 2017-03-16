@@ -4,7 +4,6 @@
 	--handleSize: 24px;
 	--handleSpacing: calc(var(--handleSize) / 3);
 	--animation: 200ms ease-in-out;
-	--burgerBreakpoint: 550px;
 }
 
 .icon {
@@ -71,7 +70,7 @@
 	}
 }
 
-@media (max-width: var(--burgerBreakpoint)) {
+@media (max-width: 550px) {
 	.handle {
 		display: block;
 	}
