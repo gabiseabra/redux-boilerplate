@@ -28,7 +28,7 @@ export default merge.smart(config, {
 	plugins: [
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "dist/",
+			publicPath: "/dist/",
 			cache: manifestCache
 		}),
 		new FontelloPlugin({
