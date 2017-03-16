@@ -1,10 +1,12 @@
 import path from "path"
 import http from "http"
 import Express from "express"
+import proxy from "express-http-proxy"
 import compression from "compression"
 import favicon from "serve-favicon"
 import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
+import { apiUrl } from "./lib/ApiClient"
 import profile from "../config/data.json"
 import config from "../config/app.json"
 import manifest from "../public/dist/manifest.json"
@@ -18,6 +20,10 @@ app.use(compression())
 app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
+
+if(config.api.proxy) {
+	app.use(config.api.proxy, proxy(apiUrl(config.api)))
+}
 
 app.use(appMiddleware({
 	serverRendering: config.serverRendering,

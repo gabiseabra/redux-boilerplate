@@ -1,10 +1,18 @@
 import axios from "axios"
 
+export function apiUrl(options) {
+	const host = options.host || "localhost"
+	const port = options.port || 3002
+	return `http://${host}:${port}`
+}
+
 export default class ApiClient {
 	constructor(options) {
-		const host = options.host || "localhost"
-		const port = options.port || 3002
-		this.url = `http://${host}:${port}`
+		if(typeof options === "string") {
+			this.url = options
+		} else {
+			this.url = apiUrl(options)
+		}
 	}
 
 	get = (url) => (

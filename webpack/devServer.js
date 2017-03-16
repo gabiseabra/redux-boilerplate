@@ -5,6 +5,7 @@ import proxy from "express-http-proxy"
 import webpack from "webpack"
 import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
+import { apiUrl } from "../src/lib/ApiClient"
 import config from "../config/app.json"
 import profile from "../config/data.json"
 import webpackConfig, { manifestCache } from "./client.babel"
@@ -34,6 +35,10 @@ const server = http.Server(app)
 app.use(devMiddleware(compiler, serverOptions))
 
 app.use(Express.static(path.join(__dirname, "../public")))
+
+if(config.api.proxy) {
+	app.use(config.api.proxy, proxy(apiUrl(config.api)))
+}
 
 app.use(appMiddleware({
 	serverRendering: false,

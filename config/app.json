@@ -5,6 +5,7 @@
 	"serverRendering": true,
 	"api": {
 		"host": "localhost",
-		"port": 3002
+		"port": 3002,
+		"proxy": "/api"
 	}
 }

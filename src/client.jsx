@@ -8,9 +8,9 @@ import routes from "./app/routes"
 import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 
-const client = new ApiClient("/api")
-
 OfflinePlugin.install()
+
+const apiConfig = JSON.parse(document.getElementById("api").textContent)
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
@@ -18,7 +18,7 @@ const profile = JSON.parse(document.getElementById("profile").textContent)
 
 const store = createStore(window.__state)
 
-store.runSaga(createSaga(client))
+store.runSaga(createSaga(new ApiClient(apiConfig)))
 
 ReactDOM.render(
 	<Provider data={appData} profile={profile} store={store}>

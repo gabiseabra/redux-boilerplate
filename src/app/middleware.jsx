@@ -21,7 +21,8 @@ export default function middleware(config) {
 		undefined,
 		data,
 		profile,
-		new Manifest(manifest)
+		new Manifest(manifest),
+		api.proxy ? api.proxy : api
 	);
 	return (req, res, next) => {
 		if(!serverRendering) {
