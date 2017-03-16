@@ -13,8 +13,8 @@ export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={Home} />
 		<Route path="hello" component={Hello} />
-		<Route path="feed" component={Feed} />
-		<Route path="post/:name" component={Post} />
+		<Route path="posts" component={Feed} />
+		<Route path="posts/:name" component={Post} />
 		<Route path="*" component={NotFound} status={404} />
 	</Route>
 )

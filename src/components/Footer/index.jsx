@@ -21,7 +21,7 @@ export default class Footer extends Component {
 	}
 
 	static contextTypes = {
-		data: PropTypes.object.isRequired,
+		info: PropTypes.object.isRequired,
 		profile: PropTypes.object.isRequired
 	}
 
@@ -50,14 +50,14 @@ export default class Footer extends Component {
 
 	render() {
 		const { className } = this.props;
-		const { data, profile } = this.context;
+		const { info, profile } = this.context;
 		return (
 			<footer className={[ styles.Footer, className ].join(" ")}>
 				<div className={styles.container}>
 					<div className={styles.social}>
 						{this.renderNetworks(profile)}
 					</div>
-					{"copy" in data && <div className={styles.copy}>&copy; 2017 - {data.copy}</div>}
+					{"copy" in info && <div className={styles.copy}>&copy; 2017 - {info.copy}</div>}
 				</div>
 			</footer>
 		)

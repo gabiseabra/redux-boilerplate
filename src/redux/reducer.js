@@ -1,6 +1,7 @@
 import { combineReducers } from "redux"
-import { content } from "./modules/reducers"
+import { content, info } from "./modules/reducers"
 
 export default combineReducers({
-	content
+	content,
+	info
 })

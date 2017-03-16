@@ -12,6 +12,7 @@ for(let i = 0; i < 3; ++i) {
 	const id = faker.helpers.slugify(title)
 
 	posts.push({
+		description: faker.lorem.paragraph(),
 		content: `<p>${faker.lorem.paragraphs(3, "</p>\n<p>")}</p>`,
 		title,
 		id

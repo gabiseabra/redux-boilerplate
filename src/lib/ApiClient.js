@@ -13,7 +13,9 @@ export default class ApiClient {
 			.catch(error => ({ error }))
 	)
 
-	feed = () => this.get("/content")
+	info = () => this.get("/info")
 
-	post = (name) => this.get(`/content/${name}`)
+	feed = () => this.get("/posts")
+
+	post = (name) => this.get(`/posts/${name}`)
 }

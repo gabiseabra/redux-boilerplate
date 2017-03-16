@@ -3,14 +3,14 @@ import { Link } from "react-router"
 import Nav from "./Nav"
 import styles from "./Header.css"
 
-const Header = ({ className }, { data }) => (
+const Header = ({ className }, { info }) => (
 	<header className={[ styles.Header, className ].join(" ")}>
 		<div className={styles.container}>
-			<Link to="/" className={styles.brand}>{data.title}</Link>
+			<Link to="/" className={styles.brand}>{info.title}</Link>
 			<Nav className={styles.nav}>
 				<Link to="/">Home</Link>
 				<Link to="/hello">Hello</Link>
-				<Link to="/feed">Feed</Link>
+				<Link to="/posts">Posts</Link>
 			</Nav>
 		</div>
 	</header>
@@ -21,7 +21,7 @@ Header.propTypes = {
 }
 
 Header.contextTypes = {
-	data: PropTypes.object.isRequired
+	info: PropTypes.object.isRequired
 }
 
 export default Header
