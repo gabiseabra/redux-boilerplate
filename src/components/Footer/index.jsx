@@ -38,13 +38,6 @@ export default class Footer extends Component {
 				);
 			}
 		}
-		if("email" in profile) {
-			social.push(
-				<a href={`mailto:${profile.email}`} title="Email">
-					<span className="icon-email" />
-				</a>
-			)
-		}
 		return social;
 	}
 
@@ -56,8 +49,12 @@ export default class Footer extends Component {
 				<div className={styles.container}>
 					<div className={styles.social}>
 						{this.renderNetworks(profile)}
+						{profile.email &&
+						<a href={`mailto:${profile.email}`} title="Email">
+							<span className="icon-email" />
+						</a>}
 					</div>
-					{"copy" in data && <div className={styles.copy}>&copy; 2017 - {data.copy}</div>}
+					{data.copy && <div className={styles.copy}>&copy; 2017 - {data.copy}</div>}
 				</div>
 			</footer>
 		)
