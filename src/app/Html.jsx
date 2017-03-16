@@ -26,7 +26,6 @@ const Html = ({ data, profile, store, manifest, children }) => {
 			</head>
 			<body>
 				<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
-				<script type="text/javascript" src="/dist/vendor.js" />
 				{store &&
 				<script
 					type="text/javascript"
@@ -49,9 +48,9 @@ Html.propTypes = {
 
 export default Html
 
-export const render = (data, profile, store, manifest, component) => {
+export const render = (data, profile, manifest, store, component) => {
 	const html = ReactDOM.renderToStaticMarkup(
-		<Html data={data} profile={profile} store={store} manifest={manifest}>{component}</Html>
+		<Html data={data || {}} profile={profile} store={store} manifest={manifest}>{component}</Html>
 	);
 	return `<!doctype html>\n${html}`;
 }
