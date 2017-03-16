@@ -3,7 +3,11 @@ import styles from "./Loading.css"
 
 const Loading = ({ className }) => (
 	<div className={[ styles.Loading, className ].join(" ")}>
-		<div className={styles.spinner} />
+		<div className={styles.spinner}>
+			<span />
+			<span />
+			<span />
+		</div>
 	</div>
 )
 
