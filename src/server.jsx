@@ -8,6 +8,7 @@ import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
 import profile from "../config/data.json"
 import config from "../config/app.json"
+import manifest from "../public/dist/manifest.json"
 
 const apiHost = config.apiHost || "localhost"
 
@@ -32,7 +33,8 @@ app.use(appMiddleware({
 	data: config.app,
 	apiUrl,
 	routes,
-	profile
+	profile,
+	manifest
 }))
 
 server.listen(config.port, err => {

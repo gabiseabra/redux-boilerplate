@@ -8,10 +8,10 @@ import createSaga from "../redux/saga"
 import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
-	let manifest;
 	const {
 		apiUrl,
 		serverRendering,
+		manifest,
 		routes,
 		data,
 		profile
@@ -20,17 +20,12 @@ export default function middleware(config) {
 	const render = renderFn.bind(
 		undefined,
 		data,
-		profile
+		profile,
+		new Manifest(manifest)
 	);
 	return (req, res, next) => {
-		if(!manifest) {
-			manifest = new Manifest(
-				require("../../public/dist/manifest.dll.json"),
-				require("../../public/dist/manifest.json")
-			)
-		}
 		if(!serverRendering) {
-			res.send(render(manifest));
+			res.send(render());
 		} else {
 			const store = createStore();
 			match({ routes, location: req.url }, (err, redirect, props) => {
@@ -45,10 +40,10 @@ export default function middleware(config) {
 						</Provider>
 					);
 					store.runSaga(saga).done
-						.then(() => res.status(200).send(render(manifest, store, component)))
+						.then(() => res.status(200).send(render(store, component)))
 						.catch(e => res.status(500).send(e.message))
 						.then(next)
-					render(manifest, store, component);
+					render(store, component);
 					store.close();
 				} else {
 					res.status(404).send("Not found");

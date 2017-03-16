@@ -7,7 +7,7 @@ import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
 import config from "../config/app.json"
 import profile from "../config/data.json"
-import webpackConfig from "./client.babel"
+import webpackConfig, { manifestCache } from "./client.babel"
 
 const port = config.devPort || 8080;
 
@@ -46,6 +46,7 @@ app.use("/api", proxy(apiUrl))
 app.use(appMiddleware({
 	serverRendering: false,
 	data: config.app,
+	manifest: manifestCache,
 	apiUrl,
 	profile
 }))
