@@ -1,14 +1,14 @@
 import axios from "axios"
 
-const trim = (str) => str.replace(/\/$/, "")
-
 export default class ApiClient {
-	constructor(base) {
-		this.base = trim(base)
+	constructor(options) {
+		const host = options.host || "localhost"
+		const port = options.port || 3002
+		this.url = `http://${host}:${port}`
 	}
 
 	get = (url) => (
-		axios.get(this.base + url)
+		axios.get(this.url + url)
 			.then(response => response.data)
 			.catch(error => ({ error }))
 	)

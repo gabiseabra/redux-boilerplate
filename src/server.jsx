@@ -3,18 +3,11 @@ import http from "http"
 import Express from "express"
 import compression from "compression"
 import favicon from "serve-favicon"
-import proxy from "express-http-proxy"
 import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
 import profile from "../config/data.json"
 import config from "../config/app.json"
 import manifest from "../public/dist/manifest.json"
-
-const apiHost = config.apiHost || "localhost"
-
-const apiPort = config.apiPort || 3002
-
-const apiUrl = `${apiHost}:${apiPort}`
 
 const app = new Express()
 
@@ -26,12 +19,10 @@ app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 
-app.use("/api", proxy(apiUrl))
-
 app.use(appMiddleware({
 	serverRendering: config.serverRendering,
 	data: config.app,
-	apiUrl,
+	api: config.api,
 	routes,
 	profile,
 	manifest

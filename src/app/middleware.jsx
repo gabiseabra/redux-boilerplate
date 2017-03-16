@@ -9,14 +9,14 @@ import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
 	const {
-		apiUrl,
+		api,
 		serverRendering,
 		manifest,
 		routes,
 		data,
 		profile
 	} = config;
-	const saga = createSaga(new ApiClient(`http://${apiUrl}`));
+	const saga = createSaga(new ApiClient(api));
 	const render = renderFn.bind(
 		undefined,
 		data,
