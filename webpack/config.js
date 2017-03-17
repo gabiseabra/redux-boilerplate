@@ -5,6 +5,8 @@ import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
+const URL_LIMIT = 10000
+
 const env = process.env.NODE_ENV || "development"
 
 const cssOptions = {
@@ -91,10 +93,39 @@ export default {
 				})
 			},
 			{
-				test: /\.(jpe?g|png|svg)?$/,
-				use: [
-					{ loader: "file-loader", options: { name: "[path][name].[ext]?[hash]" } }
-				]
+				test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "application/font-woff"
+				}
+			},
+			{
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "application/octet-stream"
+				}
+			},
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "image/svg+xml"
+				}
+			},
+			{
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				use: "file-loader"
+			},
+			{
+				test: /\.(jpe?g|png|gifv?)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT
+				}
 			}
 		]
 	},
