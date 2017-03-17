@@ -7,6 +7,16 @@ import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 const env = process.env.NODE_ENV || "development"
 
+const cssOptions = {
+	modules: true,
+	importLoaders: 1,
+	localIdentName: (
+		env === "production" ?
+		"[hash:base64:5]" :
+		"[name]_[local]--[hash:base64:5]"
+	)
+}
+
 let plugins = [
 	new ExtractTextPlugin("main.css"),
 	new webpack.EnvironmentPlugin({ NODE_ENV: env })
@@ -43,22 +53,19 @@ export default {
 			},
 			{
 				test: /\.css?$/,
+				exclude: [ path.join(__dirname, "../src") ],
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					loader: "css-loader"
+				})
+			},
+			{
+				test: /\.css?$/,
 				include: [ path.join(__dirname, "../src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
-						{
-							loader: "css-loader",
-							options: {
-								modules: true,
-								importLoaders: 1,
-								localIdentName: (
-									env === "production" ?
-									"[hash:base64:5]" :
-									"[name]_[local]--[hash:base64:5]"
-								)
-							}
-						},
+						{ loader: "css-loader", options: cssOptions },
 						{ loader: "postcss-loader" }
 					]
 				})
