@@ -56,7 +56,7 @@ export default {
 				exclude: [ path.join(__dirname, "../src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
-					loader: "css-loader"
+					use: "css-loader"
 				})
 			},
 			{
@@ -67,6 +67,26 @@ export default {
 					use: [
 						{ loader: "css-loader", options: cssOptions },
 						{ loader: "postcss-loader" }
+					]
+				})
+			},
+			{
+				test: /\.scss?$/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: [
+						{ loader: "css-loader", options: cssOptions },
+						{ loader: "sass-loader" }
+					]
+				})
+			},
+			{
+				test: /\.less?$/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: [
+						{ loader: "css-loader", options: cssOptions },
+						{ loader: "less-loader" }
 					]
 				})
 			},
