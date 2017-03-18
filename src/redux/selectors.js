@@ -1,3 +1,5 @@
+export const getStatus = (state) => state.status
+
 export const isInfoLoaded = (state) => state.content.info.loaded
 
 export const getInfo = (state) => state.content.info.data

@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Router, browserHistory } from "react-router"
+import { syncHistoryWithStore } from "react-router-redux"
 import * as OfflinePlugin from "offline-plugin/runtime"
 import Provider from "./app/Provider"
 import ApiClient from "./lib/ApiClient"
@@ -18,11 +19,13 @@ const profile = JSON.parse(document.getElementById("profile").textContent)
 
 const store = createStore(window.__state)
 
+const history = syncHistoryWithStore(browserHistory, store)
+
 store.runSaga(createSaga(new ApiClient(apiConfig)))
 
 ReactDOM.render(
 	<Provider data={appData} profile={profile} store={store}>
-		<Router history={browserHistory}>
+		<Router history={history}>
 			{routes}
 		</Router>
 	</Provider>,

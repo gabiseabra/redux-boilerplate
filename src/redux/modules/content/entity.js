@@ -49,7 +49,7 @@ export default function create(entity, type) {
 	}
 	actions.load = (name) => ({ type: actions.LOAD, name });
 	actions.request = (name) => ({ type: actions.REQUEST, name });
-	actions.success = (data) => ({ type: actions.SUCCESS, data, name });
+	actions.success = (data, name) => ({ type: actions.SUCCESS, data, name });
 	actions.fail = (error, name) => ({ type: actions.FAILURE, error, name });
 	actions.reducer = Reducers[type](actions)
 

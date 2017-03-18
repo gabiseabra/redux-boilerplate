@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 import { Loading } from "../../components"
 import { getPost, getPostError } from "../../redux/selectors"
 import { load } from "../../redux/modules/content/posts"
+import { setStatus } from "../../redux/modules/status"
+import { ResponseError } from "../../lib/ApiClient"
 
 class Post extends Component {
 	static propTypes = {
@@ -11,15 +13,22 @@ class Post extends Component {
 		}).isRequired,
 		post: PropTypes.object,
 		error: PropTypes.instanceOf(Error),
-		load: PropTypes.func.isRequired
+		load: PropTypes.func.isRequired,
+		setStatus: PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
 		this.props.load(this.props.params.name);
 	}
 
+	componentWillReceiveProps({ error }) {
+		if(error && error instanceof ResponseError) {
+			this.props.setStatus(error.code, error.message)
+		}
+	}
+
 	render() {
-		const { post, error } = this.props;
+		const { post, error } = this.props
 		if(!post) {
 			return (<section><Loading error={error} /></section>)
 		}
@@ -38,4 +47,4 @@ const mapper = (state, { params: { name } }) => ({
 	error: getPostError(state, name)
 })
 
-export default connect(mapper, { load })(Post)
+export default connect(mapper, { load, setStatus })(Post)

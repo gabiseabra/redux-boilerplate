@@ -9,7 +9,10 @@ import manifestCache from "./manifest"
 export default {
 	target: "web",
 	entry: {
-		axios: [ "axios" ],
+		vendor: [
+			"axios",
+			"es6-error"
+		],
 		react: [
 			"react",
 			"react-dom",
