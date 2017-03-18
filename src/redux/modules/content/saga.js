@@ -1,10 +1,17 @@
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import * as feed from "./feed"
 import * as posts from "./posts"
-import { isFeedLoaded, isPostLoaded } from "../../selectors"
+import * as info from "./info"
+import { isFeedLoaded, isPostLoaded, isInfoLoaded } from "../../selectors"
 
-function * request(actions, apiFn, id) {
-	yield put(actions.request());
+const Entities = [
+	{ actions: feed, selector: isFeedLoaded, apiFn: "feed" },
+	{ actions: posts, selector: isPostLoaded, apiFn: "post" },
+	{ actions: info, selector: isInfoLoaded, apiFn: "info" }
+]
+
+function * requestFn(actions, apiFn, id) {
+	yield put(actions.request())
 	const response = yield call(apiFn, id);
 	if(response.error) {
 		yield put(actions.fail(response.error, id));
@@ -14,27 +21,22 @@ function * request(actions, apiFn, id) {
 }
 
 export default function create(client) {
-	const requestFeed = request.bind(undefined, feed, client.feed)
-	const requestPosts = request.bind(undefined, posts, client.post)
+	const watchers = []
 
-	function * loadFeed() {
-		const loaded = yield select(isFeedLoaded);
-		if(!loaded) {
-			yield fork(requestFeed);
-		}
-	}
+	Entities.forEach(({ actions, selector, apiFn }) => {
+		const request = requestFn.bind(undefined, actions, client[apiFn])
 
-	function * loadPosts({ name }) {
-		const loaded = yield select(isPostLoaded, name);
-		if(!loaded) {
-			yield fork(requestPosts, name);
+		function * load({ name }) {
+			const loaded = yield select(selector, name);
+			if(!loaded) {
+				yield fork(request, name)
+			}
 		}
-	}
+
+		watchers.push(takeLatest(actions.LOAD, load))
+	})
 
 	return function * watch() {
-		yield [
-			takeLatest(feed.LOAD, loadFeed),
-			takeLatest(posts.LOAD, loadPosts)
-		]
+		yield watchers
 	}
 }

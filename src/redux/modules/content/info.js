@@ -1,6 +1,6 @@
 import createEntity from "./entity"
 
-const feed = createEntity("feed", "single")
+const feed = createEntity("info", "single")
 
 export const { LOAD, REQUEST, SUCCESS, FAILURE } = feed
 

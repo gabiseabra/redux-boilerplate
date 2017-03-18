@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import { Provider, connect } from "react-redux"
 import { getInfo } from "../redux/selectors"
-import { load } from "../redux/modules/info"
+import { load } from "../redux/modules/content/info"
 import Profile from "../lib/Profile"
 
 /**
@@ -47,7 +47,7 @@ class ContextProvider extends Component {
 }
 
 const mapper = (state) => ({
-	info: getInfo(state)
+	info: getInfo(state) || {}
 })
 
 export default connect(mapper, { load })(ContextProvider)
