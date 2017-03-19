@@ -10,8 +10,8 @@ export function apiUrl(options) {
 export class ResponseError extends ExtendableError {
 	constructor({ status, statusText }) {
 		super(`HTTP Error: [${status}] ${statusText}`)
-		this.code = status
-		this.message = statusText
+		this.status = status
+		this.statusText = statusText
 	}
 }
 

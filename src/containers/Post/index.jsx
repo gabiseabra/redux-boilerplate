@@ -23,7 +23,7 @@ class Post extends Component {
 
 	componentWillReceiveProps({ error }) {
 		if(error && error instanceof ResponseError) {
-			this.props.setStatus(error.code, error.message)
+			this.props.setStatus(error.status, error.statusText)
 		}
 	}
 
