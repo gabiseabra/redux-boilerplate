@@ -48,12 +48,16 @@ Html.propTypes = {
 	children: PropTypes.node
 }
 
+Html.defaultTypes = {
+	data: {}
+}
+
 export default Html
 
 export const render = (data, profile, manifest, api, store, component) => {
 	const html = ReactDOM.renderToStaticMarkup(
 		<Html
-			data={data || {}}
+			data={data}
 			profile={profile}
 			manifest={manifest}
 			api={api}

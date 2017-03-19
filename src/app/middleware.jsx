@@ -20,7 +20,7 @@ export default function middleware(config) {
 	const saga = createSaga(new ApiClient(api));
 	const render = renderFn.bind(
 		undefined,
-		data,
+		data || {},
 		profile,
 		new Manifest(manifest),
 		api.proxy ? api.proxy : api
