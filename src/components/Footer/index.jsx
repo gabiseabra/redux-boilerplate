@@ -32,7 +32,7 @@ export default class Footer extends Component {
 			const url = profile.social(network.url);
 			if(url) {
 				social.push(
-					<a target="_blank" rel="noreferrer noopener" href={url} title={network.label}>
+					<a key={url} target="_blank" rel="noreferrer noopener" href={url} title={network.label}>
 						<span className={network.className} />
 					</a>
 				);
