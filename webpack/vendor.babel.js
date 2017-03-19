@@ -19,6 +19,7 @@ export default {
 			"react-helmet",
 			"react-redux",
 			"react-router",
+			"react-router-redux",
 			"redux",
 			"redux-saga"
 		]
