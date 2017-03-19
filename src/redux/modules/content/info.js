@@ -1,9 +1,9 @@
 import createEntity from "./entity"
 
-const feed = createEntity("info", "single")
+const info = createEntity("info", "single")
 
-export const { LOAD, REQUEST, SUCCESS, FAILURE } = feed
+export const { LOAD, REQUEST, SUCCESS, FAILURE } = info
 
-export const { load, request, success, fail } = feed
+export const { load, request, success, fail } = info
 
-export default feed.reducer
+export default info.reducer
