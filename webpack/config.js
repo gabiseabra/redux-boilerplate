@@ -5,7 +5,19 @@ import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
+const URL_LIMIT = 10000
+
 const env = process.env.NODE_ENV || "development"
+
+const cssOptions = {
+	modules: true,
+	importLoaders: 1,
+	localIdentName: (
+		env === "production" ?
+		"[hash:base64:5]" :
+		"[name]_[local]--[hash:base64:5]"
+	)
+}
 
 let plugins = [
 	new ExtractTextPlugin("main.css"),
@@ -46,31 +58,77 @@ export default {
 			},
 			{
 				test: /\.css?$/,
+				exclude: [ path.join(__dirname, "../src") ],
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: "css-loader"
+				})
+			},
+			{
+				test: /\.css?$/,
 				include: [ path.join(__dirname, "../src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
-						{
-							loader: "css-loader",
-							options: {
-								modules: true,
-								importLoaders: 1,
-								localIdentName: (
-									env === "production" ?
-									"[hash:base64:5]" :
-									"[name]_[local]--[hash:base64:5]"
-								)
-							}
-						},
+						{ loader: "css-loader", options: cssOptions },
 						{ loader: "postcss-loader" }
 					]
 				})
 			},
 			{
-				test: /\.(jpe?g|png|svg)?$/,
-				use: [
-					{ loader: "file-loader", options: { name: "[path][name].[ext]?[hash]" } }
-				]
+				test: /\.scss?$/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: [
+						{ loader: "css-loader", options: cssOptions },
+						{ loader: "sass-loader" }
+					]
+				})
+			},
+			{
+				test: /\.less?$/,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: [
+						{ loader: "css-loader", options: cssOptions },
+						{ loader: "less-loader" }
+					]
+				})
+			},
+			{
+				test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "application/font-woff"
+				}
+			},
+			{
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "application/octet-stream"
+				}
+			},
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT,
+					mimetype: "image/svg+xml"
+				}
+			},
+			{
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				use: "file-loader"
+			},
+			{
+				test: /\.(jpe?g|png|gifv?)?$/,
+				use: "url-loader",
+				options: {
+					limit: URL_LIMIT
+				}
 			}
 		]
 	},

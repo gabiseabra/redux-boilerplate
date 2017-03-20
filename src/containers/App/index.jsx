@@ -3,9 +3,9 @@ import Helmet from "react-helmet"
 import { Header, Footer } from "../../components"
 import styles from "./App.css"
 
-const App = ({ className, children }, { data }) => (
+const App = ({ className, children }, { data: { title } }) => (
 	<div className={[ styles.App, className ].join(" ")}>
-		<Helmet titleTemplate={data.title} />
+		<Helmet titleTemplate={`%s - ${title}`} defaultTitle={title} />
 		<Header className={styles.header} />
 		<main className={styles.content}>{children}</main>
 		<Footer className={styles.footer} />
