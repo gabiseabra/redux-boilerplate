@@ -3,7 +3,7 @@ import Helmet from "react-helmet"
 import { Header, Footer } from "../../components"
 import styles from "./App.css"
 
-const App = ({ className, children }, { data: { title } }) => (
+const App = ({ className, children }, { info: { title } }) => (
 	<div className={[ styles.App, className ].join(" ")}>
 		<Helmet titleTemplate={`%s - ${title}`} defaultTitle={title} />
 		<Header className={styles.header} />
@@ -18,7 +18,7 @@ App.propTypes = {
 }
 
 App.contextTypes = {
-	data: PropTypes.object.isRequired
+	info: PropTypes.object.isRequired
 }
 
 export default App
