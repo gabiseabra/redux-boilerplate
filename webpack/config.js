@@ -97,7 +97,7 @@ export default {
 			},
 			{
 				test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url-loader",
+				loader: "url-loader",
 				options: {
 					limit: URL_LIMIT,
 					mimetype: "application/font-woff"
@@ -105,7 +105,7 @@ export default {
 			},
 			{
 				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url-loader",
+				loader: "url-loader",
 				options: {
 					limit: URL_LIMIT,
 					mimetype: "application/octet-stream"
@@ -113,7 +113,7 @@ export default {
 			},
 			{
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-				use: "url-loader",
+				loader: "url-loader",
 				options: {
 					limit: URL_LIMIT,
 					mimetype: "image/svg+xml"
@@ -121,11 +121,11 @@ export default {
 			},
 			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-				use: "file-loader"
+				loader: "file-loader"
 			},
 			{
 				test: /\.(jpe?g|png|gifv?)?$/,
-				use: "url-loader",
+				loader: "url-loader",
 				options: {
 					limit: URL_LIMIT
 				}
