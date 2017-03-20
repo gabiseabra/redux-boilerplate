@@ -19,3 +19,25 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById("app")
 )
+
+if(module.hot) {
+	const reporter = window.__webpack_hot_middleware_reporter__
+	const next = reporter.success
+	const DEAD_TIMEOUT = 2000
+
+	reporter.success = function () {
+		document.querySelectorAll("link[href][rel=stylesheet]").forEach((link) => {
+			const href = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`)
+			const newLink = link.cloneNode()
+			newLink.href = href
+			link.parentNode.appendChild(newLink)
+			setTimeout(() => {
+				if(link.parentNode) {
+					link.parentNode.removeChild(link)
+				}
+			}, DEAD_TIMEOUT)
+			next()
+		})
+	}
+	module.hot.accept()
+}

@@ -1,4 +1,5 @@
-import { Component, PropTypes } from "react"
+import React, { Component, PropTypes } from "react"
+import { AppContainer } from "react-hot-loader"
 import Profile from "../lib/Profile"
 
 /**
@@ -25,6 +26,9 @@ export default class Provider extends Component {
 	}
 
 	render() {
+		if(process.env.NODE_ENV === "development") {
+			return <AppContainer>{this.props.children}</AppContainer>
+		}
 		return this.props.children;
 	}
 }
