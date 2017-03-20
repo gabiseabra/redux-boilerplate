@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import Helmet from "react-helmet"
 import { connect } from "react-redux"
 import { Link } from "react-router"
 import { Loading } from "../../components"
@@ -42,6 +43,7 @@ class Feed extends Component {
 		const { loading, feed, error, location: { query: { type } } } = this.props;
 		return (
 			<section>
+				<Helmet title="Posts" />
 				<h1>Posts</h1>
 				{type && <h2>{type}</h2>}
 				{loading ? <Loading error={error} /> : this.renderFeed(feed)}

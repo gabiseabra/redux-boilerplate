@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import Helmet from "react-helmet"
 import { connect } from "react-redux"
 import { Loading } from "../../components"
 import { getPost, getPostError } from "../../redux/selectors"
@@ -34,6 +35,7 @@ class Post extends Component {
 		}
 		return (
 			<section>
+				<Helmet title={post.title} />
 				<h1>{post.title}</h1>
 				<p>{post.description}</p>
 				{post.content && <div dangerouslySetInnerHTML={{ __html: post.content }} />}
