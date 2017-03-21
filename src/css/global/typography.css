@@ -11,7 +11,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin: .8em 0 .5em;
+	margin: .5em 0;
 	line-height: 110%;
 	font-family: var(--fontHeading);
 	font-weight: 400;
