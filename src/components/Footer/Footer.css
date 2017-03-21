@@ -15,11 +15,13 @@
 	text-align: center;
 }
 
-.social {
-	margin-bottom: 10px;
-}
-
-.copy {
+.copyright {
+	display: flex;
+	justify-content: space-between;
 	font-size: .85em;
 	font-style: italic;
+}
+
+.social {
+	font-size: 1.2em;
 }

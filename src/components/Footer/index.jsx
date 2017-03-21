@@ -46,7 +46,8 @@ export default class Footer extends Component {
 		const { info, profile } = this.context;
 		return (
 			<footer className={[ styles.Footer, className ].join(" ")}>
-				<div className={styles.container}>
+				<div className={[ styles.container, styles.copyright ].join(" ")}>
+					{info.copy && <div>&copy; 2017 - {info.copy}</div>}
 					<div className={styles.social}>
 						{this.renderNetworks(profile)}
 						{profile.email &&
@@ -54,7 +55,6 @@ export default class Footer extends Component {
 							<span className="icon-email" />
 						</a>}
 					</div>
-					{info.copy && <div className={styles.copy}>&copy; 2017 - {info.copy}</div>}
 				</div>
 			</footer>
 		)

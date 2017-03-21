@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { Provider, connect } from "react-redux"
+import { AppContainer } from "react-hot-loader"
 import { getInfo } from "../redux/selectors"
 import { load } from "../redux/modules/content/info"
 import Profile from "../lib/Profile"
@@ -38,11 +39,15 @@ class ContextProvider extends Component {
 
 	render() {
 		const { store, children } = this.props;
-		return (
+		const component = (
 			<Provider store={store}>
 				{children}
 			</Provider>
 		);
+		if(process.env.NODE_ENV === "development") {
+			return <AppContainer>{component}</AppContainer>
+		}
+		return this.props.children;
 	}
 }
 

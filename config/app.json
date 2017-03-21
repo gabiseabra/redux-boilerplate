@@ -3,6 +3,7 @@
 	"port": 3000,
 	"devPort": 3001,
 	"serverRendering": true,
+	"hotModuleReplacement": true,
 	"app": {},
 	"api": {
 		"host": "localhost",

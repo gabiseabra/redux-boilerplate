@@ -1,17 +1,58 @@
+@import "../fonts.css";
+
 body {
-	font-family: "Roboto";
+	font-family: var(--fontBody);
 	line-height: 1.5em;
 }
 
 h1,
 h2,
 h3,
-h4 {
-	margin: 0;
-	line-height: 1em;
+h4,
+h5,
+h6 {
+	margin: .5em 0;
+	line-height: 110%;
+	font-family: var(--fontHeading);
+	font-weight: 400;
 }
 
-h1,
-h2 {
-	font-family: "Exo 2";
+h1 {
+	font-size: 2em;
+	font-weight: 700;
+}
+
+h2 { font-size: 1.5em; }
+
+h3 { font-size: 1.17em; }
+
+h4 { font-size: 1.12em; }
+
+h5 { font-size: .83em; }
+
+h6 {
+	font-size: .75em;
+	font-family: var(--fontBody);
+}
+
+p { margin: 1em 0; }
+
+blockquote,
+.blockQuote {
+	margin: 1em 2em;
+	border-left: 4px solid;
+	padding-left: 1em;
+
+	&::before {
+		content: "\201c";
+		font-family: Georgia, "Times New Roman", Times, serif;
+		display: inline-block;
+		float: left;
+		font-size: 4em;
+		height: 1px;
+		line-height: 1em;
+		font-weight: 700;
+		padding: 5px 10px;
+		margin: -10px 0 10px -10px;
+	}
 }
