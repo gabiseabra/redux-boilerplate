@@ -40,4 +40,7 @@ export default class ApiClient {
 	feed = () => this.get("/posts")
 
 	post = (name) => this.get(`/posts/${name}`)
+		.then(response => new Promise((resolve) => {
+			setTimeout(() => resolve(response), 2000)
+		}))
 }
