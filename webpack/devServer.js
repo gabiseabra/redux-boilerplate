@@ -67,4 +67,5 @@ server.listen(port, err => {
 		console.error(err);
 	}
 	console.info("==> 💻 Development server running @ http://%s:%s", config.host, port)
+	console.info("==> 🔥 Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
 })
