@@ -4,7 +4,6 @@
 import path from "path"
 import webpack from "webpack"
 import ManifestPlugin from "webpack-manifest-plugin"
-import manifestCache from "./manifest"
 
 export default {
 	target: "web",
@@ -25,19 +24,18 @@ export default {
 		]
 	},
 	output: {
-		path: path.join(__dirname, "../public/dist"),
+		path: path.join(__dirname, "../../public/dist"),
 		filename: "[name].dll.js",
 		library: "[name]_dll"
 	},
 	plugins: [
 		new webpack.DllPlugin({
-			path: path.join(__dirname, "../public/dist/[name].manifest.json"),
+			path: path.join(__dirname, "../../public/dist/[name].manifest.json"),
 			name: "[name]_dll"
 		}),
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "/dist/",
-			cache: manifestCache
+			publicPath: "/dist/"
 		}),
 		new webpack.optimize.UglifyJsPlugin({
 			minimize: true,

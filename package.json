@@ -23,10 +23,10 @@
         "NODE_ENV": "production"
       }
     },
-    "build:client": "webpack --config=webpack/client.babel.js --progress --colors",
-    "build:server": "webpack --config=webpack/server.babel.js --progress --colors",
+    "build:client": "webpack --config=webpack/bundles/client.babel.js --progress --colors",
+    "build:server": "webpack --config=webpack/bundles/server.babel.js --progress --colors",
     "build:vendor": {
-      "command": "webpack --config=webpack/vendor.babel.js --progress --colors -p",
+      "command": "webpack --config=webpack/bundles/vendor.babel.js --progress --colors -p",
       "env": {
         "NODE_ENV": "production"
       }

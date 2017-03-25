@@ -6,6 +6,7 @@ import * as OfflinePlugin from "offline-plugin/runtime"
 import Provider from "./app/Provider"
 import ApiClient from "./lib/ApiClient"
 import routes from "./app/routes"
+import sync from "./app/hot"
 import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 
@@ -32,24 +33,6 @@ ReactDOM.render(
 	document.getElementById("app")
 )
 
-if(module.hot) {
-	const reporter = window.__webpack_hot_middleware_reporter__
-	const next = reporter.success
-	const DEAD_TIMEOUT = 2000
-
-	reporter.success = function () {
-		document.querySelectorAll("link[href][rel=stylesheet]").forEach((link) => {
-			const href = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`)
-			const newLink = link.cloneNode()
-			newLink.href = href
-			link.parentNode.appendChild(newLink)
-			setTimeout(() => {
-				if(link.parentNode) {
-					link.parentNode.removeChild(link)
-				}
-			}, DEAD_TIMEOUT)
-			next()
-		})
-	}
-	module.hot.accept()
+if(process.env.NODE_ENV === "production" && module.hot) {
+	sync(window.__webpack_hot_middleware_reporter__)
 }

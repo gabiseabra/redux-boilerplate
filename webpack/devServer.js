@@ -9,7 +9,7 @@ import appMiddleware from "../src/app/middleware"
 import { apiUrl } from "../src/lib/ApiClient"
 import config from "../config/app.json"
 import profile from "../config/data.json"
-import webpackConfig, { manifestCache } from "./client.babel"
+import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HMR = config.hotModuleReplacement
 
@@ -29,7 +29,6 @@ const serverOptions = {
 		colors: true
 	}
 }
-
 
 if(HMR) {
 	webpackConfig.plugins.push(
@@ -65,7 +64,7 @@ app.use(appMiddleware({
 	serverRendering: false,
 	data: config.app,
 	api: config.api,
-	manifest: manifestCache,
+	manifest,
 	profile
 }))
 
@@ -74,4 +73,5 @@ server.listen(port, err => {
 		console.error(err);
 	}
 	console.info("==> 💻 Development server running @ http://%s:%s", config.host, port)
+	console.info("==> 🔥 Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
 })

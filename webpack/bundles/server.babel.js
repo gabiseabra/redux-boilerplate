@@ -4,7 +4,7 @@
 import path from "path"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
-import config from "./config"
+import config from "../config"
 
 export default merge.smart(config, {
 	target: "node",
@@ -20,7 +20,7 @@ export default merge.smart(config, {
 		nodeExternals()
 	],
 	output: {
-		path: path.join(__dirname, "../dist"),
+		path: path.join(__dirname, "../../dist"),
 		filename: "[name].js",
 		libraryTarget: "commonjs"
 	},
