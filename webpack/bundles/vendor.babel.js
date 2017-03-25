@@ -16,13 +16,13 @@ export default {
 		]
 	},
 	output: {
-		path: path.join(__dirname, "../public/dist"),
+		path: path.join(__dirname, "../../public/dist"),
 		filename: "[name].dll.js",
 		library: "[name]_dll"
 	},
 	plugins: [
 		new webpack.DllPlugin({
-			path: path.join(__dirname, "../public/dist/[name].manifest.json"),
+			path: path.join(__dirname, "../../public/dist/[name].manifest.json"),
 			name: "[name]_dll"
 		}),
 		new ManifestPlugin({

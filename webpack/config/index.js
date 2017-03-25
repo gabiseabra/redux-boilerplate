@@ -2,47 +2,31 @@
  * Base Webpack configuration file
  */
 import path from "path"
-import webpack from "webpack"
+import merge from "webpack-merge"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 const URL_LIMIT = 10000
 
-const env = process.env.NODE_ENV || "development"
+const context = path.resolve(__dirname, "..", "..")
 
 const cssOptions = {
 	modules: true,
-	importLoaders: 1,
-	localIdentName: (
-		env === "production" ?
-		"[hash:base64:5]" :
-		"[name]_[local]--[hash:base64:5]"
-	)
+	importLoaders: 1
 }
 
-let plugins = [
-	new ExtractTextPlugin("main.css"),
-	new webpack.EnvironmentPlugin({ NODE_ENV: env })
-];
+let envConfig = {}
 
-if(env === "production") {
-	// Production options
-	plugins = plugins.concat([
-		new webpack.HashedModuleIdsPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			sourceMap: false
-		})
-	])
-} else if(env === "development") {
-	// Development options
-	plugins = plugins.concat([
-		new webpack.NamedModulesPlugin()
-	])
-}
+try {
+	if(process.env.NODE_ENV) {
+		// eslint-disable-next-line
+		const module = require(`./${process.env.NODE_ENV}`)
+		envConfig = module.default
+		cssOptions.localIdentName = module.CSS_MODULE_NAME
+	}
+} catch(e) { /* No environment config */ }
 
-export default {
-	devtool: (env === "production" ? undefined : "inline-source-map"),
-	context: path.resolve(__dirname, ".."),
+export default merge.smart({
+	context,
 	output: {
 		filename: "[name].js"
 	},
@@ -50,12 +34,12 @@ export default {
 		rules: [
 			{
 				test: /\.jsx?$/,
-				include: [ path.join(__dirname, "../src") ],
+				include: [ path.join(context, "src") ],
 				loader: "babel-loader"
 			},
 			{
 				test: /\.css?$/,
-				exclude: [ path.join(__dirname, "../src") ],
+				exclude: [ path.join(context, "src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: "css-loader"
@@ -63,7 +47,7 @@ export default {
 			},
 			{
 				test: /\.css?$/,
-				include: [ path.join(__dirname, "../src") ],
+				include: [ path.join(context, "src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -132,5 +116,7 @@ export default {
 	resolve: {
 		extensions: [ ".js", ".jsx" ]
 	},
-	plugins
-}
+	plugins: [
+		new ExtractTextPlugin("main.css")
+	]
+}, envConfig)

@@ -7,7 +7,7 @@ import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
 import config from "../config/app.json"
 import profile from "../config/data.json"
-import webpackConfig, { manifest } from "./client.babel"
+import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HMR = config.hotModuleReplacement
 
@@ -27,7 +27,6 @@ const serverOptions = {
 		colors: true
 	}
 }
-
 
 if(HMR) {
 	webpackConfig.plugins.push(

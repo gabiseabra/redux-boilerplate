@@ -7,9 +7,9 @@ import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
 import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
-import config from "./config"
+import config from "../config"
 import vendorConfig from "./vendor.babel"
-import manifest from "../public/dist/manifest.json"
+import manifest from "../../public/dist/manifest.json"
 
 const vendors = Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`)
 
@@ -22,7 +22,7 @@ export default merge.smart(config, {
 		"./src/client.jsx"
 	],
 	output: {
-		path: path.join(__dirname, "../public/dist"),
+		path: path.join(__dirname, "../../public/dist"),
 		publicPath: "/dist/"
 	},
 	plugins: [
@@ -32,7 +32,7 @@ export default merge.smart(config, {
 			cache: manifest
 		}),
 		new FontelloPlugin({
-			config: require("../src/css/fontello.json")
+			config: require("../../src/css/fontello.json")
 		}),
 		new webpack.optimize.CommonsChunkPlugin("common"),
 		new OfflinePlugin({
@@ -45,7 +45,7 @@ export default merge.smart(config, {
 		}),
 		...(vendors.map(fileName => (
 			new webpack.DllReferencePlugin({
-				manifest: require(`../public/${fileName}`)
+				manifest: require(`../../public/${fileName}`)
 			})
 		)))
 	]
