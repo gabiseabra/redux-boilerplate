@@ -4,7 +4,6 @@
 import path from "path"
 import webpack from "webpack"
 import ManifestPlugin from "webpack-manifest-plugin"
-import manifestCache from "./manifest"
 
 export default {
 	target: "web",
@@ -28,8 +27,7 @@ export default {
 		}),
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "/dist/",
-			cache: manifestCache
+			publicPath: "/dist/"
 		}),
 		new webpack.optimize.UglifyJsPlugin({
 			minimize: true,

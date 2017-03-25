@@ -9,11 +9,11 @@ import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
 import config from "./config"
 import vendorConfig from "./vendor.babel"
-import manifestCache from "./manifest"
+import manifest from "../public/dist/manifest.json"
 
 const vendors = Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`)
 
-export { manifestCache }
+export { manifest }
 
 export default merge.smart(config, {
 	target: "web",
@@ -29,7 +29,7 @@ export default merge.smart(config, {
 		new ManifestPlugin({
 			fileName: "manifest.json",
 			publicPath: "/dist/",
-			cache: manifestCache
+			cache: manifest
 		}),
 		new FontelloPlugin({
 			config: require("../src/css/fontello.json")
