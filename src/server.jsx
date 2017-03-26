@@ -2,6 +2,7 @@ import path from "path"
 import http from "http"
 import Express from "express"
 import proxy from "express-http-proxy"
+import Cookies from "cookies"
 import compression from "compression"
 import favicon from "serve-favicon"
 import appMiddleware from "./app/middleware"
@@ -14,6 +15,8 @@ import manifest from "../public/dist/manifest.json"
 const app = new Express()
 
 const server = http.Server(app)
+
+app.use(Cookies.connect(/* keys */))
 
 app.use(compression())
 

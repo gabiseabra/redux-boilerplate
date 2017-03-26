@@ -3,6 +3,7 @@ import ReactDOM from "react-dom"
 import { Router, browserHistory } from "react-router"
 import { syncHistoryWithStore } from "react-router-redux"
 import * as OfflinePlugin from "offline-plugin/runtime"
+import Cookie from "js-cookie"
 import Provider from "./app/Provider"
 import ApiClient from "./lib/ApiClient"
 import routes from "./app/routes"
@@ -18,7 +19,7 @@ const appData = JSON.parse(document.getElementById("data").textContent)
 
 const profile = JSON.parse(document.getElementById("profile").textContent)
 
-const store = createStore(window.__state)
+const store = createStore(Cookie, window.__state)
 
 const history = syncHistoryWithStore(browserHistory, store)
 

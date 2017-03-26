@@ -29,7 +29,7 @@ export default function middleware(config) {
 		if(!serverRendering) {
 			res.send(render());
 		} else {
-			const store = createStore()
+			const store = createStore(res.cookies)
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {
 					res.status(500).send(err.message)

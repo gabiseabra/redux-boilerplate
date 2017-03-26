@@ -10,7 +10,8 @@ export default {
 	entry: {
 		vendor: [
 			"axios",
-			"es6-error"
+			"es6-error",
+			"js-cookie"
 		],
 		react: [
 			"react",
@@ -20,7 +21,8 @@ export default {
 			"react-router",
 			"react-router-redux",
 			"redux",
-			"redux-saga"
+			"redux-saga",
+			"redux-cookie"
 		]
 	},
 	output: {

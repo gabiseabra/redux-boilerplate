@@ -1,15 +1,19 @@
 import { createStore, applyMiddleware } from "redux"
 import createSagaMiddleware, { END } from "redux-saga"
 import createLoggerMiddleware from "redux-logger"
+import { createCookieMiddleware } from "redux-cookie"
 import { hydrate } from "./index"
 import reducer from "./reducer"
 
-export default function create(state) {
+export default function create(cookie, state) {
 	let store
 	const sagaMiddleware = createSagaMiddleware()
 	const middleware = [
 		sagaMiddleware
 	]
+	if(cookie) {
+		middleware.push(createCookieMiddleware(cookie))
+	}
 	if(process.env.NODE_ENV === "development") {
 		middleware.push(createLoggerMiddleware())
 	}
