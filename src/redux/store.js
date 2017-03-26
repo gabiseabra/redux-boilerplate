@@ -10,7 +10,9 @@ export default function create(state) {
 	const middleware = [
 		sagaMiddleware
 	]
-	middleware.push(createLoggerMiddleware())
+	if(process.env.NODE_ENV === "development") {
+		middleware.push(createLoggerMiddleware())
+	}
 	if(state) {
 		store = createStore(reducer, state, applyMiddleware(...middleware))
 		store.dispatch(hydrate(state))
