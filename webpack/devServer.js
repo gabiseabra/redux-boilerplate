@@ -31,9 +31,11 @@ const serverOptions = {
 if(HMR) {
 	webpackConfig.plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({
+			"process.env.HMR": true
+		})
 	)
-
 	webpackConfig.entry.unshift(
 		"react-hot-loader/patch",
 		"webpack-hot-middleware/client?reload=true"

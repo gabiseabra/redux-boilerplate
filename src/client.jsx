@@ -21,6 +21,6 @@ ReactDOM.render(
 	document.getElementById("app")
 )
 
-if(process.env.NODE_ENV === "production" && module.hot) {
+if(process.env.HMR && module.hot) {
 	sync(window.__webpack_hot_middleware_reporter__)
 }
