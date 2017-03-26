@@ -43,11 +43,11 @@ class ContextProvider extends Component {
 			<Provider store={store}>
 				{children}
 			</Provider>
-		);
-		if(process.env.NODE_ENV === "development") {
+		)
+		if(process.env.HMR) {
 			return <AppContainer>{component}</AppContainer>
 		}
-		return this.props.children;
+		return component
 	}
 }
 
