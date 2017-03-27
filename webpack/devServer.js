@@ -1,6 +1,7 @@
 import path from "path"
 import http from "http"
 import Express from "express"
+import Cookies from "cookies"
 import proxy from "express-http-proxy"
 import webpack from "webpack"
 import hotMiddleware from "webpack-hot-middleware"
@@ -49,6 +50,8 @@ const compiler = webpack(webpackConfig)
 const app = new Express()
 
 const server = http.Server(app)
+
+app.use(Cookies.connect())
 
 app.use(devMiddleware(compiler, serverOptions))
 
