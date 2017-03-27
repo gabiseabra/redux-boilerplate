@@ -17,18 +17,18 @@ export default function middleware(config) {
 		data,
 		profile
 	} = config;
-	const saga = createSaga(new ApiClient(api));
 	const render = renderFn.bind(
 		undefined,
 		data || {},
 		profile,
 		new Manifest(manifest),
-		api.proxy ? api.proxy : api
-	);
+		api
+	)
 	return (req, res, next) => {
 		if(!serverRendering) {
-			res.send(render());
+			res.send(render())
 		} else {
+			const saga = createSaga(new ApiClient(api))
 			const store = createStore(res.cookies)
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {
@@ -48,10 +48,10 @@ export default function middleware(config) {
 						})
 						.catch(e => res.status(500).send(e.message))
 						.then(next)
-					render(store, component);
+					render(store, component)
 					store.close();
 				} else {
-					res.status(404).send("Not found");
+					res.status(404).send("Not found")
 				}
 			})
 		}

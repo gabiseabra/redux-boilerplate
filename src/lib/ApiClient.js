@@ -17,8 +17,8 @@ export class ResponseError extends ExtendableError {
 
 export default class ApiClient {
 	constructor(options) {
-		if(typeof options === "string") {
-			this.url = options
+		if(options.proxy) {
+			this.url = options.proxy
 		} else {
 			this.url = apiUrl(options)
 		}
