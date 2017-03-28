@@ -38,7 +38,7 @@ export default merge.smart({
 				loader: "babel-loader"
 			},
 			{
-				test: /\.css?$/,
+				test: /\.css$/,
 				exclude: [ path.join(context, "src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
@@ -46,7 +46,7 @@ export default merge.smart({
 				})
 			},
 			{
-				test: /\.css?$/,
+				test: /\.css$/,
 				include: [ path.join(context, "src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
@@ -57,7 +57,7 @@ export default merge.smart({
 				})
 			},
 			{
-				test: /\.scss?$/,
+				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -67,7 +67,7 @@ export default merge.smart({
 				})
 			},
 			{
-				test: /\.less?$/,
+				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
