@@ -7,7 +7,7 @@
 }
 
 .icon {
-	composes: background from "../../css/global/links.css";
+	composes: background from "../../css/components/links.css";
 
 	&::before,
 	&::after {

@@ -38,8 +38,7 @@ export default merge.smart({
 				loader: "babel-loader"
 			},
 			{
-				test: /\.css$/,
-				exclude: [ path.join(context, "src") ],
+				test: /global\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: "css-loader"
@@ -47,7 +46,6 @@ export default merge.smart({
 			},
 			{
 				test: /\.css$/,
-				include: [ path.join(context, "src") ],
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
