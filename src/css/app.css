@@ -1,4 +1,2 @@
 @import "normalize-css/normalize.css";
-@import "./components/selection.css";
-@import "./components/links.css";
-@import "./components/typography.css";
+@import "./components/*.css";
