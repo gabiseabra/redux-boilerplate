@@ -41,16 +41,14 @@ export default merge.smart({
 				loader: "babel-loader"
 			},
 			{
-				test: /\.css?$/,
-				exclude: [ path.join(context, "src") ],
+				test: /global\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: "css-loader"
 				})
 			},
 			{
-				test: /\.css?$/,
-				include: [ path.join(context, "src") ],
+				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -60,7 +58,7 @@ export default merge.smart({
 				})
 			},
 			{
-				test: /\.scss?$/,
+				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -70,7 +68,7 @@ export default merge.smart({
 				})
 			},
 			{
-				test: /\.less?$/,
+				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
