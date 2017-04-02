@@ -2,6 +2,7 @@
  * Base Webpack configuration file
  */
 import path from "path"
+import webpack from "webpack"
 import merge from "webpack-merge"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 
@@ -115,6 +116,10 @@ export default merge.smart({
 		extensions: [ ".js", ".jsx" ]
 	},
 	plugins: [
-		new ExtractTextPlugin("main.css")
+		new ExtractTextPlugin("main.css"),
+		new webpack.EnvironmentPlugin([
+			"NODE_ENV",
+			"HMR"
+		])
 	]
 }, envConfig)
