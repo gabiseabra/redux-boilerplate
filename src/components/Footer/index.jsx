@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from "react"
+import React, { PureComponent, PropTypes } from "react"
 import styles from "./Footer.css"
 
-export default class Footer extends Component {
+export default class Footer extends PureComponent {
 	/* Add social networks here */
 	static Networks = [
 		{
