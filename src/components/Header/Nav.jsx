@@ -15,14 +15,12 @@ export default class Nav extends Component {
 	click = () => this.setState({ collapsed: !this.state.collapsed })
 
 	render() {
-		let i = 0;
-		const { children, className, ...props } = this.props;
-		const { collapsed } = this.state;
-		const classNames = [ styles.Nav, className ];
-		if(!collapsed) classNames.push(styles.active);
-
+		const { children, className } = this.props
+		const { collapsed } = this.state
+		const classNames = [ styles.Nav, className ]
+		if(!collapsed) classNames.push(styles.active)
 		return (
-			<nav className={classNames.join(" ")} {...props}>
+			<nav className={classNames.join(" ")}>
 				<a className={styles.handle}
 					onClick={this.click}
 					title="Menu"
@@ -31,7 +29,7 @@ export default class Nav extends Component {
 				</a>
 				<div className={styles.links}>
 					<ul>
-						{React.Children.map(children, node => <li key={++i}>{node}</li>)}
+						{React.Children.map(children, node => <li key="menu">{node}</li>)}
 					</ul>
 				</div>
 			</nav>

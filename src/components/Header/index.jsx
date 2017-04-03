@@ -8,8 +8,8 @@ const Header = ({ className }, { data }) => (
 		<div className={styles.container}>
 			<Link to="/" className={styles.brand}>{data.title}</Link>
 			<Nav className={styles.nav}>
-				<Link to="/">Home</Link>
-				<Link to="/hello">Hello</Link>
+				<Link to="/" key="home">Home</Link>
+				<Link to="/hello" key="hello">Hello</Link>
 			</Nav>
 		</div>
 	</header>
