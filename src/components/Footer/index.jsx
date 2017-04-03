@@ -26,24 +26,24 @@ export default class Footer extends PureComponent {
 	}
 
 	renderNetworks(profile) {
-		const social = [];
+		const social = []
 		for(let i = 0; i < Footer.Networks.length; ++i) {
-			const network = Footer.Networks[i];
-			const url = profile.social(network.url);
+			const network = Footer.Networks[i]
+			const url = profile.social(network.url)
 			if(url) {
 				social.push(
 					<a target="_blank" rel="noreferrer noopener" href={url} title={network.label}>
 						<span className={network.className} />
 					</a>
-				);
+				)
 			}
 		}
-		return social;
+		return social
 	}
 
 	render() {
-		const { className } = this.props;
-		const { data, profile } = this.context;
+		const { className } = this.props
+		const { data, profile } = this.context
 		return (
 			<footer className={[ styles.Footer, className ].join(" ")}>
 				<div className={[ styles.container, styles.copyright ].join(" ")}>

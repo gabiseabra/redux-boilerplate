@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run server",
     "watch": "babel-node webpack/devServer.js",
+    "lint": "eslint src",
     "prebuild": "better-npm-run build:vendor",
     "build": "better-npm-run build",
     "build:client": "better-npm-run build:client",

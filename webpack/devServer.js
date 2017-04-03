@@ -11,7 +11,7 @@ import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HMR = config.hotModuleReplacement
 
-const port = config.devPort || 8080;
+const port = config.devPort || 8080
 
 const serverOptions = {
 	contentBase: `http://${config.host}:${port}`,
@@ -65,7 +65,7 @@ app.use(appMiddleware({
 
 server.listen(port, err => {
 	if(err) {
-		console.error(err);
+		console.error(err)
 	}
 	console.info("==> 💻 Development server running @ http://%s:%s", config.host, port)
 	console.info("==> 🔥 Hot module replacement is %s", (HMR ? "enabled" : "disabled"))

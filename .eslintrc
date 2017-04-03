@@ -21,15 +21,27 @@
 		"comma-dangle": [ "error", "never" ],
 		"quotes": [ "error", "double", { "avoidEscape": true } ],
 		"array-bracket-spacing": [ "error", "always" ],
-		"semi": "off",
+		"semi": [ "error", "never" ],
+		"arrow-parens": [ "error", "as-needed" ],
+		"consistent-return": [ "warn", { "treatUndefinedAsUnspecified": true } ],
+		"import/no-extraneous-dependencies": [ "error", { "devDependencies": true } ],
+		"keyword-spacing": [
+			"error",
+			{
+				"before": true,
+				"after": true,
+				"overrides": {
+					"if": { "after": false },
+					"for": { "after": false },
+					"while": { "after": false },
+					"catch": { "after": false }
+				}
+			}
+		],
 		"no-tabs": "off",
-		"arrow-parens": "off",
 		"new-parens": "off",
-		"keyword-spacing": "off",
-		"default-case": "off",
-		"class-methods-use-this": "off",
 		"no-plusplus": "off",
-		"consistent-return": "off",
-		"import/no-extraneous-dependencies": "off"
+		"class-methods-use-this": "off",
+		"global-require": "warn"
 	}
 }

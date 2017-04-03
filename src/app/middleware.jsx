@@ -11,34 +11,34 @@ export default function middleware(config) {
 		routes,
 		data,
 		profile
-	} = config;
+	} = config
 	const render = renderFn.bind(
 		undefined,
 		data,
 		profile,
 		new Manifest(manifest)
-	);
+	)
 	return (req, res, next) => {
 		if(!serverRendering) {
-			res.send(render());
+			res.send(render())
 		} else {
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {
-					res.status(500).send(err.message);
+					res.status(500).send(err.message)
 				} else if(redirect) {
-					res.redirect(302, redirect.pathname + redirect.search);
+					res.redirect(302, redirect.pathname + redirect.search)
 				} else if(props) {
 					const component = (
 						<Provider data={data} profile={profile}>
 							<RouterContext {...props} />
 						</Provider>
-					);
-					res.status(200).send(render(component));
+					)
+					res.status(200).send(render(component))
 				} else {
-					res.status(404).send("Not found");
+					res.status(404).send("Not found")
 				}
-			});
+			})
 		}
-		next();
+		next()
 	}
 }

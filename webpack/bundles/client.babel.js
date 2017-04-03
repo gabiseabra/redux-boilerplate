@@ -45,6 +45,7 @@ export default merge.smart(config, {
 		}),
 		...(vendors.map(fileName => (
 			new webpack.DllReferencePlugin({
+				// eslint-disable-next-line import/no-dynamic-require
 				manifest: require(`../../public/${fileName}`)
 			})
 		)))

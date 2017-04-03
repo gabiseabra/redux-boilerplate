@@ -29,6 +29,6 @@ export default class Provider extends Component {
 		if(process.env.NODE_ENV === "development") {
 			return <AppContainer>{this.props.children}</AppContainer>
 		}
-		return this.props.children;
+		return this.props.children
 	}
 }

@@ -29,7 +29,7 @@ app.use(appMiddleware({
 
 server.listen(config.port, err => {
 	if(err) {
-		console.error(err);
+		console.error(err)
 	}
 	console.info("==> 💻 Server running @ http://%s:%s", config.host, config.port)
 	console.info("==> Server-side rendering is %s", (config.serverRendering ? "enabled" : "disabled"))
