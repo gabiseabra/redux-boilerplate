@@ -11,9 +11,11 @@
     "build:client": "better-npm-run build:client",
     "build:server": "better-npm-run build:server",
     "build:vendor": "better-npm-run build:vendor",
+    "build:static": "babel-node scripts/static.js > public/index.html",
     "clean": "npm run clean:client && npm run clean:server",
-    "clean:client": "rimraf ./public/dist",
-    "clean:server": "rimraf ./dist",
+    "clean:client": "rimraf public/dist",
+    "clean:server": "rimraf dist",
+    "clean:static": "rimraf public/index.html",
     "server": "node dist/server.js"
   },
   "betterScripts": {
