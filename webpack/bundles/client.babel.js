@@ -11,7 +11,10 @@ import config from "../config"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
-const vendors = Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`)
+const vendors = {
+	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
+	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`),
+}
 
 export { manifest }
 
@@ -36,15 +39,45 @@ export default merge.smart(config, {
 		}),
 		new webpack.optimize.CommonsChunkPlugin("common"),
 		new OfflinePlugin({
+			safeToUseOptionalCaches: true,
+			caches: {
+				main: [
+					"main.js",
+					"main.css",
+					"common.js",
+					"/index.html",
+					...vendors.js
+				],
+				additional: [
+					":externals:"
+				],
+				optional: [
+					":rest:"
+				]
+			},
 			externals: [
 				"/favicon.ico",
 				"/icon.png",
-				"/manifest.json",
-				...vendors
-			]
+				"/manifest.json"
+			],
+			cacheMaps: [
+				{
+					map: /.*/,
+					to: "/",
+					requestTypes: [ "navigate" ]
+				}
+			],
+			ServiceWorker: {
+				output: "../sw.js"
+			},
+			AppCache: {
+				directory: "../appcache/",
+				FALLBACK: { "/": "/" }
+			}
 		}),
-		...(vendors.map(fileName => (
+		...(vendors.json.map(fileName => (
 			new webpack.DllReferencePlugin({
+				// eslint-disable-next-line import/no-dynamic-require
 				manifest: require(`../../public/${fileName}`)
 			})
 		)))

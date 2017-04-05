@@ -38,7 +38,7 @@ class ContextProvider extends Component {
 	}
 
 	render() {
-		const { store, children } = this.props;
+		const { store, children } = this.props
 		const component = (
 			<Provider store={store}>
 				{children}
@@ -51,7 +51,7 @@ class ContextProvider extends Component {
 	}
 }
 
-const mapper = (state) => ({
+const mapper = state => ({
 	info: getInfo(state) || {}
 })
 

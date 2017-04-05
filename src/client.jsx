@@ -35,5 +35,6 @@ ReactDOM.render(
 )
 
 if(process.env.HMR && module.hot) {
+	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
 }

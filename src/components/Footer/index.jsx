@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from "react"
+import React, { PureComponent, PropTypes } from "react"
 import styles from "./Footer.css"
 
-export default class Footer extends Component {
+export default class Footer extends PureComponent {
 	/* Add social networks here */
 	static Networks = [
 		{
@@ -26,24 +26,24 @@ export default class Footer extends Component {
 	}
 
 	renderNetworks(profile) {
-		const social = [];
+		const social = []
 		for(let i = 0; i < Footer.Networks.length; ++i) {
-			const network = Footer.Networks[i];
-			const url = profile.social(network.url);
+			const network = Footer.Networks[i]
+			const url = profile.social(network.url)
 			if(url) {
 				social.push(
 					<a key={url} target="_blank" rel="noreferrer noopener" href={url} title={network.label}>
 						<span className={network.className} />
 					</a>
-				);
+				)
 			}
 		}
-		return social;
+		return social
 	}
 
 	render() {
-		const { className } = this.props;
-		const { info, profile } = this.context;
+		const { className } = this.props
+		const { info, profile } = this.context
 		return (
 			<footer className={[ styles.Footer, className ].join(" ")}>
 				<div className={[ styles.container, styles.copyright ].join(" ")}>

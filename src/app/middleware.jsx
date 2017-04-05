@@ -16,7 +16,7 @@ export default function middleware(config) {
 		routes,
 		data,
 		profile
-	} = config;
+	} = config
 	const render = renderFn.bind(
 		undefined,
 		data || {},
@@ -49,12 +49,12 @@ export default function middleware(config) {
 						.catch(e => res.status(500).send(e.message))
 						.then(next)
 					render(store, component)
-					store.close();
+					store.close()
 				} else {
 					res.status(404).send("Not found")
 				}
 			})
 		}
-		// next();
+		// next()
 	}
 }

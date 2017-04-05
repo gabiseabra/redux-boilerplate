@@ -8,9 +8,9 @@ const Header = ({ className }, { info }) => (
 		<div className={styles.container}>
 			<Link to="/" className={styles.brand}>{info.title}</Link>
 			<Nav className={styles.nav}>
-				<Link to="/">Home</Link>
-				<Link to="/hello">Hello</Link>
-				<Link to="/posts">Posts</Link>
+				<Link to="/" key="home">Home</Link>
+				<Link to="/hello" key="hello">Hello</Link>
+				<Link to="/posts" key="posts">Posts</Link>
 			</Nav>
 		</div>
 	</header>

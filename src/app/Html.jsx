@@ -4,9 +4,9 @@ import ReactDOM from "react-dom/server"
 import Helmet from "react-helmet"
 
 const Html = ({ api, data, profile, store, manifest, children }) => {
-	const content = children ? ReactDOM.renderToString(children) : "";
-	const head = Helmet.rewind();
-	const html = head.htmlAttributes.toComponent();
+	const content = children ? ReactDOM.renderToString(children) : ""
+	const head = Helmet.rewind()
+	const html = head.htmlAttributes.toComponent()
 	return (
 		<html lang="en" {...html}>
 			<head>
@@ -64,6 +64,6 @@ export const render = (data, profile, manifest, api, store, component) => {
 			store={store}>
 			{component}
 		</Html>
-	);
-	return `<!doctype html>\n${html}`;
+	)
+	return `<!doctype html>\n${html}`
 }
