@@ -2,5 +2,7 @@
 node_modules
 dist
 public/dist
+public/appcache
 public/index.html
+public/sw.js
 *.log
