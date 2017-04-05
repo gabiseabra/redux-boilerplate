@@ -1,14 +1,14 @@
-export const getStatus = (state) => state.status
+export const getStatus = state => state.status
 
-export const isInfoLoaded = (state) => state.content.info.loaded
+export const isInfoLoaded = state => state.content.info.loaded
 
-export const getInfo = (state) => state.content.info.data
+export const getInfo = state => state.content.info.data
 
-export const isFeedLoaded = (state) => state.content.feed.loaded
+export const isFeedLoaded = state => state.content.feed.loaded
 
-export const getFeed = (state) => state.content.feed.data
+export const getFeed = state => state.content.feed.data
 
-export const getFeedError = (state) => state.content.feed.error
+export const getFeedError = state => state.content.feed.error
 
 export const getFeedByType = (state, type) => (
 	state.content.feed.posts.filter(post => post.type === type)

@@ -12,11 +12,11 @@ const Entities = [
 
 function * requestFn(actions, apiFn, id) {
 	yield put(actions.request())
-	const response = yield call(apiFn, id);
+	const response = yield call(apiFn, id)
 	if(response.error) {
-		yield put(actions.fail(response.error, id));
+		yield put(actions.fail(response.error, id))
 	} else {
-		yield put(actions.success(response, id));
+		yield put(actions.success(response, id))
 	}
 }
 
@@ -27,7 +27,7 @@ export default function create(client) {
 		const request = requestFn.bind(undefined, actions, client[apiFn])
 
 		function * load({ name }) {
-			const loaded = yield select(selector, name);
+			const loaded = yield select(selector, name)
 			if(!loaded) {
 				yield fork(request, name)
 			}

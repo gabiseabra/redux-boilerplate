@@ -19,7 +19,7 @@ const appData = JSON.parse(document.getElementById("data").textContent)
 
 const profile = JSON.parse(document.getElementById("profile").textContent)
 
-const store = createStore(Cookie, window.__state)
+const store = createStore(Cookie, window.__state) // eslint-disable-line no-underscore-dangle
 
 const history = syncHistoryWithStore(browserHistory, store)
 

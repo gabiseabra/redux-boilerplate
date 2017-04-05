@@ -1,5 +1,5 @@
 const Reducers = {
-	single: (actions) => function (state = {}, action) {
+	single: actions => function reducer(state = {}, action) {
 		switch(action.type) {
 			case actions.REQUEST:
 				return {
@@ -23,7 +23,7 @@ const Reducers = {
 			default: return state
 		}
 	},
-	multi: (actions) => function (state = {}, action) {
+	multi: actions => function reducer(state = {}, action) {
 		switch(action.type) {
 			case actions.SUCCESS:
 				return {
@@ -47,10 +47,10 @@ export default function create(entity, type) {
 		SUCCESS: `content/${entity}/SUCCESS`,
 		FAILURE: `content/${entity}/FAILURE`
 	}
-	actions.load = (name) => ({ type: actions.LOAD, name });
-	actions.request = (name) => ({ type: actions.REQUEST, name });
-	actions.success = (data, name) => ({ type: actions.SUCCESS, data, name });
-	actions.fail = (error, name) => ({ type: actions.FAILURE, error, name });
+	actions.load = name => ({ type: actions.LOAD, name })
+	actions.request = name => ({ type: actions.REQUEST, name })
+	actions.success = (data, name) => ({ type: actions.SUCCESS, data, name })
+	actions.fail = (error, name) => ({ type: actions.FAILURE, error, name })
 	actions.reducer = Reducers[type](actions)
 
 	return actions
