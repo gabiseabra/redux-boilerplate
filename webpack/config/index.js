@@ -5,6 +5,7 @@ import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
 import loaders from "./loaders"
+import envConfig from "./env"
 
 require("dotenv").load()
 
@@ -14,15 +15,6 @@ const plugins = [
 		"HMR"
 	])
 ]
-
-let envConfig = {}
-
-try {
-	if(process.env.NODE_ENV) {
-		// eslint-disable-next-line
-		envConfig = require(`./${process.env.NODE_ENV}`).default
-	}
-} catch(e) { /* No environment config */ }
 
 if(process.env.HMR) {
 	plugins.push(
