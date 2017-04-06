@@ -4,7 +4,6 @@
 import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
-import ExtractTextPlugin from "extract-text-webpack-plugin"
 import loaders from "./loaders"
 
 let envConfig = {}
