@@ -12,6 +12,10 @@ import profile from "../config/data.json"
 import config from "../config/app.json"
 import manifest from "../public/dist/manifest.json"
 
+const HOST = process.env.HOST || "localhost"
+const PORT = process.env.PORT || 80
+const SSR = process.env.SSR
+
 const app = new Express()
 
 const server = http.Server(app)
@@ -29,7 +33,7 @@ if(config.api.proxy) {
 }
 
 app.use(appMiddleware({
-	serverRendering: config.serverRendering,
+	serverRendering: SSR,
 	data: config.app,
 	api: config.api,
 	routes,
@@ -37,10 +41,10 @@ app.use(appMiddleware({
 	manifest
 }))
 
-server.listen(config.port, err => {
+server.listen(PORT, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻 Server running @ http://%s:%s", config.host, config.port)
-	console.info("==> Server-side rendering is %s", (config.serverRendering ? "enabled" : "disabled"))
+	console.info("==> 💻 Server running @ http://%s:%s", HOST, PORT)
+	console.info("==> Server-side rendering is %s", (SSR ? "enabled" : "disabled"))
 })

@@ -4,17 +4,24 @@
 import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
-import ExtractTextPlugin from "extract-text-webpack-plugin"
 import loaders from "./loaders"
+import envConfig from "./env"
 
-let envConfig = {}
+require("dotenv").load()
 
-try {
-	if(process.env.NODE_ENV) {
-		// eslint-disable-next-line
-		envConfig = require(`./${process.env.NODE_ENV}`).default
-	}
-} catch(e) { /* No environment config */ }
+const plugins = [
+	new webpack.EnvironmentPlugin([
+		"NODE_ENV",
+		"HMR"
+	])
+]
+
+if(process.env.HMR) {
+	plugins.push(
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoEmitOnErrorsPlugin()
+	)
+}
 
 export default merge.smart({
 	context: path.resolve(__dirname, "..", ".."),
@@ -24,12 +31,7 @@ export default merge.smart({
 	resolve: {
 		extensions: [ ".js", ".jsx" ]
 	},
-	plugins: [
-		new webpack.EnvironmentPlugin([
-			"NODE_ENV",
-			"HMR"
-		])
-	]
+	plugins
 }, envConfig)
 
 export { loaders }

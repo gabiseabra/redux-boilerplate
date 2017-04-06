@@ -8,9 +8,15 @@ import OfflinePlugin from "offline-plugin"
 import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
 import config, { loaders } from "../config"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
+
+const entry = [
+	"babel-polyfill",
+	"./src/client.jsx"
+]
 
 const vendors = {
 	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
@@ -56,17 +62,16 @@ const offlineOptions = {
 	}
 }
 
-const extract = new ExtractTextPlugin({
-	filename: "[name].css",
-	disable: process.env.NODE_ENV === "development"
-})
+if(process.env.HMR) {
+	entry.unshift(
+		"react-hot-loader/patch",
+		"webpack-hot-middleware/client?reload=true"
+	)
+}
 
 export default merge.smart(config, {
+	entry,
 	target: "web",
-	entry: [
-		"babel-polyfill",
-		"./src/client.jsx"
-	],
 	output: {
 		path: path.join(__dirname, "../../public/dist"),
 		publicPath: "/dist/"
@@ -74,13 +79,12 @@ export default merge.smart(config, {
 	module: {
 		rules: loaders({
 			styles: {
-				extract,
+				extract: ExtractTextPlugin,
 				fallback: "style-loader"
 			}
 		})
 	},
 	plugins: [
-		extract,
 		new webpack.optimize.CommonsChunkPlugin("common"),
 		new OfflinePlugin(offlineOptions),
 		new ManifestPlugin({
@@ -90,6 +94,17 @@ export default merge.smart(config, {
 		}),
 		new FontelloPlugin({
 			config: require("../../src/css/fontello.json")
+		}),
+		new ExtractTextPlugin({
+			filename: "[name].css",
+			disable: process.env.NODE_ENV === "development"
+		}),
+		new BundleAnalyzerPlugin({
+			openAnalyzer: false,
+			generateStatsFile: process.env.STATS,
+			analyzerMode: process.env.ANALYZER || "disabled",
+			analyzerHost: process.env.HOST,
+			analyzerPort: process.env.ANALYZER_PORT
 		}),
 		...(vendors.json.map(fileName => (
 			new webpack.DllReferencePlugin({
