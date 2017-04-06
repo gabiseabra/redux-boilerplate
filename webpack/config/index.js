@@ -12,6 +12,7 @@ require("dotenv").load()
 const plugins = [
 	new webpack.EnvironmentPlugin([
 		"NODE_ENV",
+		"OFFLINE",
 		"HMR"
 	])
 ]

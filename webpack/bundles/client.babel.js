@@ -51,9 +51,7 @@ const offlineOptions = {
 		to: "/",
 		requestTypes: [ "navigate" ]
 	} ],
-	ServiceWorker: {
-		output: "../sw.js"
-	},
+	ServiceWorker: (process.env.OFFLINE ? { output: "../sw.js" } : false),
 	AppCache: {
 		directory: "../appcache/",
 		FALLBACK: {

@@ -6,7 +6,9 @@ import Provider from "./app/Provider"
 import routes from "./app/routes"
 import sync from "./app/hot"
 
-OfflinePlugin.install()
+if(process.env.OFFLINE) {
+	OfflinePlugin.install()
+}
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
