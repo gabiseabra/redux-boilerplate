@@ -10,11 +10,11 @@ import envConfig from "./env"
 require("dotenv").load()
 
 const plugins = [
-	new webpack.EnvironmentPlugin([
-		"NODE_ENV",
-		"OFFLINE",
-		"HMR"
-	])
+	new webpack.EnvironmentPlugin({
+		NODE_ENV: "development",
+		OFFLINE: false,
+		HMR: false
+	})
 ]
 
 if(process.env.HMR) {
