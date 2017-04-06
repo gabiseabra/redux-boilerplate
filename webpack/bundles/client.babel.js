@@ -7,16 +7,59 @@ import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
 import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
-import config from "../config"
+import ExtractTextPlugin from "extract-text-webpack-plugin"
+import config, { loaders } from "../config"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
 const vendors = {
 	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
-	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`),
+	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
 }
 
-export { manifest }
+const offlineOptions = {
+	safeToUseOptionalCaches: true,
+	caches: {
+		main: [
+			"main.*",
+			"common.js",
+			"/index.html",
+			...vendors.js
+		],
+		additional: [
+			":externals:"
+		],
+		optional: [
+			":rest:"
+		]
+	},
+	externals: [
+		"/favicon.ico",
+		"/icon.png",
+		"/manifest.json",
+		"/index.html",
+		...vendors.js
+	],
+	cacheMaps: [ {
+		map: /.*/,
+		to: "/",
+		requestTypes: [ "navigate" ]
+	} ],
+	ServiceWorker: {
+		output: "../sw.js"
+	},
+	AppCache: {
+		directory: "../appcache/",
+		FALLBACK: {
+			"/": "/"
+		}
+	}
+}
+
+const extract = new ExtractTextPlugin({
+	filename: "[name].css",
+	disable: process.env.NODE_ENV === "development"
+})
 
 export default merge.smart(config, {
 	target: "web",
@@ -28,7 +71,18 @@ export default merge.smart(config, {
 		path: path.join(__dirname, "../../public/dist"),
 		publicPath: "/dist/"
 	},
+	module: {
+		rules: loaders({
+			styles: {
+				extract,
+				fallback: "style-loader"
+			}
+		})
+	},
 	plugins: [
+		extract,
+		new webpack.optimize.CommonsChunkPlugin("common"),
+		new OfflinePlugin(offlineOptions),
 		new ManifestPlugin({
 			fileName: "manifest.json",
 			publicPath: "/dist/",
@@ -36,46 +90,6 @@ export default merge.smart(config, {
 		}),
 		new FontelloPlugin({
 			config: require("../../src/css/fontello.json")
-		}),
-		new webpack.optimize.CommonsChunkPlugin("common"),
-		new OfflinePlugin({
-			safeToUseOptionalCaches: true,
-			caches: {
-				main: [
-					"main.js",
-					"main.css",
-					"common.js",
-					"/index.html",
-					...vendors.js
-				],
-				additional: [
-					":externals:"
-				],
-				optional: [
-					":rest:"
-				]
-			},
-			externals: [
-				"/favicon.ico",
-				"/icon.png",
-				"/manifest.json",
-				"/index.html",
-				...vendors.js
-			],
-			cacheMaps: [
-				{
-					map: /.*/,
-					to: "/",
-					requestTypes: [ "navigate" ]
-				}
-			],
-			ServiceWorker: {
-				output: "../sw.js"
-			},
-			AppCache: {
-				directory: "../appcache/",
-				FALLBACK: { "/": "/" }
-			}
 		}),
 		...(vendors.json.map(fileName => (
 			new webpack.DllReferencePlugin({
@@ -85,3 +99,5 @@ export default merge.smart(config, {
 		)))
 	]
 })
+
+export { manifest }

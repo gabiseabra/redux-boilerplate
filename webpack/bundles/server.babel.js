@@ -4,7 +4,7 @@
 import path from "path"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
-import config from "../config"
+import config, { loaders } from "../config"
 
 export default merge.smart(config, {
 	target: "node",
@@ -23,6 +23,9 @@ export default merge.smart(config, {
 		path: path.join(__dirname, "../../dist"),
 		filename: "[name].js",
 		libraryTarget: "commonjs"
+	},
+	module: {
+		rules: loaders()
 	},
 	node: {
 		__dirname: true

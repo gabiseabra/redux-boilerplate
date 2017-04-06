@@ -15,18 +15,33 @@ export default class Manifest {
 		}
 	}
 
+	filter(ext, options) {
+		if(options && options.exclude) {
+			const entries = []
+			// eslint-disable-next-line no-restricted-syntax
+			for(const entry of this.getFiles(ext)) {
+				if(entry !== options.exclude) {
+					entries.push(entry)
+				}
+			}
+			return entries
+		}
+		return Array.from(this.getFiles(ext))
+	}
+
 	get entry() { return this.cache[ENTRY_SCRIPT] }
 
-	get styles() { return Array.from(this.getFiles("css")) }
-
-	get scripts() {
-		const scripts = []
-		// eslint-disable-next-line no-restricted-syntax
-		for(const script of this.getFiles("js")) {
-			if(script !== this.entry) {
-				scripts.push(script)
-			}
+	get styles() {
+		let exclude
+		// FIXME:
+		// ExtractTextPlugin adds main.css to the manifest when it's disabled.
+		// This is the case in development, so it needs to be excluded to
+		// avoid an invalid <link/> in the Html component.
+		if(process.env.NODE_ENV === "development") {
+			exclude = "main.css"
 		}
-		return scripts
+		return this.filter("css", { exclude })
 	}
+
+	get scripts() { return this.filter("js", { exclude: this.entry }) }
 }
