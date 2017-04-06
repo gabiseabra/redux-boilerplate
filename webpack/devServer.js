@@ -53,6 +53,15 @@ const server = http.Server(app)
 
 app.use(Cookies.connect())
 
+// Webpack dev server only servers files from it's publicPath
+// and the service worker should be on the root of the app's scope,
+// so rewrite url to make the relative path explicit.
+app.get([ "/sw.js", "/appcache/*" ], (req, res, next) => {
+	// eslint-disable-next-line no-param-reassign
+	req.url = `${serverOptions.publicPath}/..${req.url}`
+	next()
+})
+
 app.use(devMiddleware(compiler, serverOptions))
 
 if(HMR) {

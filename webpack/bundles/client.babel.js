@@ -58,7 +58,9 @@ export default merge.smart(config, {
 			externals: [
 				"/favicon.ico",
 				"/icon.png",
-				"/manifest.json"
+				"/manifest.json",
+				"/index.html",
+				...vendors.js
 			],
 			cacheMaps: [
 				{
