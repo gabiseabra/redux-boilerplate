@@ -13,10 +13,48 @@ import manifest from "../../public/dist/manifest.json"
 
 const vendors = {
 	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
-	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`),
+	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
 }
 
-export { manifest }
+const offlineOptions = {
+	safeToUseOptionalCaches: true,
+	caches: {
+		main: [
+			"main.js",
+			"main.css",
+			"common.js",
+			"/index.html",
+			...vendors.js
+		],
+		additional: [
+			":externals:"
+		],
+		optional: [
+			":rest:"
+		]
+	},
+	externals: [
+		"/favicon.ico",
+		"/icon.png",
+		"/manifest.json",
+		"/index.html",
+		...vendors.js
+	],
+	cacheMaps: [ {
+		map: /.*/,
+		to: "/",
+		requestTypes: [ "navigate" ]
+	} ],
+	ServiceWorker: {
+		output: "../sw.js"
+	},
+	AppCache: {
+		directory: "../appcache/",
+		FALLBACK: {
+			"/": "/"
+		}
+	}
+}
 
 export default merge.smart(config, {
 	target: "web",
@@ -29,6 +67,7 @@ export default merge.smart(config, {
 		publicPath: "/dist/"
 	},
 	plugins: [
+		new webpack.optimize.CommonsChunkPlugin("common"),
 		new ManifestPlugin({
 			fileName: "manifest.json",
 			publicPath: "/dist/",
@@ -37,46 +76,7 @@ export default merge.smart(config, {
 		new FontelloPlugin({
 			config: require("../../src/css/fontello.json")
 		}),
-		new webpack.optimize.CommonsChunkPlugin("common"),
-		new OfflinePlugin({
-			safeToUseOptionalCaches: true,
-			caches: {
-				main: [
-					"main.js",
-					"main.css",
-					"common.js",
-					"/index.html",
-					...vendors.js
-				],
-				additional: [
-					":externals:"
-				],
-				optional: [
-					":rest:"
-				]
-			},
-			externals: [
-				"/favicon.ico",
-				"/icon.png",
-				"/manifest.json",
-				"/index.html",
-				...vendors.js
-			],
-			cacheMaps: [
-				{
-					map: /.*/,
-					to: "/",
-					requestTypes: [ "navigate" ]
-				}
-			],
-			ServiceWorker: {
-				output: "../sw.js"
-			},
-			AppCache: {
-				directory: "../appcache/",
-				FALLBACK: { "/": "/" }
-			}
-		}),
+		new OfflinePlugin(offlineOptions),
 		...(vendors.json.map(fileName => (
 			new webpack.DllReferencePlugin({
 				// eslint-disable-next-line import/no-dynamic-require
@@ -85,3 +85,5 @@ export default merge.smart(config, {
 		)))
 	]
 })
+
+export { manifest }
