@@ -9,12 +9,12 @@ import config from "../config/app.json"
 import profile from "../config/data.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 
-const HMR = config.hotModuleReplacement
-
-const port = config.devPort || 8080
+const HOST = process.env.HOST || "localhost"
+const PORT = process.env.DEV_PORT || 8080
+const HMR = process.env.HMR
 
 const serverOptions = {
-	contentBase: `http://${config.host}:${port}`,
+	contentBase: `http://${HOST}:${PORT}`,
 	publicPath: webpackConfig.output.publicPath,
 	hot: true,
 	quiet: true,
@@ -26,20 +26,6 @@ const serverOptions = {
 	stats: {
 		colors: true
 	}
-}
-
-if(HMR) {
-	webpackConfig.plugins.push(
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin(),
-		new webpack.DefinePlugin({
-			"process.env.HMR": true
-		})
-	)
-	webpackConfig.entry.unshift(
-		"react-hot-loader/patch",
-		"webpack-hot-middleware/client?reload=true"
-	)
 }
 
 const compiler = webpack(webpackConfig)
@@ -72,10 +58,10 @@ app.use(appMiddleware({
 	profile
 }))
 
-server.listen(port, err => {
+server.listen(PORT, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻 Development server running @ http://%s:%s", config.host, port)
+	console.info("==> 💻 Development server running @ http://%s:%s", HOST, PORT)
 	console.info("==> 🔥 Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
 })

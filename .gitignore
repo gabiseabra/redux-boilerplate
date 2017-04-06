@@ -5,4 +5,5 @@ public/dist
 public/appcache
 public/index.html
 public/sw.js
+.env
 *.log

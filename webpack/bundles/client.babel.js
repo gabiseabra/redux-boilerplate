@@ -12,6 +12,11 @@ import config, { loaders } from "../config"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
+const entry = [
+	"babel-polyfill",
+	"./src/client.jsx"
+]
+
 const vendors = {
 	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
 	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
@@ -61,12 +66,16 @@ const extract = new ExtractTextPlugin({
 	disable: process.env.NODE_ENV === "development"
 })
 
+if(process.env.HMR) {
+	entry.unshift(
+		"react-hot-loader/patch",
+		"webpack-hot-middleware/client?reload=true"
+	)
+}
+
 export default merge.smart(config, {
+	entry,
 	target: "web",
-	entry: [
-		"babel-polyfill",
-		"./src/client.jsx"
-	],
 	output: {
 		path: path.join(__dirname, "../../public/dist"),
 		publicPath: "/dist/"
