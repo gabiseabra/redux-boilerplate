@@ -23,7 +23,9 @@ const store = createStore(Cookie, window.__state) // eslint-disable-line no-unde
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-store.runSaga(createSaga(new ApiClient(apiConfig)))
+const apiClient = new ApiClient(apiConfig)
+
+let task = store.runSaga(createSaga(apiClient))
 
 ReactDOM.render(
 	<Provider data={appData} profile={profile} store={store}>
@@ -37,4 +39,9 @@ ReactDOM.render(
 if(process.env.HMR && module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
+
+	module.hot.accept("./redux/saga", () => {
+		task.cancel()
+		task = store.runSaga(createSaga(apiClient))
+	})
 }
