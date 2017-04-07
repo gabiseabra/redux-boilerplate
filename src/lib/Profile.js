@@ -1,21 +1,24 @@
-const formatPhone = phone => phone.replace(/^(?:\+\d{2})(\d{2})(\d{4,5})(\d{4})$/, "($1) $2-$3")
+const defaults = {
+	"@type": "Thing"
+}
+
+function normalize(data) {
+	const info = Object.assign({}, data, defaults)
+	if(typeof info.sameAs === "string") {
+		info.sameAs = [ info.sameAs ]
+	}
+	return info
+}
 
 export default class Profile {
-	static defaultProps = {
-		"@type": "Thing"
-	}
-
-	/**
-	 * @param {Object} data - JSON-LD data.
-	 */
 	constructor(data) {
-		Object.assign(this, data)
+		this.info = normalize(data)
 	}
 
 	social(domain) {
-		if(this.sameAs) {
+		if(this.info.sameAs) {
 			const regExp = new RegExp(`^https?:\\/\\/([^\\.]+\\.)*${domain.replace(/[^\w\s]/g, "\\$&")}`)
-			for(let i = 0; i < this.sameAs.length; ++i) {
+			for(let i = 0; i < this.info.sameAs.length; ++i) {
 				const url = this.sameAs[i]
 				if(url.match(regExp)) {
 					return url
@@ -23,9 +26,4 @@ export default class Profile {
 			}
 		}
 	}
-
-	get type() { return this["@type"] }
-	get phoneNumber() { return this.telephone }
-	get phone() { return "telephone" in this ? formatPhone(this.telephone) : undefined }
-	get fax() { return "faxNumber" in this ? formatPhone(this.faxNumber) : undefined }
 }
