@@ -34,7 +34,7 @@ class ContextProvider extends Component {
 	}
 
 	componentWillMount() {
-		this.props.load();
+		this.props.load()
 	}
 
 	render() {
