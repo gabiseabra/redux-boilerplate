@@ -6,7 +6,7 @@ import Provider from "./app/Provider"
 import routes from "./app/routes"
 import sync from "./app/hot"
 
-if(process.env.OFFLINE) {
+if(process.env.OFFLINE === "true") {
 	OfflinePlugin.install()
 }
 
@@ -23,7 +23,7 @@ ReactDOM.render(
 	document.getElementById("app")
 )
 
-if(process.env.HMR && module.hot) {
+if(process.env.HMR === "true" && module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
 }

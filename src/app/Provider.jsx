@@ -26,7 +26,7 @@ export default class Provider extends Component {
 	}
 
 	render() {
-		if(process.env.HMR) {
+		if(process.env.HMR === "true") {
 			return <AppContainer>{this.props.children}</AppContainer>
 		}
 		return this.props.children

@@ -51,7 +51,7 @@ const offlineOptions = {
 		to: "/",
 		requestTypes: [ "navigate" ]
 	} ],
-	ServiceWorker: (process.env.OFFLINE ? { output: "../sw.js" } : false),
+	ServiceWorker: (process.env.OFFLINE === "true" ? { output: "../sw.js" } : false),
 	AppCache: {
 		directory: "../appcache/",
 		FALLBACK: {
@@ -60,7 +60,7 @@ const offlineOptions = {
 	}
 }
 
-if(process.env.HMR) {
+if(process.env.HMR === "true") {
 	entry.unshift(
 		"react-hot-loader/patch",
 		"webpack-hot-middleware/client?reload=true"
@@ -99,7 +99,7 @@ export default merge.smart(config, {
 		}),
 		new BundleAnalyzerPlugin({
 			openAnalyzer: false,
-			generateStatsFile: process.env.STATS,
+			generateStatsFile: process.env.STATS === "true",
 			analyzerMode: process.env.ANALYZER || "disabled",
 			analyzerHost: process.env.HOST,
 			analyzerPort: process.env.ANALYZER_PORT

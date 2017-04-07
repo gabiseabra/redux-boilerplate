@@ -1,6 +1,8 @@
 import development from "./development"
 import production from "./production"
 
+require("dotenv").load()
+
 const env = {
 	development,
 	production
