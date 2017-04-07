@@ -7,16 +7,15 @@ import merge from "webpack-merge"
 import loaders from "./loaders"
 import envConfig from "./env"
 
-require("dotenv").load()
-
 const plugins = [
-	new webpack.EnvironmentPlugin([
-		"NODE_ENV",
-		"HMR"
-	])
+	new webpack.EnvironmentPlugin({
+		NODE_ENV: "development",
+		OFFLINE: "false",
+		HMR: "false"
+	})
 ]
 
-if(process.env.HMR) {
+if(process.env.HMR === "true") {
 	plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin()

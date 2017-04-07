@@ -11,7 +11,7 @@
     "build:client": "better-npm-run build:client",
     "build:server": "better-npm-run build:server",
     "build:vendor": "better-npm-run build:vendor",
-    "build:static": "babel-node scripts/static.js > public/index.html",
+    "build:static": "better-npm-run build:static",
     "clean": "npm run clean:client && npm run clean:server",
     "clean:client": "rimraf public/dist & rimraf public/appcache & rimraf public/sw.js",
     "clean:server": "rimraf dist",
@@ -30,6 +30,12 @@
     "build:server": "webpack --config=webpack/bundles/server.babel.js --progress --colors",
     "build:vendor": {
       "command": "webpack --config=webpack/bundles/vendor.babel.js --progress --colors -p",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:static": {
+      "command": "babel-node scripts/static.js > public/index.html",
       "env": {
         "NODE_ENV": "production"
       }

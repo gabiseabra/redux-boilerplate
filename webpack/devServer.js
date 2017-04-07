@@ -14,7 +14,7 @@ import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.DEV_PORT || 8080
-const HMR = process.env.HMR
+const HMR = process.env.HMR === "true"
 
 const serverOptions = {
 	contentBase: `http://${HOST}:${PORT}`,

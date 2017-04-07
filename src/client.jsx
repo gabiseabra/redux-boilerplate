@@ -11,7 +11,9 @@ import sync from "./app/hot"
 import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 
-OfflinePlugin.install()
+if(process.env.OFFLINE === "true") {
+	OfflinePlugin.install()
+}
 
 const apiConfig = JSON.parse(document.getElementById("api").textContent)
 
@@ -36,7 +38,7 @@ ReactDOM.render(
 	document.getElementById("app")
 )
 
-if(process.env.HMR && module.hot) {
+if(process.env.HMR === "true" && module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
 

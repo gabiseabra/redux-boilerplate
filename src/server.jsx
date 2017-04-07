@@ -14,7 +14,7 @@ import manifest from "../public/dist/manifest.json"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 80
-const SSR = process.env.SSR
+const SSR = process.env.SSR === "true"
 
 const app = new Express()
 

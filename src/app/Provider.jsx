@@ -44,7 +44,7 @@ class ContextProvider extends Component {
 				{children}
 			</Provider>
 		)
-		if(process.env.HMR) {
+		if(process.env.HMR === "true") {
 			return <AppContainer>{component}</AppContainer>
 		}
 		return component
