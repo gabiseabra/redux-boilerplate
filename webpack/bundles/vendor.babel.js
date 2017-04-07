@@ -1,6 +1,3 @@
-/**
- * Vendor bundle configuration file
- */
 import path from "path"
 import webpack from "webpack"
 import ManifestPlugin from "webpack-manifest-plugin"

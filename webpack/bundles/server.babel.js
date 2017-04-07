@@ -1,6 +1,3 @@
-/**
- * Server bundle configuration file
- */
 import path from "path"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
