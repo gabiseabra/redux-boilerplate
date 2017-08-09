@@ -26,6 +26,9 @@ export default {
 			fileName: "manifest.json",
 			publicPath: "/dist/"
 		}),
+		new webpack.EnvironmentPlugin({
+			NODE_ENV: "production"
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			minimize: true,
 			sourceMap: false
