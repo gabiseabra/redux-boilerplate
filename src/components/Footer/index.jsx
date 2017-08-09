@@ -2,7 +2,6 @@ import React, { PureComponent, PropTypes } from "react"
 import styles from "./Footer.css"
 
 export default class Footer extends PureComponent {
-	/* Add social networks here */
 	static Networks = [
 		{
 			url: "facebook.com",
@@ -32,7 +31,12 @@ export default class Footer extends PureComponent {
 			const url = profile.social(network.url)
 			if(url) {
 				social.push(
-					<a target="_blank" rel="noreferrer noopener" href={url} title={network.label}>
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						key={network.url}
+						href={url}
+						title={network.label}>
 						<span className={network.className} />
 					</a>
 				)
