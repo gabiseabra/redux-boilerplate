@@ -6,39 +6,17 @@
     "start": "npm run server",
     "watch": "babel-node webpack/devServer.js",
     "lint": "eslint src",
-    "prebuild": "better-npm-run build:vendor",
-    "build": "better-npm-run build",
-    "build:client": "better-npm-run build:client",
-    "build:server": "better-npm-run build:server",
-    "build:vendor": "better-npm-run build:vendor",
-    "build:static": "better-npm-run build:static",
+    "prebuild": "cross-env NODE_ENV=production npm run build:vendor",
+    "build": "webpack --config=webpack/config.babel.js --progress --colors --",
+    "build:client": "webpack --config=webpack/bundles/client.babel.js --progress --colors --",
+    "build:server": "webpack --config=webpack/bundles/server.babel.js --progress --colors --",
+    "build:vendor": "webpack --config=webpack/bundles/vendor.babel.js --progress --colors --",
+    "build:static": "cross-env NODE_ENV=production babel-node scripts/static.js > public/index.html",
     "clean": "npm run clean:client && npm run clean:server",
     "clean:client": "rimraf public/dist & rimraf public/appcache & rimraf public/sw.js",
     "clean:server": "rimraf dist",
     "clean:static": "rimraf public/index.html",
     "server": "node dist/server.js"
-  },
-  "betterScripts": {
-    "build": {
-      "command": "webpack --config=webpack/config.babel.js --progress --colors -p",
-      "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "build:client": "webpack --config=webpack/bundles/client.babel.js --progress --colors",
-    "build:server": "webpack --config=webpack/bundles/server.babel.js --progress --colors",
-    "build:vendor": {
-      "command": "webpack --config=webpack/bundles/vendor.babel.js --progress --colors -p",
-      "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "build:static": {
-      "command": "babel-node scripts/static.js > public/index.html",
-      "env": {
-        "NODE_ENV": "production"
-      }
-    }
   },
   "author": "Gabriela Seabra",
   "license": "MIT",
@@ -96,6 +74,7 @@
   "dependencies": {
     "babel-polyfill": "^6.22.0",
     "compression": "^1.6.2",
+    "cross-env": "^5.0.5",
     "express": "^4.14.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
