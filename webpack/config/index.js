@@ -9,16 +9,16 @@ import envConfig from "./env"
 
 const plugins = [
 	new webpack.EnvironmentPlugin({
-		NODE_ENV: "development",
-		OFFLINE: "false",
-		HMR: "false"
+		NODE_ENV: "",
+		OFFLINE: "false"
 	})
 ]
 
-if(process.env.HMR === "true") {
+if(process.argv.indexOf("--hot") !== -1) {
 	plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({ HMR: true })
 	)
 }
 

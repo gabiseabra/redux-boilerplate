@@ -16,7 +16,7 @@ const entry = [
 	"./src/client.jsx"
 ]
 
-if(process.env.HMR === "true") {
+if(process.argv.indexOf("--hot") !== -1) {
 	entry.unshift(
 		"react-hot-loader/patch",
 		"webpack-hot-middleware/client?reload=true"
