@@ -35,6 +35,6 @@ server.listen(PORT, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻 Server running @ http://%s:%s", HOST, PORT)
+	console.info("==> 💻  Server running @ http://%s:%s", HOST, PORT)
 	console.info("==> Server-side rendering is %s", (SSR ? "enabled" : "disabled"))
 })
