@@ -4,8 +4,10 @@
 import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
-import loaders from "./loaders"
+import loadersFn from "./loaders"
 import envConfig from "./env"
+
+const context = path.resolve(__dirname, "..", "..")
 
 const plugins = [
 	new webpack.EnvironmentPlugin({
@@ -23,7 +25,7 @@ if(process.argv.indexOf("--hot") !== -1) {
 }
 
 export default merge.smart({
-	context: path.resolve(__dirname, "..", ".."),
+	context,
 	output: {
 		filename: "[name].js"
 	},
@@ -33,4 +35,4 @@ export default merge.smart({
 	plugins
 }, envConfig)
 
-export { loaders }
+export const loaders = loadersFn.bind(undefined, context)
