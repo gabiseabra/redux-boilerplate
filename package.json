@@ -20,6 +20,11 @@
   },
   "author": "Gabriela Seabra",
   "license": "MIT",
+  "homepage": "https://github.com/gabiseabra/react-boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabiseabra/react-boilerplate.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.22.1",
