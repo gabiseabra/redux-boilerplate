@@ -19,5 +19,5 @@ server.listen(port, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻 API server running @ http://%s:%s", host, port)
+	console.info("==> 💻  API server running @ http://%s:%s", host, port)
 })

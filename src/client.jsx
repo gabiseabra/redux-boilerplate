@@ -8,7 +8,6 @@ import Provider from "./app/Provider"
 import ApiClient from "./lib/ApiClient"
 import routes from "./app/routes"
 import sync from "./app/hot"
-import DevTools from "./redux/DevTools"
 import createStore from "./redux/store"
 import createSaga from "./redux/saga"
 
@@ -35,11 +34,6 @@ const components = [
 		{routes}
 	</Router>
 ]
-
-// eslint-disable-next-line no-underscore-dangle
-if(process.env.NODE_ENV === "development" && !window.__REDUX_DEVTOOLS_EXTENSION__) {
-	components.push(<DevTools />)
-}
 
 ReactDOM.render(
 	<Provider data={appData} profile={profile} store={store}>

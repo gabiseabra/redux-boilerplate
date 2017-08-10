@@ -4,7 +4,6 @@ import createLoggerMiddleware from "redux-logger"
 import { createCookieMiddleware } from "redux-cookie"
 import { hydrate } from "./index"
 import reducer from "./reducer"
-import DevTools from "./DevTools"
 
 export default function create(cookie, state) {
 	const sagaMiddleware = createSagaMiddleware()
@@ -15,16 +14,12 @@ export default function create(cookie, state) {
 	if(cookie) {
 		middleware.push(createCookieMiddleware(cookie))
 	}
-	if(process.env.NODE_ENV === "development") {
+	/* eslint-disable no-underscore-dangle */
+	if(process.env.NODE_ENV === "development" && window.__REDUX_DEVTOOLS_EXTENSION__) {
 		middleware.push(createLoggerMiddleware())
-		/* eslint-disable no-underscore-dangle */
-		enhancers.push(
-			window.__REDUX_DEVTOOLS_EXTENSION__ ?
-			window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() :
-			DevTools.instrument()
-		)
-		/* eslint-enable */
+		enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__())
 	}
+	/* eslint-enable */
 	const finalCreateStore = compose(
 		applyMiddleware(...middleware),
 		...enhancers
