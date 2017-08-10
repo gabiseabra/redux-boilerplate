@@ -14,7 +14,7 @@
     "build:server": "webpack --config=webpack/bundles/server.babel.js --progress --colors",
     "build:vendor": "webpack --config=webpack/bundles/vendor.babel.js --progress --colors",
     "build:static": "cross-env NODE_ENV=production babel-node scripts/static.js > public/index.html",
-    "clean": "npm run clean:client && npm run clean:server",
+    "clean": "npm run clean:client & npm run clean:server & npm run clean:static",
     "clean:client": "rimraf public/dist & rimraf public/appcache & rimraf public/sw.js",
     "clean:server": "rimraf dist",
     "clean:static": "rimraf public/index.html",
