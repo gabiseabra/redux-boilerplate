@@ -4,26 +4,28 @@
 import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
-import loaders from "./loaders"
+import loadersFn from "./loaders"
 import envConfig from "./env"
+
+const context = path.resolve(__dirname, "..", "..")
 
 const plugins = [
 	new webpack.EnvironmentPlugin({
-		NODE_ENV: "development",
-		OFFLINE: "false",
-		HMR: "false"
+		NODE_ENV: "",
+		OFFLINE: "false"
 	})
 ]
 
-if(process.env.HMR === "true") {
+if(process.argv.indexOf("--hot") !== -1) {
 	plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.DefinePlugin({ HMR: true })
 	)
 }
 
 export default merge.smart({
-	context: path.resolve(__dirname, "..", ".."),
+	context,
 	output: {
 		filename: "[name].js"
 	},
@@ -33,4 +35,4 @@ export default merge.smart({
 	plugins
 }, envConfig)
 
-export { loaders }
+export const loaders = loadersFn.bind(undefined, context)

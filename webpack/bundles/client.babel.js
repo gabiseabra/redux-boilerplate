@@ -7,6 +7,7 @@ import ManifestPlugin from "webpack-manifest-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
 import config, { loaders } from "../config"
+import offline from "../config/offline"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
@@ -15,54 +16,19 @@ const entry = [
 	"./src/client.jsx"
 ]
 
-const vendors = {
-	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
-	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
-}
-
-const offlineOptions = {
-	safeToUseOptionalCaches: true,
-	caches: {
-		main: [
-			"main.*",
-			"common.js",
-			"/index.html",
-			...vendors.js
-		],
-		additional: [
-			":externals:"
-		],
-		optional: [
-			":rest:"
-		]
-	},
-	externals: [
-		"/favicon.ico",
-		"/icon.png",
-		"/manifest.json",
-		"/index.html",
-		...vendors.js
-	],
-	cacheMaps: [ {
-		map: /.*/,
-		to: "/",
-		requestTypes: [ "navigate" ]
-	} ],
-	ServiceWorker: (process.env.OFFLINE === "true" ? { output: "../sw.js" } : false),
-	AppCache: {
-		directory: "../appcache/",
-		FALLBACK: {
-			"/": "/"
-		}
-	}
-}
-
-if(process.env.HMR === "true") {
+if(process.argv.indexOf("--hot") !== -1) {
 	entry.unshift(
 		"react-hot-loader/patch",
 		"webpack-hot-middleware/client?reload=true"
 	)
 }
+
+const vendors = {
+	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
+	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
+}
+
+const offlineOptions = offline(vendors)
 
 export default merge.smart(config, {
 	entry,

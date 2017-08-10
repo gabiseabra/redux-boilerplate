@@ -14,7 +14,7 @@ import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.DEV_PORT || 8080
-const HMR = process.env.HMR === "true"
+const HMR = process.argv.indexOf("--hot") !== -1
 
 const serverOptions = {
 	contentBase: `http://${HOST}:${PORT}`,
@@ -72,6 +72,6 @@ server.listen(PORT, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻 Development server running @ http://%s:%s", HOST, PORT)
-	console.info("==> 🔥 Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
+	console.info("==> 💻  Development server running @ http://%s:%s", HOST, PORT)
+	console.info("==> 🔥  Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
 })
