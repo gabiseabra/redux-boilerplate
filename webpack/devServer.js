@@ -6,7 +6,6 @@ import hotMiddleware from "webpack-hot-middleware"
 import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
 import config from "../config/app.json"
-import profile from "../config/data.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
@@ -53,9 +52,8 @@ app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(appMiddleware({
 	serverRendering: false,
-	data: config.app,
-	manifest,
-	profile
+	data: config,
+	manifest
 }))
 
 server.listen(PORT, err => {

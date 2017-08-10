@@ -12,10 +12,8 @@ if(process.env.OFFLINE === "true") {
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
-const profile = JSON.parse(document.getElementById("profile").textContent)
-
 ReactDOM.render(
-	<Provider data={appData} profile={profile}>
+	<Provider data={appData}>
 		<Router history={browserHistory}>
 			{routes}
 		</Router>

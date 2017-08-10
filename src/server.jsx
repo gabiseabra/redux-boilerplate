@@ -5,7 +5,6 @@ import compression from "compression"
 import favicon from "serve-favicon"
 import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
-import profile from "../config/data.json"
 import config from "../config/app.json"
 import manifest from "../public/dist/manifest.json"
 
@@ -25,9 +24,8 @@ app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 
 app.use(appMiddleware({
 	serverRendering: SSR,
-	data: config.app,
+	data: config,
 	routes,
-	profile,
 	manifest
 }))
 

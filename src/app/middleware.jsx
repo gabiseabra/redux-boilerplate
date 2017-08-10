@@ -9,13 +9,11 @@ export default function middleware(config) {
 		serverRendering,
 		manifest,
 		routes,
-		data,
-		profile
+		data
 	} = config
 	const render = renderFn.bind(
 		undefined,
 		data,
-		profile,
 		new Manifest(manifest)
 	)
 	return (req, res, next) => {
@@ -29,7 +27,7 @@ export default function middleware(config) {
 					res.redirect(302, redirect.pathname + redirect.search)
 				} else if(props) {
 					const component = (
-						<Provider data={data} profile={profile}>
+						<Provider data={data}>
 							<RouterContext {...props} />
 						</Provider>
 					)
@@ -39,6 +37,6 @@ export default function middleware(config) {
 				}
 			})
 		}
-		next()
+		if(next) next()
 	}
 }

@@ -1,6 +1,17 @@
 {
-	"app": {
-		"title": "React Boilerplate",
-		"copy": "Gabriela Seabra"
+	"title": "React Boilerplate",
+	"copy": "Gabriela Seabra",
+	"email": "email@example.com",
+	"social": {
+		"facebook": {
+			"label": "Facebook",
+			"url": "https://facebook.com/",
+			"icon": "facebook"
+		},
+		"google": {
+			"label": "Google Plus",
+			"url": "https://google.com/",
+			"icon": "gplus"
+		}
 	}
 }
