@@ -3,8 +3,8 @@ import Helmet from "react-helmet"
 import { Header, Footer } from "../../components"
 import styles from "./App.css"
 
-const App = ({ className, children }, { data: { title } }) => (
-	<div className={[ styles.App, className ].join(" ")}>
+const App = ({ children }, { data: { title } }) => (
+	<div className={styles.App}>
 		<Helmet titleTemplate={`%s - ${title}`} defaultTitle={title} />
 		<Header className={styles.header} />
 		<main className={styles.content}>{children}</main>
@@ -13,7 +13,6 @@ const App = ({ className, children }, { data: { title } }) => (
 )
 
 App.propTypes = {
-	className: PropTypes.string,
 	children: PropTypes.node
 }
 

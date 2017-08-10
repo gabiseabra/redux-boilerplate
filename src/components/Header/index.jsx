@@ -1,10 +1,11 @@
 import React, { PropTypes } from "react"
 import { Link } from "react-router"
+import classnames from "classnames"
 import Nav from "./Nav"
 import styles from "./Header.css"
 
 const Header = ({ className }, { data }) => (
-	<header className={[ styles.Header, className ].join(" ")}>
+	<header className={classnames(styles.Header, className)}>
 		<div className={styles.container}>
 			<Link to="/" className={styles.brand}>{data.title}</Link>
 			<Nav className={styles.nav}>

@@ -1,4 +1,5 @@
 import React, { PureComponent, PropTypes } from "react"
+import classnames from "classnames"
 import styles from "./Footer.css"
 
 export default class Footer extends PureComponent {
@@ -33,8 +34,8 @@ export default class Footer extends PureComponent {
 		const { className } = this.props
 		const { data } = this.context
 		return (
-			<footer className={[ styles.Footer, className ].join(" ")}>
-				<div className={[ styles.container, styles.copyright ].join(" ")}>
+			<footer className={classnames(styles.Footer, className)}>
+				<div className={classnames(styles.container, styles.copyright)}>
 					{data.copy && <div>&copy; 2017 - {data.copy}</div>}
 					<div className={styles.social}>
 						{this.renderNetworks()}

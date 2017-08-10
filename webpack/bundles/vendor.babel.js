@@ -5,6 +5,9 @@ import ManifestPlugin from "webpack-manifest-plugin"
 export default {
 	target: "web",
 	entry: {
+		vendor: [
+			"classnames"
+		],
 		react: [
 			"react",
 			"react-dom",
