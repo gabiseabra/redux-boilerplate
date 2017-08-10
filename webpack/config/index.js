@@ -12,7 +12,10 @@ const context = path.resolve(__dirname, "..", "..")
 const plugins = [
 	new webpack.EnvironmentPlugin({
 		NODE_ENV: "",
-		OFFLINE: "false"
+		OFFLINE: "false",
+		HOST: "localhost",
+		PORT: "80",
+		SSR: "false"
 	})
 ]
 
