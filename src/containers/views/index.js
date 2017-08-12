@@ -1,6 +1,6 @@
 export { default as Shell } from "./Shell"
 export {
-	HomePage,
-	HelloPage,
+	Home,
+	Hello,
 	NotFound
 } from "../../components/views"
