@@ -10,10 +10,10 @@ export default function middleware(config) {
 		routes,
 		data
 	} = config
-	const render = renderWith(
+	const render = renderWith({
 		data,
-		new Manifest(manifest)
-	)
+		manifest: new Manifest(manifest)
+	})
 	return (req, res, next) => {
 		if(!serverRendering) {
 			res.send(render())
