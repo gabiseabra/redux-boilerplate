@@ -6,7 +6,7 @@ import Footer from "./Footer"
 import styles from "./Shell.css"
 
 const Shell = ({ children, appData }) => (
-	<div className={styles.App}>
+	<div className={styles.Shell}>
 		<Helmet titleTemplate={`%s - ${appData.title}`} defaultTitle={appData.title} />
 		<Header className={styles.header} appData={appData} />
 		<main className={styles.content}>{children}</main>
