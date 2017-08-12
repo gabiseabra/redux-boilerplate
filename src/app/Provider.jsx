@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { Provider, connect } from "react-redux"
 import { AppContainer } from "react-hot-loader"
 import { getInfo } from "../redux/selectors"
 import { load } from "../redux/modules/content/info"
-import Profile from "../lib/Profile"
 
 /**
  * App context provider
@@ -13,7 +13,6 @@ class ContextProvider extends Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		info: PropTypes.object.isRequired,
-		profile: PropTypes.object.isRequired,
 		store: PropTypes.object.isRequired,
 		children: PropTypes.node.isRequired,
 		load: PropTypes.func.isRequired
@@ -21,15 +20,13 @@ class ContextProvider extends Component {
 
 	static childContextTypes = {
 		data: PropTypes.object.isRequired,
-		info: PropTypes.object.isRequired,
-		profile: PropTypes.instanceOf(Profile)
+		info: PropTypes.object.isRequired
 	}
 
 	getChildContext() {
 		return {
 			data: this.props.data,
-			info: this.props.info,
-			profile: new Profile(this.props.profile)
+			info: this.props.info
 		}
 	}
 

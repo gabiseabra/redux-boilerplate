@@ -1,9 +1,10 @@
-import React, { PropTypes } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import serialize from "serialize-javascript"
 import ReactDOM from "react-dom/server"
 import Helmet from "react-helmet"
 
-const Html = ({ api, data, profile, store, manifest, children }) => {
+const Html = ({ api, store, data, manifest, children }) => {
 	const content = children ? ReactDOM.renderToString(children) : ""
 	const head = Helmet.rewind()
 	const html = head.htmlAttributes.toComponent()
@@ -22,7 +23,6 @@ const Html = ({ api, data, profile, store, manifest, children }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 				<script id="api" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(api) }} />
 				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
-				<script id="profile" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profile) }} />
 				{manifest.scripts.map(src => <script key={src} src={src} />)}
 			</head>
 			<body>
@@ -43,7 +43,6 @@ Html.propTypes = {
 	api: PropTypes.any,
 	store: PropTypes.object,
 	data: PropTypes.object.isRequired,
-	profile: PropTypes.object.isRequired,
 	manifest: PropTypes.object.isRequired,
 	children: PropTypes.node
 }
@@ -54,11 +53,10 @@ Html.defaultTypes = {
 
 export default Html
 
-export const render = (data, profile, manifest, api, store, component) => {
+export const render = (data, manifest, api, store, component) => {
 	const html = ReactDOM.renderToStaticMarkup(
 		<Html
 			data={data}
-			profile={profile}
 			manifest={manifest}
 			api={api}
 			store={store}>

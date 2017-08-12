@@ -8,7 +8,7 @@ import favicon from "serve-favicon"
 import appMiddleware from "./app/middleware"
 import routes from "./app/routes"
 import { apiUrl } from "./lib/ApiClient"
-import profile from "../config/data.json"
+import api from "../config/api.json"
 import config from "../config/app.json"
 import manifest from "../public/dist/manifest.json"
 
@@ -28,16 +28,15 @@ app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 
-if(config.api.proxy) {
-	app.use(config.api.proxy, proxy(apiUrl(config.api)))
+if(api.proxy) {
+	app.use(api.proxy, proxy(apiUrl(api)))
 }
 
 app.use(appMiddleware({
 	serverRendering: SSR,
-	data: config.app,
-	api: config.api,
+	data: config,
+	api,
 	routes,
-	profile,
 	manifest
 }))
 

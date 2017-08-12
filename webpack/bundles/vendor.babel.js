@@ -8,7 +8,8 @@ export default {
 		vendor: [
 			"axios",
 			"es6-error",
-			"js-cookie"
+			"js-cookie",
+			"classnames"
 		],
 		react: [
 			"react",

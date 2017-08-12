@@ -19,8 +19,6 @@ const apiConfig = JSON.parse(document.getElementById("api").textContent)
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
-const profile = JSON.parse(document.getElementById("profile").textContent)
-
 const store = createStore(Cookie, window.__state) // eslint-disable-line no-underscore-dangle
 
 const history = syncHistoryWithStore(browserHistory, store)
@@ -36,7 +34,7 @@ const components = [
 ]
 
 ReactDOM.render(
-	<Provider data={appData} profile={profile} store={store}>
+	<Provider data={appData} store={store}>
 		<div>{components}</div>
 	</Provider>,
 	document.getElementById("app")

@@ -1,10 +1,10 @@
 import jsonServer from "json-server"
-import config from "../config/app.json"
+import config from "../config/api.json"
 import content from "./content"
 
-const host = config.api.host || "localhost"
+const host = config.host || "localhost"
 
-const port = config.api.port || 3002
+const port = config.port || 8081
 
 const server = jsonServer.create()
 

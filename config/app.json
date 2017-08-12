@@ -1,8 +1,17 @@
 {
-	"app": {},
-	"api": {
-		"host": "localhost",
-		"port": 3002,
-		"proxy": "/api"
+	"title": "Redux Boilerplate",
+	"copy": "Gabriela Seabra",
+	"email": "email@example.com",
+	"social": {
+		"facebook": {
+			"label": "Facebook",
+			"url": "https://facebook.com/",
+			"icon": "facebook"
+		},
+		"google": {
+			"label": "Google Plus",
+			"url": "https://google.com/",
+			"icon": "gplus"
+		}
 	}
 }

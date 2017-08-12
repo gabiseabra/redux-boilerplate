@@ -1,10 +1,11 @@
-import React, { PropTypes } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { Header, Footer } from "../../components"
 import styles from "./App.css"
 
-const App = ({ className, children }, { info: { title } }) => (
-	<div className={[ styles.App, className ].join(" ")}>
+const App = ({ children }, { data: { title } }) => (
+	<div className={styles.App}>
 		<Helmet titleTemplate={`%s - ${title}`} defaultTitle={title} />
 		<Header className={styles.header} />
 		<main className={styles.content}>{children}</main>
@@ -13,12 +14,11 @@ const App = ({ className, children }, { info: { title } }) => (
 )
 
 App.propTypes = {
-	className: PropTypes.string,
 	children: PropTypes.node
 }
 
 App.contextTypes = {
-	info: PropTypes.object.isRequired
+	data: PropTypes.object.isRequired
 }
 
 export default App

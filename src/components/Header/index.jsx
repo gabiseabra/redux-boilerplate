@@ -1,12 +1,14 @@
-import React, { PropTypes } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import { Link } from "react-router"
+import classnames from "classnames"
 import Nav from "./Nav"
 import styles from "./Header.css"
 
-const Header = ({ className }, { info }) => (
-	<header className={[ styles.Header, className ].join(" ")}>
+const Header = ({ className }, { data }) => (
+	<header className={classnames(styles.Header, className)}>
 		<div className={styles.container}>
-			<Link to="/" className={styles.brand}>{info.title}</Link>
+			<Link to="/" className={styles.brand}>{data.title}</Link>
 			<Nav className={styles.nav}>
 				<Link to="/" key="home">Home</Link>
 				<Link to="/hello" key="hello">Hello</Link>
@@ -21,7 +23,7 @@ Header.propTypes = {
 }
 
 Header.contextTypes = {
-	info: PropTypes.object.isRequired
+	data: PropTypes.object.isRequired
 }
 
 export default Header

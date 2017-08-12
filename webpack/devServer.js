@@ -9,7 +9,7 @@ import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
 import { apiUrl } from "../src/lib/ApiClient"
 import config from "../config/app.json"
-import profile from "../config/data.json"
+import api from "../config/api.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
@@ -56,16 +56,15 @@ if(HMR) {
 
 app.use(Express.static(path.join(__dirname, "../public")))
 
-if(config.api.proxy) {
-	app.use(config.api.proxy, proxy(apiUrl(config.api)))
+if(api.proxy) {
+	app.use(api.proxy, proxy(apiUrl(api)))
 }
 
 app.use(appMiddleware({
 	serverRendering: false,
-	data: config.app,
-	api: config.api,
-	manifest,
-	profile
+	data: config,
+	api,
+	manifest
 }))
 
 server.listen(PORT, err => {
