@@ -1,4 +1,4 @@
-@import "../../css/colors.css";
+@import "../../../css/colors.css";
 
 :root {
 	--handleSize: 24px;
@@ -7,7 +7,7 @@
 }
 
 .icon {
-	composes: background from "../../css/components/links.css";
+	composes: background from "../../../css/components/links.css";
 
 	&::before,
 	&::after {

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import classnames from "classnames"
 import styles from "./Nav.css"
 
 export default class Nav extends Component {
@@ -18,10 +19,8 @@ export default class Nav extends Component {
 	render() {
 		const { children, className } = this.props
 		const { collapsed } = this.state
-		const classNames = [ styles.Nav, className ]
-		if(!collapsed) classNames.push(styles.active)
 		return (
-			<nav className={classNames.join(" ")}>
+			<nav className={classnames(styles.Nav, className, collapsed && styles.active)}>
 				<a className={styles.handle}
 					onClick={this.click}
 					title="Menu"

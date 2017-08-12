@@ -5,18 +5,15 @@ import styles from "./Footer.css"
 
 export default class Footer extends PureComponent {
 	static propTypes = {
-		className: PropTypes.string
-	}
-
-	static contextTypes = {
-		data: PropTypes.object.isRequired
+		className: PropTypes.string,
+		appData: PropTypes.object.isRequired
 	}
 
 	renderNetworks() {
-		const { data } = this.context
+		const { appData } = this.props
 		const networks = []
-		Object.keys(data.social).forEach(key => {
-			const { label, url, icon } = data.social[key]
+		Object.keys(appData.social).forEach(key => {
+			const { label, url, icon } = appData.social[key]
 			networks.push(
 				<a
 					target="_blank"
@@ -32,16 +29,15 @@ export default class Footer extends PureComponent {
 	}
 
 	render() {
-		const { className } = this.props
-		const { data } = this.context
+		const { appData, className } = this.props
 		return (
 			<footer className={classnames(styles.Footer, className)}>
 				<div className={classnames(styles.container, styles.copyright)}>
-					{data.copy && <div>&copy; 2017 - {data.copy}</div>}
+					{appData.copy && <div>&copy; 2017 - {appData.copy}</div>}
 					<div className={styles.social}>
 						{this.renderNetworks()}
-						{data.email &&
-						<a href={`mailto:${data.email}`} title="Email">
+						{appData.email &&
+						<a href={`mailto:${appData.email}`} title="Email">
 							<span className="icon-email" />
 						</a>}
 					</div>

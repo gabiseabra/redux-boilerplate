@@ -1,6 +1,6 @@
-@import "../../css/app.css";
-@import "../../css/colors.css";
-@import "../../css/layout.css";
+@import "../../../css/app.css";
+@import "../../../css/colors.css";
+@import "../../../css/layout.css";
 
 html,
 body {
@@ -22,7 +22,7 @@ body,
 	display: flex;
 }
 
-.App {
+.Shell {
 	display: flex;
 	flex-direction: column;
 	background: var(--backgroundColor);

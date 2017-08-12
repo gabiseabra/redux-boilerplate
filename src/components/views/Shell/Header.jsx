@@ -5,10 +5,10 @@ import classnames from "classnames"
 import Nav from "./Nav"
 import styles from "./Header.css"
 
-const Header = ({ className }, { data }) => (
+const Header = ({ appData, className }) => (
 	<header className={classnames(styles.Header, className)}>
 		<div className={styles.container}>
-			<Link to="/" className={styles.brand}>{data.title}</Link>
+			<Link to="/" className={styles.brand}>{appData.title}</Link>
 			<Nav className={styles.nav}>
 				<Link to="/" key="home">Home</Link>
 				<Link to="/hello" key="hello">Hello</Link>
@@ -18,11 +18,8 @@ const Header = ({ className }, { data }) => (
 )
 
 Header.propTypes = {
-	className: PropTypes.string
-}
-
-Header.contextTypes = {
-	data: PropTypes.object.isRequired
+	className: PropTypes.string,
+	appData: PropTypes.object.isRequired
 }
 
 export default Header

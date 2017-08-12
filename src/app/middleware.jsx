@@ -1,7 +1,6 @@
 import React from "react"
 import { match, RouterContext } from "react-router"
-import { render as renderFn } from "./Html"
-import Provider from "./Provider"
+import { Provider, renderWith } from "../containers/app"
 import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
@@ -11,8 +10,7 @@ export default function middleware(config) {
 		routes,
 		data
 	} = config
-	const render = renderFn.bind(
-		undefined,
+	const render = renderWith(
 		data,
 		new Manifest(manifest)
 	)

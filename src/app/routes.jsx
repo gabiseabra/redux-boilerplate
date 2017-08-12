@@ -1,16 +1,16 @@
 import React from "react"
 import { Route, IndexRoute } from "react-router"
 import {
-	App,
-	Home,
-	Hello,
+	Shell,
+	HomePage,
+	HelloPage,
 	NotFound
-} from "../containers"
+} from "../containers/views"
 
 export default (
-	<Route path="/" component={App}>
-		<IndexRoute component={Home} />
-		<Route path="hello" component={Hello} />
+	<Route path="/" component={Shell}>
+		<IndexRoute component={HomePage} />
+		<Route path="hello" component={HelloPage} />
 		<Route path="*" component={NotFound} status={404} />
 	</Route>
 )
