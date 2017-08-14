@@ -1,0 +1,31 @@
+@import "../../../css/colors.css";
+@import "../../../css/layout.css";
+
+:root {
+	--brandSize: 1.4em;
+}
+
+.Header {
+	composes: inverse from "../../../css/components/links.css";
+	padding: 10px 20px;
+	background: var(--primaryColor);
+	color: var(--primaryTextColor);
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	max-width: var(--maxWidth);
+}
+
+.brand {
+	font-size: var(--brandSize);
+	white-space: nowrap;
+	float: left;
+}
+
+.nav {
+	float: right;
+	height: var(--brandSize);
+	line-height: var(--brandSize);
+}

@@ -1,7 +1,6 @@
 import React from "react"
 import { match, RouterContext } from "react-router"
-import { render as renderFn } from "./Html"
-import Provider from "./Provider"
+import { Provider, renderWith } from "../containers/app"
 import ApiClient from "../lib/ApiClient"
 import createStore from "../redux/store"
 import createSaga from "../redux/saga"
@@ -16,8 +15,7 @@ export default function middleware(config) {
 		routes,
 		data
 	} = config
-	const render = renderFn.bind(
-		undefined,
+	const render = renderWith(
 		data,
 		new Manifest(manifest),
 		api
@@ -42,11 +40,11 @@ export default function middleware(config) {
 					store.runSaga(saga).done
 						.then(() => {
 							const statusCode = getStatus(store.getState()).code
-							res.status(statusCode).send(render(store, component))
+							res.status(statusCode).send(render(component, store))
 						})
 						.catch(e => res.status(500).send(e.message))
 						.then(next)
-					render(store, component)
+					render(component, store)
 					store.close()
 				} else {
 					res.status(404).send("Not found")

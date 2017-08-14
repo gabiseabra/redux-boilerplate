@@ -1,0 +1,27 @@
+@import "../../../css/colors.css";
+@import "../../../css/layout.css";
+
+.Footer {
+	composes: inverse from "../../../css/components/links.css";
+	padding: 10px 20px;
+	background: var(--primaryColor);
+	color: var(--primaryTextColor);
+}
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	max-width: var(--maxWidth);
+	text-align: center;
+}
+
+.copyright {
+	display: flex;
+	justify-content: space-between;
+	font-size: .85em;
+	font-style: italic;
+}
+
+.social {
+	font-size: 1.2em;
+}
