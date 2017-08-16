@@ -1,1 +1,2 @@
-export { default as Loading } from "./Loading" // eslint-disable-line
+export { default as Error } from "./Error"
+export { default as Loader } from "./Loader"

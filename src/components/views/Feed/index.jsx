@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { Link } from "react-router"
-import { Loading } from "../../shared"
+import { Loader } from "../../shared"
 import styles from "./Feed.css"
 
 const Post = ({ post }) => (
@@ -15,18 +15,19 @@ const Post = ({ post }) => (
 )
 
 Post.propTypes = {
-	post: PropTypes.object.isRequired
+	post: PropTypes.object
 }
 
 const Feed = ({ feed, error, loading, type }) => (
 	<section>
-		<Helmet title="Posts" />
-		<h1>Posts</h1>
-		{type && <h2>{type}</h2>}
-		{loading ? <Loading error={error} /> :
-		<div className={styles.feed}>
-			{feed.map(post => <Post post={post} />)}
-		</div>}
+		<Loader loading={loading} error={error}>
+			<Helmet title="Posts" />
+			<h1>Posts</h1>
+			{type && <h2>{type}</h2>}
+			{feed && <div className={styles.feed}>
+				{feed.map(post => <Post post={post} />)}
+			</div>}
+		</Loader>
 	</section>
 )
 

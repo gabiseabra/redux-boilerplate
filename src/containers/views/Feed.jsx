@@ -35,9 +35,9 @@ class FeedPage extends Component {
 }
 
 const props = (state, { location: { query: { type } } }) => ({
-	loading: !isFeedLoaded(state),
 	error: getFeedError(state),
-	feed: type ? getFeedByType(state, type) : getFeed(state)
+	feed: type ? getFeedByType(state, type) : getFeed(state),
+	loading: !isFeedLoaded(state)
 })
 
 export default connect(props, { load })(FeedPage)
