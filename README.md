@@ -1,124 +1,41 @@
 # React Boilerplate
 
-WIP
-
 ## Getting Started
 
 ### Installing
 
 ```bash
-git clone https://github.com/gabiseabra/react-boilerplate
+git clone https://github.com/gabiseabra/react-boilerplate.git
 cd react-boilerplate
 npm install
 ```
 
 ### Building
 
-Run the `build` script to build everything for production.
+Use a build command to build distributable package:
 
 ```bash
 npm run build
 ```
 
-The `vendor` bundle is a prerequisite for building the `client` bundle, so it is built first and followed by the `server` and `client` bundles in parallel. Each one can be built separately with their respective commands:
+Build commands:
 
-#### Vendor
+| Command          | Description               | Output
+|------------------|---------------------------|--------------------
+| `build:vendor`   | Build vendor bundle       | `/public/dist`
+| `build:client`*  | Build web client bundle   | `/public/dist`
+| `build:server`*  | Build server bundle       | `/dist`
+| `build`          | Build all                 | \*
+| `build:prod`     | Build all for production  | \*
+| `build:dev`      | Build all for development | \*
+| `build:static`** | Build static index.html   | `/public/index.html`
 
-```bash
-npm run build:vendor
-```
+\* The `vendor` bundle is a prerequisite for building the `client` and `server` bundles. Make sure to `npm run build:vendor` before using these commands.  
 
-Contains all vendor code (React stuff, etc).
+\*\* `build:static` requires a `client` build.
 
-Output: `public/dist/`
-
-#### Client
-
-```bash
-npm run build:client
-```
-
-Contains compiled js and assets for the browser.
-
-Input: `src/client.jsx`
-
-Output: `public/dist/`, `public/appcache/`, `public/sw.js`
-
-#### Server
+## Docker
 
 ```bash
-npm run build:server
+docker run -p 3000:80 -d gabiseabra/react-boilerplate
 ```
-
-Contains compiled js for the server.
-
-Input: `src/server.jsx`
-
-Output: `dist/`
-
-----
-
-#### Static
-
-Optionally, a static index.html file can be built with `build:static`:
-
-```bash
-npm run build:static
-```
-
-Output: `public/index.html`
-
-## Running Dev Server
-
-```bash
-npm run watch
-```
-Listens to [localhost:3001](localhost:3001) by default.
-
-## Running Production Server
-
-```bash
-npm start
-```
-Listens to [localhost:3000](localhost:3000) by default.
-
-## Commands
-
-All commands can be found in the `scripts` section of [package.json](package.json).
-
-#### start - `npm run start`
-
-Start production server.
-
-#### watch - `npm run watch`
-
-Start development server.
-
-#### lint - `npm run lint`
-
-Run eslint.
-
-#### build - `npm run build`
-
-Build all for production.
-
-#### clean - `npm run clean`
-
-Clean all compiled bundles.
-
-#### [build|clean]:vendor - `npm run build:vendor`
-
-Build/Clean vendor bundle.
-
-#### [build|clean]:client - `npm run build:client`
-
-Build/Clean client bundle.
-
-#### [build|clean]:server - `npm run build:server`
-
-Build/Clean server bundle.
-
-#### [build|clean]:static - `npm run build:static`
-
-Build/Clean static index.html.
-
