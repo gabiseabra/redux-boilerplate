@@ -1,12 +1,6 @@
 import axios from "axios"
 import ExtendableError from "es6-error"
 
-export function apiUrl(options) {
-	const host = options.host || "localhost"
-	const port = options.port || 3002
-	return `http://${host}:${port}`
-}
-
 export class ResponseError extends ExtendableError {
 	constructor({ status, statusText }) {
 		super(`HTTP Error: [${status}] ${statusText}`)
@@ -16,12 +10,8 @@ export class ResponseError extends ExtendableError {
 }
 
 export default class ApiClient {
-	constructor(options) {
-		if(options.proxy) {
-			this.url = options.proxy
-		} else {
-			this.url = apiUrl(options)
-		}
+	constructor(url) {
+		this.url = url
 	}
 
 	get = url => (

@@ -1,10 +1,8 @@
 import jsonServer from "json-server"
-import config from "../config/api.json"
 import content from "./content"
 
-const host = config.host || "localhost"
-
-const port = config.port || 8081
+const API_HOST = process.env.API_HOST || process.env.HOST || "localhost"
+const API_PORT = process.env.API_PORT || 8080
 
 const server = jsonServer.create()
 
@@ -15,9 +13,9 @@ server.use((req, res, next) => {
 
 server.use(jsonServer.router(content))
 
-server.listen(port, err => {
+server.listen(API_PORT, err => {
 	if(err) {
 		console.error(err)
 	}
-	console.info("==> 💻  API server running @ http://%s:%s", host, port)
+	console.info("==> 💻  API server running @ http://%s:%s", API_HOST, API_PORT)
 })

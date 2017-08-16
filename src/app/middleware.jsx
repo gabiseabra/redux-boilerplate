@@ -9,22 +9,22 @@ import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
 	const {
-		api,
 		serverRendering,
 		manifest,
 		routes,
 		data
 	} = config
+	const apiUrl = config.apiUrl || "/api"
 	const render = renderWith(
 		data,
 		new Manifest(manifest),
-		api
+		apiUrl
 	)
 	return (req, res, next) => {
 		if(!serverRendering) {
 			res.send(render())
 		} else {
-			const saga = createSaga(new ApiClient(api))
+			const saga = createSaga(new ApiClient(apiUrl))
 			const store = createStore(res.cookies)
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {

@@ -4,7 +4,7 @@ import serialize from "serialize-javascript"
 import ReactDOM from "react-dom/server"
 import Helmet from "react-helmet"
 
-const Html = ({ api, store, data, manifest, children }) => {
+const Html = ({ apiUrl, store, data, manifest, children }) => {
 	const content = children ? ReactDOM.renderToString(children) : ""
 	const head = Helmet.rewind()
 	const html = head.htmlAttributes.toComponent()
@@ -21,7 +21,7 @@ const Html = ({ api, store, data, manifest, children }) => {
 				<link rel="manifest" href="/manifest.json" />
 				{manifest.styles.map(src => <link key={src} rel="stylesheet" href={src} data-hot />)}
 				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-				<script id="api" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(api) }} />
+				<meta name="api" content={apiUrl} />
 				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 				{manifest.scripts.map(src => <script key={src} src={src} />)}
 			</head>
@@ -40,7 +40,7 @@ const Html = ({ api, store, data, manifest, children }) => {
 }
 
 Html.propTypes = {
-	api: PropTypes.any,
+	apiUrl: PropTypes.string.isRequired,
 	store: PropTypes.object,
 	data: PropTypes.object.isRequired,
 	manifest: PropTypes.object.isRequired,
@@ -53,12 +53,12 @@ Html.defaultTypes = {
 
 export default Html
 
-export const renderWith = (data, manifest, api) => (component, store) => {
+export const renderWith = (data, manifest, apiUrl) => (component, store) => {
 	const html = ReactDOM.renderToStaticMarkup(
 		<Html
 			data={data}
 			manifest={manifest}
-			api={api}
+			apiUrl={apiUrl}
 			store={store}>
 			{component}
 		</Html>

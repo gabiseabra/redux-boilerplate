@@ -7,14 +7,15 @@ import webpack from "webpack"
 import hotMiddleware from "webpack-hot-middleware"
 import devMiddleware from "webpack-dev-middleware"
 import appMiddleware from "../src/app/middleware"
-import { apiUrl } from "../src/lib/ApiClient"
 import config from "../config/app.json"
-import api from "../config/api.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.DEV_PORT || 8080
 const HMR = process.argv.indexOf("--hot") !== -1
+const API_HOST = process.env.API_HOST || HOST
+const API_PORT = process.env.API_PORT || 8080
+const API_URL = `${API_HOST}:${API_PORT}`
 
 const serverOptions = {
 	contentBase: `http://${HOST}:${PORT}`,
@@ -56,14 +57,12 @@ if(HMR) {
 
 app.use(Express.static(path.join(__dirname, "../public")))
 
-if(api.proxy) {
-	app.use(api.proxy, proxy(apiUrl(api)))
-}
+app.use("/api", proxy(API_URL))
 
 app.use(appMiddleware({
 	serverRendering: false,
+	apiUrl: "/api",
 	data: config,
-	api,
 	manifest
 }))
 

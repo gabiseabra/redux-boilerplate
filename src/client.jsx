@@ -15,7 +15,7 @@ if(process.env.OFFLINE === "true") {
 	OfflinePlugin.install()
 }
 
-const apiConfig = JSON.parse(document.getElementById("api").textContent)
+const API_URL = document.querySelector("meta[name=api]").getAttribute("content")
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
@@ -23,7 +23,7 @@ const store = createStore(Cookie, window.__state) // eslint-disable-line no-unde
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-const apiClient = new ApiClient(apiConfig)
+const apiClient = new ApiClient(API_URL)
 
 let task = store.runSaga(createSaga(apiClient))
 
