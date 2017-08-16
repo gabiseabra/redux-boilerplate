@@ -9,7 +9,7 @@ import config from "../config/app.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 
 const HOST = process.env.HOST || "localhost"
-const PORT = process.env.DEV_PORT || 8080
+const PORT = process.env.DEV_PORT || process.env.PORT || 3000
 const HMR = process.argv.indexOf("--hot") !== -1
 
 const serverOptions = {
