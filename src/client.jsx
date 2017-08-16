@@ -27,15 +27,11 @@ const apiClient = new ApiClient(API_URL)
 
 let task = store.runSaga(createSaga(apiClient))
 
-const components = [
-	<Router history={history}>
-		{routes}
-	</Router>
-]
-
 ReactDOM.render(
 	<Provider data={appData} store={store}>
-		<div>{components}</div>
+		<Router history={history}>
+			{routes}
+		</Router>
 	</Provider>,
 	document.getElementById("app")
 )
