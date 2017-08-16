@@ -19,7 +19,8 @@ class NotFoundPage extends Component {
 	}
 
 	render() {
-		return <NotFound />
+		const { message } = this.props
+		return <NotFound message={message} />
 	}
 }
 

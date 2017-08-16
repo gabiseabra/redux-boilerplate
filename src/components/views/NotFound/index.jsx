@@ -1,32 +1,17 @@
-import React, { Component } from "react"
+import React from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
 import Helmet from "react-helmet"
-import { setStatus } from "../../../redux/modules/status"
 
-class NotFound extends Component {
-	static propTypes = {
-		setStatus: PropTypes.func.isRequired,
-		message: PropTypes.string.isRequired
-	}
+const NotFound = ({ message }) => (
+	<section>
+		<Helmet title={message} />
+		<h1>404</h1>
+		<p>The page you have requested does not exist.</p>
+	</section>
+)
 
-	static defaultProps = {
-		message: "Not Found"
-	}
-
-	componentWillMount() {
-		this.props.setStatus(404, this.props.message)
-	}
-
-	render() {
-		return (
-			<section>
-				<Helmet title={this.props.message} />
-				<h1>404</h1>
-				<p>The page you have requested does not exist.</p>
-			</section>
-		)
-	}
+NotFound.propTypes = {
+	message: PropTypes.string.isRequired
 }
 
-export default connect(undefined, { setStatus })(NotFound)
+export default NotFound
