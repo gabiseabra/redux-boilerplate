@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { AppContainer } from "react-hot-loader"
 
 /**
  * App context provider
@@ -23,7 +22,8 @@ export default class Provider extends React.Component {
 	}
 
 	render() {
-		if(process.env.HMR === "true") {
+		if(module.hot) {
+			const { AppContainer } = require("react-hot-loader")
 			return <AppContainer>{this.props.children}</AppContainer>
 		}
 		return this.props.children
