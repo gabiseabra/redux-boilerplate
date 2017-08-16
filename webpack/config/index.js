@@ -13,8 +13,6 @@ const plugins = [
 	new webpack.EnvironmentPlugin({
 		NODE_ENV: "",
 		OFFLINE: "false",
-		HOST: "localhost",
-		PORT: "80",
 		SSR: "false"
 	})
 ]

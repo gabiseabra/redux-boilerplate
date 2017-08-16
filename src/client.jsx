@@ -40,7 +40,7 @@ if(process.env.NODE_ENV === "development") {
 	window.Perf = require("react-addons-perf")
 }
 
-if(process.env.HMR === "true" && module.hot) {
+if(module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
 

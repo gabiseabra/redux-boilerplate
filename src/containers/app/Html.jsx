@@ -53,7 +53,7 @@ Html.defaultTypes = {
 
 export default Html
 
-export const renderWith = (data, manifest, apiUrl) => (component, store) => {
+export const renderWith = ({ data, manifest, apiUrl }) => (component, store) => {
 	const html = ReactDOM.renderToStaticMarkup(
 		<Html
 			data={data}

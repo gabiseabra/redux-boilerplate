@@ -1,11 +1,9 @@
+
 # Dependencies
 node_modules
 
 # Configuration
 .env
-
-# IDE
-.vscode
 
 # Logs
 *.log
@@ -16,3 +14,9 @@ public/dist
 public/appcache
 public/index.html
 public/sw.js
+
+# Development files
+.env.example
+.editorconfig
+.gitignore
+README.md

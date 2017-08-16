@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Provider, connect } from "react-redux"
-import { AppContainer } from "react-hot-loader"
 import { getInfo } from "../../redux/selectors"
 import { load } from "../../redux/modules/content/info"
 
@@ -41,7 +40,8 @@ class ContextProvider extends React.Component {
 				{children}
 			</Provider>
 		)
-		if(process.env.HMR === "true") {
+		if(module.hot) {
+			const { AppContainer } = require("react-hot-loader")
 			return <AppContainer>{component}</AppContainer>
 		}
 		return component

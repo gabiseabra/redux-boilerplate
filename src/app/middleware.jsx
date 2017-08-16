@@ -15,11 +15,11 @@ export default function middleware(config) {
 		data
 	} = config
 	const apiUrl = config.apiUrl || "/api"
-	const render = renderWith(
+	const render = renderWith({
 		data,
-		new Manifest(manifest),
-		apiUrl
-	)
+		apiUrl,
+		manifest: new Manifest(manifest)
+	})
 	return (req, res, next) => {
 		if(!serverRendering) {
 			res.send(render())
