@@ -1,0 +1,22 @@
+
+# Dependencies
+node_modules
+
+# Configuration
+.env
+
+# Logs
+*.log
+
+# Build
+dist
+public/dist
+public/appcache
+public/index.html
+public/sw.js
+
+# Development files
+.env.example
+.editorconfig
+.gitignore
+README.md
