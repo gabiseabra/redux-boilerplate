@@ -1,9 +1,18 @@
-.vscode
+# Dependencies
 node_modules
+
+# Configuration
+.env
+
+# IDE
+.vscode
+
+# Logs
+*.log
+
+# Build
 dist
 public/dist
 public/appcache
 public/index.html
 public/sw.js
-.env
-*.log
