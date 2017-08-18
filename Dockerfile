@@ -1,17 +1,20 @@
-FROM node:7
+FROM node:7-slim
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm install -s --no-progress
 
 COPY . .
 
 ARG SSR=true
 ARG OFFLINE=true
+ARG NODE_ENV=production
 
-RUN npm run build
+ENV NODE_ENV=$NODE_ENV
+
+RUN npm run build && npm prune
 
 EXPOSE 80
 
