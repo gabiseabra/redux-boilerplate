@@ -5,7 +5,7 @@ import {
 	Home,
 	Hello,
 	NotFound
-} from "../containers/views"
+} from "./views"
 
 export default (
 	<Route path="/" component={Shell}>

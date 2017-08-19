@@ -13,7 +13,7 @@ import manifest from "../../public/dist/manifest.json"
 
 const entry = [
 	"babel-polyfill",
-	"./src/client.jsx"
+	"./src/bundles/client"
 ]
 
 if(process.argv.indexOf("--hot") !== -1) {

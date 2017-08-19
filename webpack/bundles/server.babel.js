@@ -7,7 +7,7 @@ export default merge.smart(config, {
 	target: "node",
 	entry: [
 		"babel-polyfill",
-		"./src/server.jsx"
+		"./src/bundles/server"
 	],
 	externals: [
 		/\.json$/,

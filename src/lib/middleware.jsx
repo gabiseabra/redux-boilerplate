@@ -1,7 +1,7 @@
 import React from "react"
 import { match, RouterContext } from "react-router"
 import { Provider, renderWith } from "../containers/app"
-import Manifest from "../lib/Manifest"
+import Manifest from "./Manifest"
 
 export default function middleware(config) {
 	const {
