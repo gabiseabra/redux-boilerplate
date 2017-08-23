@@ -7,7 +7,7 @@ import merge from "webpack-merge"
 import loadersFn from "./loaders"
 import envConfig from "./env"
 
-const context = path.resolve(__dirname, "..", "..")
+export const context = path.resolve(__dirname, "..", "..")
 
 const plugins = [
 	new webpack.EnvironmentPlugin({
@@ -31,7 +31,11 @@ export default merge.smart({
 		filename: "[name].js"
 	},
 	resolve: {
-		extensions: [ ".js", ".jsx" ]
+		extensions: [ ".json", ".js", ".jsx" ],
+		alias: {
+			config: path.join(context, "config"),
+			public: path.join(context, "public")
+		}
 	},
 	plugins
 }, envConfig)
