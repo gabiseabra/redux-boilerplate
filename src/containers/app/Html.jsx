@@ -37,6 +37,10 @@ Html.propTypes = {
 	children: PropTypes.node
 }
 
+Html.defaultProps = {
+	data: {}
+}
+
 export default Html
 
 export const renderWith = ({ data, manifest }) => component => {
