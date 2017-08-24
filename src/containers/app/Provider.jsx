@@ -31,7 +31,7 @@ export default class Provider extends React.Component {
 }
 
 export const withAppData = Component => (
-  // eslint-disable-next-line
+	// eslint-disable-next-line
 	class extends React.Component {
 		static contextTypes = {
 			appData: PropTypes.object.isRequired

@@ -12,7 +12,7 @@ export default class Footer extends PureComponent {
 	renderNetworks() {
 		const { appData } = this.props
 		const networks = []
-		Object.keys(appData.social).forEach(key => {
+		Object.keys(appData.social).forEach((key) => {
 			const { label, url, icon } = appData.social[key]
 			networks.push(
 				<a

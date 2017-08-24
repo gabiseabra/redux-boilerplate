@@ -8,7 +8,7 @@ export default function Hello() {
 			<h1>Hello</h1>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur
-				commodo libero. Aliquam eu dignissim ligula, quis lacinia lorem. <a href="#">In ultricies
+				commodo libero. Aliquam eu dignissim ligula, quis lacinia lorem. <a href="/">In ultricies
 				eros</a> et accumsan convallis. Vestibulum ante ipsum primis in faucibus orci luctus
 				et ultrices posuere cubilia Curae; Nulla efficitur lectus ac urna porttitor
 				condimentum. <b>Nunc elit mi</b>, dignissim et dui sit amet, eleifend dictum risus. In
