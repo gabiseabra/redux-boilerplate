@@ -35,7 +35,8 @@ export default merge.smart({
 		alias: {
 			"manifest.json$": path.join(context, "public/dist/manifest.json"),
 			config: path.join(context, "config"),
-			public: path.join(context, "public")
+			public: path.join(context, "public"),
+			styles: path.join(context, "styles")
 		}
 	},
 	plugins

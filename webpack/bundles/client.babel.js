@@ -54,7 +54,7 @@ export default merge.smart(config, {
 			cache: manifest
 		}),
 		new FontelloPlugin({
-			config: require("../../src/css/fontello.json")
+			config: require("../../styles/fontello.json")
 		}),
 		new ExtractTextPlugin({
 			filename: "[name].css",
