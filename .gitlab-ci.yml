@@ -18,11 +18,10 @@ stages:
   - test
   - deploy
 
-before_script:
-  - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
-
 build:
   stage: build
+  before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
   script:
     - docker build --build-arg NODE_ENV=development
                    --tag "$DOCKER_IMAGE:$CI_BUILD_REF"
@@ -46,6 +45,8 @@ lint:
 
 release:
   stage: deploy
+  before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
   script:
     - docker pull "$DOCKER_IMAGE:$CI_BUILD_REF"
     - docker build --cache-from "$DOCKER_IMAGE:$CI_BUILD_REF"
