@@ -5,6 +5,9 @@ language: node_js
 services:
   - docker
 
+env:
+  - IMAGE_NAME="gabiseabra/react-boilerplate:latest"
+
 install:
   - docker version
   - docker build -t $IMAGE_NAME --pull .
