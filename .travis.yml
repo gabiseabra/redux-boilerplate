@@ -4,20 +4,21 @@ services:
   - docker
 
 env:
-  - IMAGE_NAME="gabiseabra/react-boilerplate:latest"
+  - IMAGE_TEST="gabiseabra/react-boilerplate:dev"
+  - IMAGE_RELEASE="gabiseabra/react-boilerplate:latest"
 
 install:
-  - docker version
-  - docker build -t "$IMAGE_NAME" --pull .
+  - docker build --build-arg NODE_ENV=development --tag $IMAGE_TEST .
 
 script:
-  - docker run -p 80:80 --name project-test -d "$IMAGE_NAME"
+  - docker run --port 80:80 --name container-test -d "$IMAGE_TEST"
   - curl -v http://localhost:80
-  - docker exec project-test npm run test
-  - docker exec project-test npm run lint
+  - docker exec container-test npm run test
+  - docker exec container-test npm run lint
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
-    docker push $IMAGE_NAME;
+    docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
+    docker build --tag "$IMAGE_RELEASE" .;
+    docker push $IMAGE_RELEASE;
     fi
