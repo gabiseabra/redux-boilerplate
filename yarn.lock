@@ -2552,9 +2552,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-fontello-webpack-plugin@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/fontello-webpack-plugin/-/fontello-webpack-plugin-0.4.5.tgz#1f29aa7baf02a25d6c5f645a66ef86ce68b7dd83"
+fontello-webpack-plugin@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/fontello-webpack-plugin/-/fontello-webpack-plugin-0.4.6.tgz#3b3f6bae371954ff5fcd0d99af6f39479b0c9800"
   dependencies:
     form-data "^2.1.2"
     lodash "^4.17.4"
@@ -2590,15 +2590,7 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
 
-form-data@^2.1.2:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.1.tgz#6fb94fbd71885306d73d15cc497fe4cc4ecd44bf"
-  dependencies:
-    asynckit "^0.4.0"
-    combined-stream "^1.0.5"
-    mime-types "^2.1.12"
-
-form-data@~2.1.1:
+form-data@^2.1.2, form-data@~2.1.1:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.1.4.tgz#33c183acf193276ecaa98143a69e94bfee1750d1"
   dependencies:
