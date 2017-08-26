@@ -8,7 +8,7 @@
     "test": "mocha './{test,src}/**/*.spec.{js,jsx}' --",
     "lint": "eslint src",
     "prebuild": "cross-env NODE_ENV=production npm run build:vendor",
-    "build": "webpack --config=webpack/config.babel.js --progress --colors --",
+    "build": "webpack --config=webpack/config.babel.js --",
     "build:dev": "cross-env NODE_ENV=development npm run build --",
     "build:prod": "cross-env NODE_ENV=production npm run build --",
     "build:client": "webpack --config=webpack/bundles/client.babel.js --progress --colors",
