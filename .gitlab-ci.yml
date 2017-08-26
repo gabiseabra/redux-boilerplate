@@ -3,12 +3,15 @@ image: docker:latest
 services:
   - docker:dind
 
+cache:
+  untracked: true
+
 variables:
+  DOCKER_DRIVER: overlay
   DOCKER_USER: gitlab-ci-token
   DOCKER_PASS: $CI_JOB_TOKEN
   DOCKER_REGISTRY: $CI_REGISTRY
-  IMAGE_TEST: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  IMAGE_RELEASE: $CI_REGISTRY_IMAGE:latest
+  DOCKER_IMAGE: $CI_REGISTRY_IMAGE
 
 stages:
   - build
@@ -21,26 +24,32 @@ before_script:
 build:
   stage: build
   script:
-    - docker build -t $IMAGE_TEST --pull .
-    - docker push $IMAGE_TEST
+    - docker build -t "$DOCKER_IMAGE:$CI_BUILD_REF" --pull .
+    - docker push "$DOCKER_IMAGE:$CI_BUILD_REF"
 
 test:
   stage: test
   script:
-    - docker pull $IMAGE_TEST
-    - docker run $IMAGE_TEST yarn run test
+    - docker pull "$DOCKER_IMAGE:$CI_BUILD_REF"
+    - docker run "$DOCKER_IMAGE:$CI_BUILD_REF" yarn run test
 
 lint:
   stage: test
   script:
-    - docker pull $IMAGE_TEST
-    - docker run $IMAGE_TEST yarn run lint
+    - docker pull "$DOCKER_IMAGE:$CI_BUILD_REF"
+    - docker run "$DOCKER_IMAGE:$CI_BUILD_REF" yarn run lint
 
 release:
   stage: deploy
   script:
-    - docker pull $IMAGE_TEST
-    - docker tag $IMAGE_TEST $IMAGE_RELEASE
-    - docker push $IMAGE_RELEASE
+    - docker pull "$DOCKER_IMAGE:$CI_BUILD_REF"
+    - docker build --cache-from "$DOCKER_IMAGE:$CI_BUILD_REF"
+                   -t "$DOCKER_IMAGE:latest"
+                   ./
+    - docker push "$DOCKER_IMAGE:latest"
+    - if [ -n "$CI_COMMIT_TAG" ]; then
+        docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$CI_COMMIT_TAG"
+        docker push "$DOCKER_IMAGE:$CI_COMMIT_TAG";
+      fi
   only:
     - master
