@@ -11,7 +11,7 @@ install:
   - docker build --build-arg NODE_ENV=development --tag $IMAGE_TEST .
 
 script:
-  - docker run --port 80:80 --name container-test -d "$IMAGE_TEST"
+  - docker run --p 80:80 --name container-test -d "$IMAGE_TEST"
   - curl -v http://localhost:80
   - docker exec container-test npm run test
   - docker exec container-test npm run lint
