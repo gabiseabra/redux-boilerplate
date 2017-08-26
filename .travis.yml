@@ -8,10 +8,10 @@ env:
 
 install:
   - docker version
-  - docker build -t $IMAGE_NAME --pull .
+  - docker build -t "$IMAGE_NAME" --pull .
 
 script:
-  - docker run -d -p 80:80 -n project-test $IMAGE_NAME
+  - docker run -p 80:80 --name project-test -d "$IMAGE_NAME"
   - curl -v http://localhost:80
   - docker exec project-test npm run test
   - docker exec project-test npm run lint
