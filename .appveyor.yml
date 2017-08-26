@@ -9,13 +9,13 @@ init:
   - git config --global core.autocrlf input
 
 install:
-	- docker version
+  - docker version
 
 build_script:
   - docker build -t %IMAGE_NAME% .
 
 test_script:
-	- docker run  -d -p 80:80 -n project-test %IMAGE_NAME%
+  - docker run  -d -p 80:80 -n project-test %IMAGE_NAME%
   - curl -v http://localhost:80
   - docker exec project-test npm run test
   - docker exec project-test npm run lint
