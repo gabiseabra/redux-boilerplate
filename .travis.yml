@@ -5,7 +5,7 @@ services:
 
 env:
   - IMAGE_TEST="gabiseabra/react-boilerplate:dev"
-  - IMAGE_RELEASE="gabiseabra/react-boilerplate:latest"
+    IMAGE_RELEASE="gabiseabra/react-boilerplate:latest"
 
 install:
   - docker build --build-arg NODE_ENV=development --tag $IMAGE_TEST .
