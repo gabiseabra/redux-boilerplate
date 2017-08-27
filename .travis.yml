@@ -8,6 +8,7 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - public
 
 services:
   - docker
@@ -40,11 +41,19 @@ after_success:
       docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
     fi
   - docker logout
-  # Build and copy static files
+
+before_deploy:
+  # Copy build files from container
   - docker run --name container-latest -d "$DOCKER_IMAGE:latest"
   - rm -rf ./public
   - docker cp container-latest:app/public ./public
+  # Build static files
   - yarn run build:static
+  # Rewrite .gitignore to exclude build files. This is required for git based deploys
+  # https://docs.travis-ci.com/user/deployment/heroku/#Using-.gitignore-on-git-strategy
+  - echo ""             >  .gitignore
+  - echo "node_modules" >> .gitignore
+  - echo "*.log"        >> .gitignore
 
 deploy:
   provider: pages
