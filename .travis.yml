@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - DOCKER_IMAGE="gabiseabra/redux-boilerplate"
+
+install:
+  - docker build --build-arg NODE_ENV=development
+                 --tag "$DOCKER_IMAGE:dev"
+                 --pull
+                 ./
+
+script:
+  - docker run --name container-test -d "$DOCKER_IMAGE:dev"
+  - docker exec container-test npm run test
+  - docker exec container-test npm run lint
+
+after_success:
+  - docker build --tag "$DOCKER_IMAGE:latest" ./
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then
+      docker push "$DOCKER_IMAGE:latest";
+    fi
+  - if [ "$TRAVIS_TAG" ]; then
+      docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$TRAVIS_TAG";
+      docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
+    fi
+  - docker logout

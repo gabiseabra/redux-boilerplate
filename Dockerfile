@@ -2,9 +2,9 @@ FROM node:7-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock .yarnclean ./
 
-RUN npm install -s --no-progress
+RUN yarn install --pure-lockfile
 
 COPY . .
 
@@ -14,7 +14,10 @@ ARG NODE_ENV=production
 
 ENV NODE_ENV=$NODE_ENV
 
-RUN npm run build && npm prune
+RUN yarn run build && \
+    yarn install --force \
+                 --ignore-scripts \
+                 --prefer-offline
 
 EXPOSE 80
 
