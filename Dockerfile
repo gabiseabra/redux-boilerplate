@@ -15,9 +15,9 @@ ARG NODE_ENV=production
 ENV NODE_ENV=$NODE_ENV
 
 RUN yarn run build && \
-		yarn install --force \
-								 --ignore-scripts \
-								 --prefer-offline
+    yarn install --force \
+                 --ignore-scripts \
+                 --prefer-offline
 
 EXPOSE 80
 
