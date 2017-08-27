@@ -49,15 +49,11 @@ before_deploy:
   - docker cp container-latest:app/public ./public
   # Build static files
   - yarn run build:static
-  # Rewrite .gitignore to exclude build files. This is required for git based deploys
-  # https://docs.travis-ci.com/user/deployment/heroku/#Using-.gitignore-on-git-strategy
-  - echo ""             >  .gitignore
-  - echo "node_modules" >> .gitignore
-  - echo "*.log"        >> .gitignore
 
 deploy:
   provider: pages
   skip_cleanup: true
+  local_dir: public/
   github_token: $GITHUB_TOKEN
   on:
     branch: master
