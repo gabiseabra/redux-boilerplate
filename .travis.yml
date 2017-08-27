@@ -16,6 +16,7 @@ env:
   - DOCKER_IMAGE="$TRAVIS_REPO_SLUG"
 
 install:
+  - yarn install --frozen-lockfile
   - docker build --build-arg NODE_ENV=development
                  --tag "$DOCKER_IMAGE:dev"
                  --pull
