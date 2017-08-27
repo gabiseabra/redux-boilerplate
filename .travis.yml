@@ -18,12 +18,13 @@ script:
   - docker exec container-test npm run lint
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-      docker build --tag "$DOCKER_IMAGE:latest" ./;
+  - docker build --tag "$DOCKER_IMAGE:latest" ./
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then
       docker push "$DOCKER_IMAGE:latest";
-      if [ -n "$TRAVIS_TAG" ]; then
+    fi
+  - if [ "$TRAVIS_TAG" ]; then
       docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$TRAVIS_TAG";
       docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
-      fi
     fi
+  - docker logout
