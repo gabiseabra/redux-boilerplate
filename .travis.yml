@@ -14,12 +14,14 @@ install:
 
 script:
   - docker run --name container-test -d "$DOCKER_IMAGE:dev"
-  - docker exec container-test npm run test
-  - docker exec container-test npm run lint
+  - docker exec container-test yarn run test
+  - docker exec container-test yarn run lint
 
 after_success:
+  # Build production image
   - docker build --tag "$DOCKER_IMAGE:latest" ./
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+  # Push image tags
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
       docker push "$DOCKER_IMAGE:latest";
     fi
@@ -28,3 +30,15 @@ after_success:
       docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
     fi
   - docker logout
+  # Build and copy static files
+  - docker run --name container-latest -d "$DOCKER_IMAGE:latest"
+  - docker exec container-latest yarn run build:static
+  - rm -rf ./public
+  - docker cp container-latest:/public ./public
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
