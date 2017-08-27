@@ -1,5 +1,14 @@
 sudo: required
 
+language: node_js
+
+node_js: "7"
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 services:
   - docker
 
@@ -32,9 +41,9 @@ after_success:
   - docker logout
   # Build and copy static files
   - docker run --name container-latest -d "$DOCKER_IMAGE:latest"
-  - docker exec container-latest yarn run build:static
   - rm -rf ./public
-  - docker cp container-latest:/public ./public
+  - docker cp container-latest:app/public ./public
+  - yarn run build:static
 
 deploy:
   provider: pages
