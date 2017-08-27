@@ -44,7 +44,7 @@ if(module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
 
-	module.hot.accept("./redux/saga", () => {
+	module.hot.accept("../../redux/saga", () => {
 		task.cancel()
 		task = store.runSaga(createSaga(apiClient))
 	})
