@@ -12,6 +12,7 @@ variables:
   DOCKER_PASS: $CI_JOB_TOKEN
   DOCKER_REGISTRY: $CI_REGISTRY
   DOCKER_IMAGE: $CI_REGISTRY_IMAGE
+  DOCKER_TEST_TAG: $CI_COMMIT_REF_NAME
 
 stages:
   - build
@@ -24,32 +25,30 @@ build:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
   script:
     - docker build --build-arg NODE_ENV=development
-                   --tag "$DOCKER_IMAGE:$CI_BUILD_REF"
+                   --tag "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
                    --pull
                    ./
-    - docker push "$DOCKER_IMAGE:$CI_BUILD_REF"
-  tags:
-    - docker
+    - docker push "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
 
 test:
-  image: "$DOCKER_IMAGE:$CI_BUILD_REF"
   stage: test
   script:
-    - yarn run test
+    - docker pull "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
+    - docker run "$DOCKER_IMAGE:$DOCKER_TEST_TAG" npm run test
 
 lint:
-  image: "$DOCKER_IMAGE:$CI_BUILD_REF"
   stage: test
   script:
-    - yarn run lint
+    - docker pull "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
+    - docker run "$DOCKER_IMAGE:$DOCKER_TEST_TAG" npm run lint
 
 release:
   stage: deploy
   before_script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
   script:
-    - docker pull "$DOCKER_IMAGE:$CI_BUILD_REF"
-    - docker build --cache-from "$DOCKER_IMAGE:$CI_BUILD_REF"
+    - docker pull "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
+    - docker build --cache-from "$DOCKER_IMAGE:$DOCKER_TEST_TAG"
                    --tag "$DOCKER_IMAGE:latest"
                    ./
     - docker push "$DOCKER_IMAGE:latest"
@@ -57,7 +56,5 @@ release:
         docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$CI_COMMIT_TAG"
         docker push "$DOCKER_IMAGE:$CI_COMMIT_TAG";
       fi
-  tags:
-    - docker
   only:
     - master
