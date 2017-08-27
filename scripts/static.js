@@ -1,13 +1,11 @@
-import config from "../config/app.json"
-import profile from "../config/data.json"
+import data from "../config/app.json"
 import manifestJson from "../public/dist/manifest.json"
-import { render } from "../src/app/Html"
+import { renderWith } from "../src/containers/app"
 import Manifest from "../src/lib/Manifest"
 
-const out = render(
-	config.app,
-	profile,
-	new Manifest(manifestJson)
-)
+const out = renderWith({
+	data,
+	manifest: new Manifest(manifestJson)
+})()
 
 process.stdout.write(out)
