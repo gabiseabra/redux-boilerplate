@@ -49,6 +49,8 @@ before_deploy:
   - docker cp container-latest:app/public ./public
   # Build static files
   - yarn run build:static
+  # Copy README to public folder
+  - cp ./README.md ./public/README.md
 
 deploy:
   provider: pages
