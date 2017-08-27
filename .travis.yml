@@ -7,7 +7,10 @@ env:
   - DOCKER_IMAGE="gabiseabra/react-boilerplate"
 
 install:
-  - docker build --pull --build-arg NODE_ENV=development --tag "$DOCKER_IMAGE:dev" .
+  - docker build --build-arg NODE_ENV=development
+                 --tag "$DOCKER_IMAGE:dev"
+                 --pull
+                 ./
 
 script:
   - docker run --name container-test -d "$DOCKER_IMAGE:dev"
@@ -17,10 +20,10 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u "$DOCKER_USER" -p "$DOCKER_PASS";
-    docker build --tag "$DOCKER_IMAGE:latest" .;
+    docker build --tag "$DOCKER_IMAGE:latest" ./;
     docker push "$DOCKER_IMAGE:latest";
     if [ -n "$TRAVIS_TAG" ]; then
-      docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$TRAVIS_TAG"
+      docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$TRAVIS_TAG";
       docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
     fi
   fi
