@@ -13,7 +13,7 @@ server.use((req, res, next) => {
 
 server.use(jsonServer.router(content))
 
-server.listen(API_PORT, err => {
+server.listen(API_PORT, (err) => {
 	if(err) {
 		console.error(err)
 	}

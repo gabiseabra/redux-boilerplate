@@ -16,7 +16,7 @@ export default class ApiClient {
 
 	get = url => (
 		axios.get(this.url + url, { validateStatus: undefined })
-			.then(response => {
+			.then((response) => {
 				if(response.status >= 300 || response.status < 200) {
 					throw new ResponseError(response)
 				}
@@ -30,7 +30,7 @@ export default class ApiClient {
 	feed = () => this.get("/posts")
 
 	post = name => this.get(`/posts/${name}`)
-		.then(response => new Promise(resolve => {
+		.then(response => new Promise((resolve) => {
 			setTimeout(() => resolve(response), 2000)
 		}))
 }

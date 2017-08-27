@@ -16,8 +16,8 @@ export const getFeedByType = (state, type) => (
 
 export const getPostError = (state, name) => (
 	name in state.content.posts ?
-	state.content.posts[name].error :
-	undefined
+		state.content.posts[name].error :
+		undefined
 )
 
 export const isPostLoaded = (state, name) => (
@@ -27,6 +27,6 @@ export const isPostLoaded = (state, name) => (
 
 export const getPost = (state, name) => (
 	isPostLoaded(state, name) ?
-	state.content.posts[name] :
-	undefined
+		state.content.posts[name] :
+		undefined
 )

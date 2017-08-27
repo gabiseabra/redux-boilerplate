@@ -1,7 +1,7 @@
 import faker from "faker"
 
 function ucFirst(text) {
-	return text[0].toUpperCase() + text.slice(1).toLowerCase();
+	return text[0].toUpperCase() + text.slice(1).toLowerCase()
 }
 
 const info = {
