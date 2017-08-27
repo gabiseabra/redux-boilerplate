@@ -1,8 +1,8 @@
-@import "../../../css/colors.css";
-@import "../../../css/layout.css";
+@import "styles/colors.css";
+@import "styles/layout.css";
 
 .Footer {
-	composes: inverse from "../../../css/components/links.css";
+	composes: inverse from "styles/components/links.css";
 	padding: 10px 20px;
 	background: var(--primaryColor);
 	color: var(--primaryTextColor);

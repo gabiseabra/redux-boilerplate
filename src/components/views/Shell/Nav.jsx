@@ -21,9 +21,12 @@ export default class Nav extends Component {
 		const { collapsed } = this.state
 		return (
 			<nav className={classnames(styles.Nav, className, collapsed && styles.active)}>
-				<a className={styles.handle}
+				<a
+					className={styles.handle}
 					onClick={this.click}
 					title="Menu"
+					role="button"
+					aria-expanded={!collapsed}
 					tabIndex="0">
 					<span className={styles.icon} />
 				</a>

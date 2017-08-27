@@ -6,7 +6,7 @@ import proxy from "express-http-proxy"
 import webpack from "webpack"
 import hotMiddleware from "webpack-hot-middleware"
 import devMiddleware from "webpack-dev-middleware"
-import appMiddleware from "../src/app/middleware"
+import appMiddleware from "../src/lib/middleware"
 import config from "../config/app.json"
 import webpackConfig, { manifest } from "./bundles/client.babel"
 

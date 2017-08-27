@@ -5,10 +5,10 @@ import proxy from "express-http-proxy"
 import Cookies from "cookies"
 import compression from "compression"
 import favicon from "serve-favicon"
-import appMiddleware from "./app/middleware"
-import routes from "./app/routes"
-import config from "../config/app.json"
-import manifest from "../public/dist/manifest.json"
+import manifest from "manifest.json"
+import config from "config/app.json"
+import appMiddleware from "../../lib/middleware"
+import routes from "../../containers/routes"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 80
@@ -38,7 +38,7 @@ app.use(appMiddleware({
 	manifest
 }))
 
-server.listen(PORT, err => {
+server.listen(PORT, (err) => {
 	if(err) {
 		console.error(err)
 	}

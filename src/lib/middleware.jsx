@@ -1,11 +1,11 @@
 import React from "react"
 import { match, RouterContext } from "react-router"
 import { Provider, renderWith } from "../containers/app"
-import ApiClient from "../lib/ApiClient"
+import ApiClient from "./ApiClient"
+import Manifest from "./Manifest"
 import createStore from "../redux/store"
 import createSaga from "../redux/saga"
 import { getStatus } from "../redux/selectors"
-import Manifest from "../lib/Manifest"
 
 export default function middleware(config) {
 	const {

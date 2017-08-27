@@ -6,14 +6,14 @@ import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
-import config, { loaders } from "../config"
+import config, { loaders, context } from "../config"
 import offline from "../config/offline"
 import vendorConfig from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
 const entry = [
 	"babel-polyfill",
-	"./src/client.jsx"
+	"./src/bundles/client"
 ]
 
 if(process.argv.indexOf("--hot") !== -1) {
@@ -34,7 +34,7 @@ export default merge.smart(config, {
 	entry,
 	target: "web",
 	output: {
-		path: path.join(__dirname, "../../public/dist"),
+		path: path.join(context, "public/dist"),
 		publicPath: "/dist/"
 	},
 	module: {
@@ -54,7 +54,7 @@ export default merge.smart(config, {
 			cache: manifest
 		}),
 		new FontelloPlugin({
-			config: require("../../src/css/fontello.json")
+			config: require("../../styles/fontello.json")
 		}),
 		new ExtractTextPlugin({
 			filename: "[name].css",

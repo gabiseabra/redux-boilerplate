@@ -55,7 +55,7 @@ const mapper = state => ({
 export default connect(mapper, { load })(ContextProvider)
 
 export const withAppData = Component => (
-  // eslint-disable-next-line
+	// eslint-disable-next-line
 	class extends React.Component {
 		static contextTypes = {
 			appData: PropTypes.object.isRequired

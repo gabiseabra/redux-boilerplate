@@ -2,8 +2,8 @@ import path from "path"
 
 const localIdentName = (
 	process.env.NODE_ENV === "development" ?
-	"[name]_[local]--[hash:base64:5]" :
-	"[hash:base64:5]"
+		"[name]_[local]--[hash:base64:5]" :
+		"[hash:base64:5]"
 )
 
 const defaults = context => ({
@@ -17,6 +17,7 @@ const defaults = context => ({
 	},
 	modules: {
 		include: [
+			path.join(context, "styles"),
 			path.join(context, "src")
 		],
 		exclude: [

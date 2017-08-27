@@ -1,50 +1,62 @@
 {
+	"extends": "airbnb",
 	"env": {
 		"browser": true,
 		"node": true,
 		"es6": true
 	},
-	"extends": "airbnb",
-	"plugins": [ "react" ],
+	"plugins": [
+		"react",
+		"jsx-a11y",
+		"import"
+	],
 	"parser": "babel-eslint",
 	"parserOptions": {
 		"sourceType": "module"
 	},
-	"rules": {
-		"indent": [ "error", "tab", { "SwitchCase": 1 } ],
-		"react/jsx-indent": [ "error", "tab" ],
-		"react/jsx-indent-props": "off",
-		"react/jsx-closing-bracket-location": "off",
-		"react/jsx-first-prop-new-line": [ "warn", "never" ],
-		"react/require-default-props": "off",
-		"react/forbid-prop-types": "off",
-		"comma-dangle": [ "error", "never" ],
-		"quotes": [ "error", "double", { "avoidEscape": true } ],
-		"array-bracket-spacing": [ "error", "always" ],
-		"semi": [ "error", "never" ],
-		"arrow-parens": [ "error", "as-needed" ],
-		"consistent-return": [ "warn", { "treatUndefinedAsUnspecified": true } ],
-		"import/no-extraneous-dependencies": [ "error", { "devDependencies": true } ],
-		"keyword-spacing": [
-			"error",
-			{
-				"before": true,
-				"after": true,
-				"overrides": {
-					"if": { "after": false },
-					"for": { "after": false },
-					"while": { "after": false },
-					"catch": { "after": false },
-					"switch": { "after": false }
-				}
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"config": "webpack/bundles/server.babel.js"
 			}
-		],
+		}
+	},
+	"rules": {
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true
+    }],
+    "quotes": ["error", "double", {
+      "avoidEscape": true
+    }],
+    "keyword-spacing": ["error", {
+      "overrides": {
+        "if": { "after": false },
+        "for": { "after": false },
+        "while": { "after": false },
+        "catch": { "after": false },
+        "switch": { "after": false }
+      }
+    }],
+    "generator-star-spacing": ["error", {
+      "before": true,
+      "after": true
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }],
+		"indent": ["error", "tab", {
+			"SwitchCase": 1
+		}],
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-indent-props": ["error", "tab"],
 		"no-tabs": "off",
-		"new-parens": "off",
-		"no-plusplus": "off",
-		"no-else-return": "off",
-		"generator-star-spacing": [ "error", { "before": true, "after": true } ],
-		"class-methods-use-this": "off",
-		"global-require": "warn"
+    "comma-dangle": ["error", "never"],
+    "array-bracket-spacing": ["error", "always"],
+    "semi": ["error", "never"],
+    "global-require": "warn",
+    "class-methods-use-this": "off",
+    "react/forbid-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-closing-bracket-location": ["error", "after-props"]
 	}
 }

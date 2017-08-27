@@ -47,7 +47,7 @@ Html.propTypes = {
 	children: PropTypes.node
 }
 
-Html.defaultTypes = {
+Html.defaultProps = {
 	data: {}
 }
 

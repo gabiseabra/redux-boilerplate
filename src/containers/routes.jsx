@@ -7,7 +7,7 @@ import {
 	Feed,
 	Post,
 	NotFound
-} from "../containers/views"
+} from "./views"
 
 export default (
 	<Route path="/" component={Shell}>
