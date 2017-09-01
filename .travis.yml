@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 
 language: node_js
 
@@ -11,41 +11,18 @@ cache:
     - public
     - dist
 
-services:
-  - docker
-
 env:
-  - DOCKER_IMAGE="$TRAVIS_REPO_SLUG"
   # Build options
   - OFFLINE=true
 
 install:
   - yarn install --pure-lockfile
-  - docker build --build-arg NODE_ENV=development
-                 --tag "$DOCKER_IMAGE:dev"
-                 --pull
-                 ./
 
 script:
   - yarn run test
   - yarn run lint
   - yarn run build
   - yarn run build:static
-
-after_success:
-  # Build production image
-  - docker build --tag "$DOCKER_IMAGE:latest" ./
-  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-  # Push latest image
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then
-      docker push "$DOCKER_IMAGE:latest";
-    fi
-  # Push tagged image
-  - if [ "$TRAVIS_TAG" ]; then
-      docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$TRAVIS_TAG";
-      docker push "$DOCKER_IMAGE:$TRAVIS_TAG";
-    fi
-  - docker logout
 
 before_deploy:
   # Copy README to public folder

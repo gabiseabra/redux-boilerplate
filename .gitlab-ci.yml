@@ -1,16 +1,4 @@
 ########################################
-# Job templates
-########################################
-.docker_template: &docker
-  image: docker:latest
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY
-  tags:
-    - docker
-
-########################################
 # Pipeline
 ########################################
 image: node:7
@@ -23,18 +11,9 @@ cache:
     - public
     - dist
 
-variables:
-  DOCKER_DRIVER: overlay
-  DOCKER_USER: gitlab-ci-token
-  DOCKER_PASS: $CI_JOB_TOKEN
-  DOCKER_REGISTRY: $CI_REGISTRY
-  DOCKER_IMAGE: $CI_REGISTRY_IMAGE
-
 stages:
   - build
   - test
-  - relase
-  - post-release
 
 ########################################
 # Jobs
@@ -55,24 +34,3 @@ lint:
   stage: test
   script:
     - yarn run lint
-
-# Release latest docker image
-docker:
-  <<: *docker
-  stage: relase
-  script:
-    - docker build --tag "$DOCKER_IMAGE:latest" ./
-    - docker push "$DOCKER_IMAGE:latest"
-  only:
-    - master
-
-# Release tagged docker image
-docker:tags:
-  <<: *docker
-  stage: post-release
-  script:
-    - docker pull "$DOCKER_IMAGE:latest"
-    - docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$CI_COMMIT_TAG"
-    - docker push "$DOCKER_IMAGE:$CI_COMMIT_TAG"
-  only:
-    - tags
