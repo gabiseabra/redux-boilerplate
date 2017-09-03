@@ -53,15 +53,9 @@ Html.defaultProps = {
 
 export default Html
 
-export const renderWith = ({ data, manifest, apiUrl }) => (component, store) => {
+export const renderWith = props => (component, store) => {
 	const html = ReactDOM.renderToStaticMarkup(
-		<Html
-			data={data}
-			manifest={manifest}
-			apiUrl={apiUrl}
-			store={store}>
-			{component}
-		</Html>
+		<Html {...props} store={store}>{component}</Html>
 	)
 	return `<!doctype html>\n${html}`
 }

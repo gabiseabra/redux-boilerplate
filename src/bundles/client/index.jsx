@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { useBasename } from "history"
 import { Router, browserHistory } from "react-router"
 import { syncHistoryWithStore } from "react-router-redux"
 import * as OfflinePlugin from "offline-plugin/runtime"
@@ -15,13 +16,18 @@ if(process.env.OFFLINE === "true") {
 	OfflinePlugin.install()
 }
 
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
+
 const API_URL = document.querySelector("meta[name=api-url]").getAttribute("content")
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
 const store = createStore(Cookie, window.__state) // eslint-disable-line no-underscore-dangle
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(
+	useBasename(() => browserHistory)({ basename: PUBLIC_PATH }),
+	store
+)
 
 const apiClient = new ApiClient(API_URL)
 

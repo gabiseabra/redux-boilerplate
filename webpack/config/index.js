@@ -1,6 +1,7 @@
 /**
  * Base Webpack configuration file
  */
+import url from "url"
 import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
@@ -9,9 +10,12 @@ import envConfig from "./env"
 
 export const context = path.resolve(__dirname, "..", "..")
 
+export const publicPath = url.resolve(process.env.PUBLIC_PATH || "/", "dist/")
+
 const plugins = [
 	new webpack.EnvironmentPlugin({
 		NODE_ENV: "",
+		PUBLIC_PATH: "/",
 		OFFLINE: "false",
 		SSR: "false"
 	})
@@ -28,6 +32,8 @@ if(process.argv.indexOf("--hot") !== -1) {
 export default merge.smart({
 	context,
 	output: {
+		publicPath,
+		path: path.join(context, "public/dist"),
 		filename: "[name].js"
 	},
 	resolve: {

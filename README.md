@@ -33,9 +33,3 @@ Build commands:
 \* The `vendor` bundle is a prerequisite for building the `client` and `server` bundles. Make sure to `npm run build:vendor` before using these commands.  
 
 \*\* `build:static` requires a `client` build.
-
-## Docker
-
-```bash
-docker run -p 3000:80 -d gabiseabra/redux-boilerplate
-```

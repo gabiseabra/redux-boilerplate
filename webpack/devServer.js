@@ -66,7 +66,7 @@ app.use(appMiddleware({
 	manifest
 }))
 
-server.listen(PORT, err => {
+server.listen(PORT, (err) => {
 	if(err) {
 		console.error(err)
 	}

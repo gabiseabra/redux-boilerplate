@@ -1,4 +1,3 @@
-import path from "path"
 import webpack from "webpack"
 import merge from "webpack-merge"
 import OfflinePlugin from "offline-plugin"
@@ -6,15 +5,17 @@ import FontelloPlugin from "fontello-webpack-plugin"
 import ManifestPlugin from "webpack-manifest-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
-import config, { loaders, context } from "../config"
+import config, { loaders } from "../config"
 import offline from "../config/offline"
-import vendorConfig from "./vendor.babel"
+import * as vendor from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
 const entry = [
 	"babel-polyfill",
 	"./src/bundles/client"
 ]
+
+const plugins = vendor.references()
 
 if(process.argv.indexOf("--hot") !== -1) {
 	entry.unshift(
@@ -23,20 +24,14 @@ if(process.argv.indexOf("--hot") !== -1) {
 	)
 }
 
-const vendors = {
-	json: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.manifest.json`),
-	js: Object.keys(vendorConfig.entry).map(module => `/dist/${module}.dll.js`)
+if(process.env.OFFLINE === "true") {
+	const offlineOptions = offline(vendor.scripts)
+	plugins.unshift(new OfflinePlugin(offlineOptions))
 }
-
-const offlineOptions = offline(vendors)
 
 export default merge.smart(config, {
 	entry,
 	target: "web",
-	output: {
-		path: path.join(context, "public/dist"),
-		publicPath: "/dist/"
-	},
 	module: {
 		rules: loaders({
 			styles: {
@@ -47,10 +42,9 @@ export default merge.smart(config, {
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin("common"),
-		new OfflinePlugin(offlineOptions),
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "/dist/",
+			publicPath: config.output.publicPath,
 			cache: manifest
 		}),
 		new FontelloPlugin({
@@ -67,12 +61,7 @@ export default merge.smart(config, {
 			analyzerHost: process.env.HOST,
 			analyzerPort: process.env.ANALYZER_PORT
 		}),
-		...(vendors.json.map(fileName => (
-			new webpack.DllReferencePlugin({
-				// eslint-disable-next-line import/no-dynamic-require
-				manifest: require(`../../public/${fileName}`)
-			})
-		)))
+		...plugins
 	]
 })
 

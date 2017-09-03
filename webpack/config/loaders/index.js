@@ -9,7 +9,7 @@ export { fonts, images, styles, scripts }
 
 export default function build(context, options = {}) {
 	const loaders = []
-	Object.keys(modules).forEach(name => {
+	Object.keys(modules).forEach((name) => {
 		if(options[name] === false) {
 			return
 		}
