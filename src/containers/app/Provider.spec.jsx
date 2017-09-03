@@ -3,6 +3,9 @@ import React from "react"
 import PropTypes from "prop-types"
 import { mount } from "enzyme"
 import Provider, { withAppData } from "./Provider"
+import createStore from "../../redux/store"
+
+const store = createStore()
 
 const data = {
 	foo: "foo",
@@ -15,7 +18,7 @@ describe("<Provider />", () => {
 		Child.propTypes = { appData: PropTypes.object.isRequired }
 		const ChildHOC = withAppData(Child)
 		const wrapper = mount(
-			<Provider data={data}>
+			<Provider data={data} store={store}>
 				<ChildHOC />
 			</Provider>
 		)

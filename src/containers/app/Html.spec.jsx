@@ -11,7 +11,7 @@ const manifest = {
 
 describe("<Html />", () => {
 	it("renders assets from manifest.json", () => {
-		const wrapper = render(<Html manifest={manifest} />)
+		const wrapper = render(<Html apiUrl="/api" manifest={manifest} />)
 		wrapper.find("script[src='main.js']").should.be.present()
 		wrapper.find("script[src='script.js']").should.be.present()
 		wrapper.find("link[href='style.css']").should.be.present()
@@ -22,7 +22,12 @@ describe("<Html />", () => {
 			foo: "foo",
 			bar: "bar"
 		}
-		const wrapper = render(<Html manifest={manifest} data={data} />)
+		const wrapper = render(<Html apiUrl="/api" manifest={manifest} data={data} />)
 		JSON.parse(wrapper.find("#data").text()).should.contain(data)
 	})
+
+  it("renders apiUrl meta", () => {
+    const wrapper = render(<Html manifest={manifest} apiUrl="http://example.com" />)
+    wrapper.find("meta[name=api-url]").attr("content").should.equal("http://example.com")
+  })
 })

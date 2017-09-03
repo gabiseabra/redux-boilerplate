@@ -15,7 +15,7 @@ if(process.env.OFFLINE === "true") {
 	OfflinePlugin.install()
 }
 
-const API_URL = document.querySelector("meta[name=api]").getAttribute("content")
+const API_URL = document.querySelector("meta[name=api-url]").getAttribute("content")
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 

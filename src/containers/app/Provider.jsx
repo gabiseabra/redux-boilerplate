@@ -1,36 +1,26 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Provider, connect } from "react-redux"
-import { getInfo } from "../../redux/selectors"
-import { load } from "../../redux/modules/content/info"
+import { Provider } from "react-redux"
 
 /**
  * App context provider
  * @class Provider
  */
-class ContextProvider extends React.Component {
+export default class ContextProvider extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		info: PropTypes.object.isRequired,
 		store: PropTypes.object.isRequired,
-		children: PropTypes.node.isRequired,
-		load: PropTypes.func.isRequired
+		children: PropTypes.node.isRequired
 	}
 
 	static childContextTypes = {
-		appData: PropTypes.object,
-		info: PropTypes.object.isRequired
+		appData: PropTypes.object
 	}
 
 	getChildContext() {
 		return {
-			appData: this.props.data,
-			info: this.props.info
+			appData: this.props.data
 		}
-	}
-
-	componentWillMount() {
-		this.props.load()
 	}
 
 	render() {
@@ -47,12 +37,6 @@ class ContextProvider extends React.Component {
 		return component
 	}
 }
-
-const mapper = state => ({
-	info: getInfo(state) || {}
-})
-
-export default connect(mapper, { load })(ContextProvider)
 
 export const withAppData = Component => (
 	// eslint-disable-next-line
