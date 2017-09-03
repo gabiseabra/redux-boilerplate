@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import { useBasename } from "history"
 import { Router, browserHistory } from "react-router"
 import { syncHistoryWithStore } from "react-router-redux"
-import * as OfflinePlugin from "offline-plugin/runtime"
 import Cookie from "js-cookie"
 import ApiClient from "../../lib/ApiClient"
 import { Provider } from "../../containers/app"
@@ -13,7 +12,7 @@ import createStore from "../../redux/store"
 import createSaga from "../../redux/saga"
 
 if(process.env.OFFLINE === "true") {
-	OfflinePlugin.install()
+	require("offline-plugin/runtime").install()
 }
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
