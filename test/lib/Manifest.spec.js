@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 import Manifest from "../../src/lib/Manifest"
 
 const manifest = new Manifest({
