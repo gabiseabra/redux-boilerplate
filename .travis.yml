@@ -14,7 +14,7 @@ cache:
 env:
   # Build options
   - PUBLIC_PATH="/$(basename $TRAVIS_REPO_SLUG)/"
-  - OFFLINE=true
+    OFFLINE=true
 
 install:
   - yarn install --pure-lockfile
