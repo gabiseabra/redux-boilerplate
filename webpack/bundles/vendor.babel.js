@@ -8,7 +8,8 @@ const vendorConfig = {
 	target: "web",
 	entry: {
 		vendor: [
-			"classnames"
+			"classnames",
+			"history"
 		],
 		react: [
 			"react",
