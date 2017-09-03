@@ -26,8 +26,8 @@ describe("<Html />", () => {
 		JSON.parse(wrapper.find("#data").text()).should.contain(data)
 	})
 
-  it("renders apiUrl meta", () => {
-    const wrapper = render(<Html manifest={manifest} apiUrl="http://example.com" />)
-    wrapper.find("meta[name=api-url]").attr("content").should.equal("http://example.com")
-  })
+	it("renders apiUrl meta", () => {
+		const wrapper = render(<Html manifest={manifest} apiUrl="http://example.com" />)
+		wrapper.find("meta[name=api-url]").attr("content").should.equal("http://example.com")
+	})
 })
