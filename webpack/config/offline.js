@@ -1,11 +1,15 @@
-export default vendors => ({
+import url from "url"
+
+const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
+
+export default externals => ({
 	safeToUseOptionalCaches: true,
 	caches: {
 		main: [
 			"main.*",
 			"common.js",
-			"/index.html",
-			...vendors.js
+			url.resolve(PUBLIC_PATH, "index.html"),
+			...externals
 		],
 		additional: [
 			":externals:"
@@ -15,18 +19,20 @@ export default vendors => ({
 		]
 	},
 	externals: [
-		"/favicon.ico",
-		"/icon.png",
-		"/manifest.json",
-		"/index.html",
-		...vendors.js
+		url.resolve(PUBLIC_PATH, "favicon.ico"),
+		url.resolve(PUBLIC_PATH, "icon.png"),
+		url.resolve(PUBLIC_PATH, "manifest.json"),
+		url.resolve(PUBLIC_PATH, "index.html"),
+		...externals
 	],
 	cacheMaps: [ {
 		map: /.*/,
 		to: "/",
 		requestTypes: [ "navigate" ]
 	} ],
-	ServiceWorker: (process.env.OFFLINE === "true" ? { output: "../sw.js" } : false),
+	ServiceWorker: {
+		output: "../sw.js"
+	},
 	AppCache: {
 		directory: "../appcache/",
 		FALLBACK: {

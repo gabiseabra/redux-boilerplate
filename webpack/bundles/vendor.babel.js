@@ -1,8 +1,10 @@
+import url from "url"
 import path from "path"
 import webpack from "webpack"
 import ManifestPlugin from "webpack-manifest-plugin"
+import config from "../config"
 
-export default {
+const vendorConfig = {
 	target: "web",
 	entry: {
 		vendor: [
@@ -16,7 +18,7 @@ export default {
 		]
 	},
 	output: {
-		path: path.join(__dirname, "../../public/dist"),
+		...config.output,
 		filename: "[name].dll.js",
 		library: "[name]_dll"
 	},
@@ -27,7 +29,7 @@ export default {
 		}),
 		new ManifestPlugin({
 			fileName: "manifest.json",
-			publicPath: "/dist/"
+			publicPath: config.output.publicPath
 		}),
 		new webpack.EnvironmentPlugin({
 			NODE_ENV: "production"
@@ -38,3 +40,21 @@ export default {
 		})
 	]
 }
+
+export default vendorConfig
+
+export function entryPath(entry) {
+	return url.resolve(vendorConfig.output.publicPath, entry)
+}
+
+export function manifest(entry) {
+	return require(`../../public/dist/${entry}.manifest.json`) // eslint-disable-line
+}
+
+export const references = () => Object.keys(vendorConfig.entry).map(entry => (
+	new webpack.DllReferencePlugin({
+		manifest: manifest(entry)
+	})
+))
+
+export const scripts = Object.keys(vendorConfig.entry).map(entry => entryPath(entry))

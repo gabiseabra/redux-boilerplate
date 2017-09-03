@@ -13,6 +13,7 @@ cache:
 
 env:
   # Build options
+  - PUBLIC_PATH="/$(basename $TRAVIS_REPO_SLUG)/"
   - OFFLINE=true
 
 install:
@@ -21,7 +22,7 @@ install:
 script:
   - yarn run test
   - yarn run lint
-  - yarn run build
+  - yarn run build:prod
   - yarn run build:static
 
 before_deploy:
