@@ -19,8 +19,13 @@ export default class Nav extends Component {
 	render() {
 		const { children, className } = this.props
 		const { collapsed } = this.state
+		const navClass = classnames(
+			styles.Nav,
+			className,
+			(collapsed ? "" : styles.active)
+		)
 		return (
-			<nav className={classnames(styles.Nav, className, collapsed && styles.active)}>
+			<nav className={navClass}>
 				<a
 					className={styles.handle}
 					onClick={this.click}
