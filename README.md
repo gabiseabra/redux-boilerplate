@@ -1,5 +1,7 @@
 # React Boilerplate
 
+[![Build Status](https://travis-ci.org/gabiseabra/react-boilerplate.svg?branch=master)](https://travis-ci.org/gabiseabra/react-boilerplate)
+
 ## Getting Started
 
 ### Installing
