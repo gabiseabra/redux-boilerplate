@@ -31,7 +31,6 @@ class PostPage extends Component {
 
 	render() {
 		const { loading, post, error } = this.props
-		console.log(post, loading)
 		return <Post loading={loading} post={post} error={error} />
 	}
 }
