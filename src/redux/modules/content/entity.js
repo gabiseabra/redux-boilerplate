@@ -1,5 +1,42 @@
-const Reducers = {
-	single: actions => function reducer(state = {}, action) {
+const createActions = (entity) => {
+	const actions = {
+		LOAD: `content/${entity}/LOAD`,
+		REQUEST: `content/${entity}/REQUEST`,
+		SUCCESS: `content/${entity}/SUCCESS`,
+		FAILURE: `content/${entity}/FAILURE`
+	}
+	actions.load = id => ({ type: actions.LOAD, id })
+	actions.request = id => ({ type: actions.REQUEST, id })
+	actions.success = (data, id) => ({ type: actions.SUCCESS, data, id })
+	actions.fail = (error, id) => ({ type: actions.FAILURE, error, id })
+	return actions
+}
+
+// Create reducer for an entity endpoint
+export function createEntity(name) {
+	const actions = createActions(name)
+	actions.reducer = (state = {}, action) => {
+		switch(action.type) {
+			case actions.SUCCESS:
+				return {
+					...state,
+					[action.id]: action.data
+				}
+			case actions.FAILURE:
+				return {
+					...state,
+					[action.id]: { error: action.error }
+				}
+			default: return state
+		}
+	}
+	return actions
+}
+
+// Create reducer for a collection endpoint
+export function createCollection(name) {
+	const actions = createActions(name)
+	actions.reducer = (state = {}, action) => {
 		switch(action.type) {
 			case actions.REQUEST:
 				return {
@@ -22,36 +59,6 @@ const Reducers = {
 				}
 			default: return state
 		}
-	},
-	multi: actions => function reducer(state = {}, action) {
-		switch(action.type) {
-			case actions.SUCCESS:
-				return {
-					...state,
-					[action.name]: action.data
-				}
-			case actions.FAILURE:
-				return {
-					...state,
-					[action.name]: { error: action.error }
-				}
-			default: return state
-		}
 	}
-}
-
-export default function create(entity, type) {
-	const actions = {
-		LOAD: `content/${entity}/LOAD`,
-		REQUEST: `content/${entity}/REQUEST`,
-		SUCCESS: `content/${entity}/SUCCESS`,
-		FAILURE: `content/${entity}/FAILURE`
-	}
-	actions.load = name => ({ type: actions.LOAD, name })
-	actions.request = name => ({ type: actions.REQUEST, name })
-	actions.success = (data, name) => ({ type: actions.SUCCESS, data, name })
-	actions.fail = (error, name) => ({ type: actions.FAILURE, error, name })
-	actions.reducer = Reducers[type](actions)
-
 	return actions
 }

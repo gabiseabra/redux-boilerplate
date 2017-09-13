@@ -10,8 +10,7 @@ const Post = ({ loading, post, error }) => (
 				<div>
 					<Helmet title={post.title} />
 					<h1>{post.title}</h1>
-					<p>{post.description}</p>
-					{post.content && <div dangerouslySetInnerHTML={{ __html: post.content }} />}
+					<div dangerouslySetInnerHTML={{ __html: post.body }} />
 				</div>
 			)}
 		</Loader>

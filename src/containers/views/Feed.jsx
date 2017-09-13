@@ -6,7 +6,6 @@ import { load } from "../../redux/modules/content/feed"
 import {
 	getFeed,
 	getFeedError,
-	getFeedByType,
 	isFeedLoaded
 } from "../../redux/selectors"
 
@@ -34,9 +33,9 @@ class FeedPage extends Component {
 	}
 }
 
-const props = (state, { location: { query: { type } } }) => ({
+const props = state => ({
 	error: getFeedError(state),
-	feed: type ? getFeedByType(state, type) : getFeed(state),
+	feed: getFeed(state),
 	loading: !isFeedLoaded(state)
 })
 

@@ -1,6 +1,6 @@
-import createEntity from "./entity"
+import { createEntity } from "./entity"
 
-const posts = createEntity("posts", "multi")
+const posts = createEntity("posts")
 
 export const { LOAD, REQUEST, SUCCESS, FAILURE } = posts
 

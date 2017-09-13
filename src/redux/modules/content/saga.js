@@ -1,13 +1,11 @@
 import { put, call, fork, select, takeLatest } from "redux-saga/effects"
 import * as feed from "./feed"
 import * as posts from "./posts"
-import * as info from "./info"
-import { isFeedLoaded, isPostLoaded, isInfoLoaded } from "../../selectors"
+import { isFeedLoaded, isPostLoaded } from "../../selectors"
 
 const Entities = [
 	{ actions: feed, selector: isFeedLoaded, apiFn: "feed" },
-	{ actions: posts, selector: isPostLoaded, apiFn: "post" },
-	{ actions: info, selector: isInfoLoaded, apiFn: "info" }
+	{ actions: posts, selector: isPostLoaded, apiFn: "post" }
 ]
 
 function * requestFn(actions, apiFn, id) {
@@ -26,10 +24,10 @@ export default function create(client) {
 	Entities.forEach(({ actions, selector, apiFn }) => {
 		const request = requestFn.bind(undefined, actions, client[apiFn])
 
-		function * load({ name }) {
-			const loaded = yield select(selector, name)
+		function * load({ id }) {
+			const loaded = yield select(selector, id)
 			if(!loaded) {
-				yield fork(request, name)
+				yield fork(request, id)
 			}
 		}
 

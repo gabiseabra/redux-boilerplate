@@ -8,7 +8,7 @@ const vendorConfig = {
 	target: "web",
 	entry: {
 		vendor: [
-			"axios",
+			"isomorphic-fetch",
 			"es6-error",
 			"js-cookie",
 			"classnames",

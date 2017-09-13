@@ -1,6 +1,6 @@
-import createEntity from "./entity"
+import { createCollection } from "./entity"
 
-const feed = createEntity("feed", "single")
+const feed = createCollection("feed")
 
 export const { LOAD, REQUEST, SUCCESS, FAILURE } = feed
 

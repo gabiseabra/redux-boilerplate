@@ -10,7 +10,7 @@ import { ResponseError } from "../../lib/ApiClient"
 class PostPage extends Component {
 	static propTypes = {
 		params: PropTypes.shape({
-			name: PropTypes.string.isRequired
+			id: PropTypes.string.isRequired
 		}).isRequired,
 		post: PropTypes.object,
 		error: PropTypes.instanceOf(Error),
@@ -20,7 +20,7 @@ class PostPage extends Component {
 	}
 
 	componentWillMount() {
-		this.props.load(this.props.params.name)
+		this.props.load(this.props.params.id)
 	}
 
 	componentWillReceiveProps({ error }) {
@@ -31,14 +31,15 @@ class PostPage extends Component {
 
 	render() {
 		const { loading, post, error } = this.props
+		console.log(post, loading)
 		return <Post loading={loading} post={post} error={error} />
 	}
 }
 
-const props = (state, { params: { name } }) => ({
-	post: getPost(state, name),
-	error: getPostError(state, name),
-	loading: !isPostLoaded(state, name)
+const props = (state, { params: { id } }) => ({
+	post: getPost(state, id),
+	error: getPostError(state, id),
+	loading: !isPostLoaded(state, id)
 })
 
 export default connect(props, { load, setStatus })(PostPage)

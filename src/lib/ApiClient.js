@@ -1,5 +1,7 @@
-import axios from "axios"
+import fetch from "isomorphic-fetch"
 import ExtendableError from "es6-error"
+
+const API_URL = "https://jsonplaceholder.typicode.com"
 
 export class ResponseError extends ExtendableError {
 	constructor({ status, statusText }) {
@@ -10,27 +12,19 @@ export class ResponseError extends ExtendableError {
 }
 
 export default class ApiClient {
-	constructor(url) {
+	constructor(url = API_URL) {
 		this.url = url
 	}
 
-	get = url => (
-		axios.get(this.url + url, { validateStatus: undefined })
-			.then((response) => {
-				if(response.status >= 300 || response.status < 200) {
-					throw new ResponseError(response)
-				}
-				return response.data
-			})
-			.catch(error => ({ error }))
-	)
+	fetch = (url, options = {}) => fetch(this.url + url, options)
+		.then((response) => {
+			if(response.status >= 300 || response.status < 200) {
+				throw new ResponseError(response)
+			}
+			return response.json()
+		})
 
-	info = () => this.get("/info")
+	feed = () => this.fetch("/posts")
 
-	feed = () => this.get("/posts")
-
-	post = name => this.get(`/posts/${name}`)
-		.then(response => new Promise((resolve) => {
-			setTimeout(() => resolve(response), 2000)
-		}))
+	post = id => this.fetch(`/posts/${id}`)
 }

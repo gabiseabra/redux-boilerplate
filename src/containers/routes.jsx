@@ -14,7 +14,7 @@ export default (
 		<IndexRoute component={Home} />
 		<Route path="hello" component={Hello} />
 		<Route path="posts" component={Feed} />
-		<Route path="posts/:name" component={Post} />
+		<Route path="posts/:id" component={Post} />
 		<Route path="*" component={NotFound} status={404} />
 	</Route>
 )
