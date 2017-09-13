@@ -12,9 +12,6 @@ import routes from "../../containers/routes"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 80
-const API_HOST = process.env.API_HOST || HOST
-const API_PORT = process.env.API_PORT || 8080
-const API_URL = `${API_HOST}:${API_PORT}`
 const SSR = process.env.SSR === "true"
 
 const app = new Express()
@@ -28,8 +25,6 @@ app.use(compression())
 app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
-
-app.use("/api", proxy(API_URL))
 
 app.use(appMiddleware({
 	serverRendering: SSR,

@@ -14,17 +14,15 @@ export default function middleware(config) {
 		routes,
 		data
 	} = config
-	const apiUrl = config.apiUrl || "/api"
 	const render = renderWith({
 		data,
-		apiUrl,
 		manifest: new Manifest(manifest)
 	})
 	return (req, res, next) => {
 		if(!serverRendering) {
 			res.send(render())
 		} else {
-			const saga = createSaga(new ApiClient(apiUrl))
+			const saga = createSaga(new ApiClient())
 			const store = createStore(res.cookies)
 			match({ routes, location: req.url }, (err, redirect, props) => {
 				if(err) {

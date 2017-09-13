@@ -6,22 +6,17 @@ import config, { loaders, context } from "../config"
 
 export default merge.smart(config, {
 	target: "node",
-	entry: {
-		server: [
-			"babel-polyfill",
-			"./src/bundles/server"
-		],
-		api: [
-			"./src/bundles/api"
-		]
-	},
+	entry: [
+		"babel-polyfill",
+		"./src/bundles/server"
+	],
 	externals: [
 		appExternals(context),
 		nodeExternals()
 	],
 	output: {
 		path: path.join(context, "dist"),
-		filename: "[name].js",
+		filename: "server.js",
 		libraryTarget: "commonjs"
 	},
 	module: {

@@ -2,7 +2,6 @@ import path from "path"
 import http from "http"
 import Express from "express"
 import Cookies from "cookies"
-import proxy from "express-http-proxy"
 import webpack from "webpack"
 import hotMiddleware from "webpack-hot-middleware"
 import devMiddleware from "webpack-dev-middleware"
@@ -13,9 +12,6 @@ import webpackConfig, { manifest } from "./bundles/client.babel"
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.DEV_PORT || process.env.PORT || 3000
 const HMR = process.argv.indexOf("--hot") !== -1
-const API_HOST = process.env.API_HOST || HOST
-const API_PORT = process.env.API_PORT || 8080
-const API_URL = `${API_HOST}:${API_PORT}`
 
 const serverOptions = {
 	contentBase: `http://${HOST}:${PORT}`,
@@ -57,11 +53,8 @@ if(HMR) {
 
 app.use(Express.static(path.join(__dirname, "../public")))
 
-app.use("/api", proxy(API_URL))
-
 app.use(appMiddleware({
 	serverRendering: false,
-	apiUrl: "/api",
 	data: config,
 	manifest
 }))

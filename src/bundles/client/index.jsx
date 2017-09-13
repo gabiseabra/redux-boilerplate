@@ -17,8 +17,6 @@ if(process.env.OFFLINE === "true") {
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
 
-const API_URL = document.querySelector("meta[name=api-url]").getAttribute("content")
-
 const appData = JSON.parse(document.getElementById("data").textContent)
 
 const store = createStore(Cookie, window.__state) // eslint-disable-line no-underscore-dangle
@@ -28,7 +26,7 @@ const history = syncHistoryWithStore(
 	store
 )
 
-const apiClient = new ApiClient(API_URL)
+const apiClient = new ApiClient()
 
 let task = store.runSaga(createSaga(apiClient))
 
