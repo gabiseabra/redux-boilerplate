@@ -19,7 +19,7 @@ const Html = ({ data, manifest, children }) => {
 				<link rel="shortcut icon" href="/favicon.ico" />
 				<link rel="manifest" href="/manifest.json" />
 				{manifest.styles.map(src => <link key={src} rel="stylesheet" href={src} data-hot />)}
-				<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+				<meta name="viewport" content="width=device-width, user-scalable=no" />
 				<script id="data" type="application/json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 				{manifest.scripts.map(src => <script key={src} src={src} />)}
 			</head>
