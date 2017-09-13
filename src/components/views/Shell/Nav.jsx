@@ -16,6 +16,8 @@ export default class Nav extends Component {
 
 	click = () => this.setState({ collapsed: !this.state.collapsed })
 
+	collapse = () => this.setState({ collapsed: true })
+
 	render() {
 		const { children, className } = this.props
 		const { collapsed } = this.state
@@ -37,7 +39,10 @@ export default class Nav extends Component {
 				</a>
 				<div className={styles.links}>
 					<ul>
-						{React.Children.map(children, node => <li key="menu">{node}</li>)}
+						{React.Children.map(children, node => (
+							// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+							<li key="menu" onClick={this.collapse}>{node}</li>
+						))}
 					</ul>
 				</div>
 			</nav>
