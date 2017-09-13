@@ -1,6 +1,6 @@
 {
   "name": "redux-boilerplate",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "React + Redux + Webpack 3 boilerplate",
   "scripts": {
     "start": "node dist/server.js",
