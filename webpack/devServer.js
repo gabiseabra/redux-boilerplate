@@ -60,6 +60,7 @@ server.listen(PORT, (err) => {
 	if(err) {
 		console.error(err)
 	}
+	server.keepAliveTimeout = 0
 	console.info("==> 💻  Development server running @ http://%s:%s", HOST, PORT)
 	console.info("==> 🔥  Hot module replacement is %s", (HMR ? "enabled" : "disabled"))
 })
