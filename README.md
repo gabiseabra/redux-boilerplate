@@ -1,5 +1,7 @@
 # Redux Boilerplate
 
+[![Build Status](https://travis-ci.org/gabiseabra/redux-boilerplate.svg?branch=master)](https://travis-ci.org/gabiseabra/redux-boilerplate)
+
 ## Getting Started
 
 ### Installing
@@ -7,7 +9,7 @@
 ```bash
 git clone https://github.com/gabiseabra/redux-boilerplate.git
 cd react-boilerplate
-npm install
+yarn install
 ```
 
 ### Building
@@ -15,7 +17,7 @@ npm install
 Use a build command to build distributable package:
 
 ```bash
-npm run build
+yarn run build
 ```
 
 Build commands:

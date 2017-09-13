@@ -22,10 +22,10 @@ const plugins = [
 ]
 
 if(process.argv.indexOf("--hot") !== -1) {
+	process.env.OFFLINE = "false"
 	plugins.push(
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin(),
-		new webpack.DefinePlugin({ HMR: true })
+		new webpack.NoEmitOnErrorsPlugin()
 	)
 }
 

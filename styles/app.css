@@ -2,3 +2,7 @@
 @import "./components/links.css";
 @import "./components/selection.css";
 @import "./components/typography.css";
+
+html {
+	touch-action: manipulation;
+}

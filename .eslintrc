@@ -52,6 +52,7 @@
 		"no-tabs": "off",
     "comma-dangle": ["error", "never"],
     "array-bracket-spacing": ["error", "always"],
+    "arrow-body-style": "off",
     "semi": ["error", "never"],
     "global-require": "warn",
     "class-methods-use-this": "off",
