@@ -31,13 +31,6 @@ const vendorConfig = {
 		new ManifestPlugin({
 			fileName: "manifest.json",
 			publicPath: config.output.publicPath
-		}),
-		new webpack.EnvironmentPlugin({
-			NODE_ENV: "production"
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			sourceMap: false
 		})
 	]
 }
