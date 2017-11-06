@@ -9,7 +9,7 @@ const manifest = {
 	scripts: [ "script.js" ]
 }
 
-describe("<Html />", () => {
+describe.only("<Html />", () => {
 	it("renders assets from manifest.json", () => {
 		const wrapper = shallow(<Html manifest={manifest} />)
 		wrapper.find("script[src='main.js']").should.be.present()
@@ -23,6 +23,6 @@ describe("<Html />", () => {
 			bar: "bar"
 		}
 		const wrapper = shallow(<Html manifest={manifest} data={data} />)
-		JSON.parse(wrapper.find("#data").text()).should.contain(data)
+		JSON.parse(wrapper.find("#data").render().html()).should.contain(data)
 	})
 })
