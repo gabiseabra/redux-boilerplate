@@ -10,15 +10,11 @@ import offline from "../config/offline"
 import * as vendor from "./vendor.babel"
 import manifest from "../../public/dist/manifest.json"
 
-const entry = [
-	"babel-polyfill",
-	"./src/bundles/client"
-]
-
 const plugins = vendor.references()
+const common = []
 
 if(process.argv.indexOf("--hot") !== -1) {
-	entry.unshift(
+	common.unshift(
 		"react-hot-loader/patch",
 		"webpack-hot-middleware/client?reload=true"
 	)
@@ -30,7 +26,13 @@ if(process.env.OFFLINE === "true") {
 }
 
 export default merge.smart(config, {
-	entry,
+	entry: {
+		common: [
+			"babel-polyfill",
+			...common
+		],
+		main: "./src/bundles/client"
+	},
 	target: "web",
 	module: {
 		rules: loaders({
