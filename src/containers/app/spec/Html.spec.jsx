@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import React from "react"
 import { shallow } from "enzyme"
-import Html from "./Html"
+import Html from "../Html"
 
 const manifest = {
 	entry: "main.js",

@@ -2,7 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { mount } from "enzyme"
-import Provider, { withAppData } from "./Provider"
+import Provider, { withAppData } from "../Provider"
 
 const data = {
 	foo: "foo",
