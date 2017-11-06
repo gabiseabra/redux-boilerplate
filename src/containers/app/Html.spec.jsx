@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import React from "react"
-import { render } from "enzyme"
+import { shallow } from "enzyme"
 import Html from "./Html"
 
 const manifest = {
@@ -11,7 +11,7 @@ const manifest = {
 
 describe("<Html />", () => {
 	it("renders assets from manifest.json", () => {
-		const wrapper = render(<Html manifest={manifest} />)
+		const wrapper = shallow(<Html manifest={manifest} />)
 		wrapper.find("script[src='main.js']").should.be.present()
 		wrapper.find("script[src='script.js']").should.be.present()
 		wrapper.find("link[href='style.css']").should.be.present()
@@ -22,7 +22,7 @@ describe("<Html />", () => {
 			foo: "foo",
 			bar: "bar"
 		}
-		const wrapper = render(<Html manifest={manifest} data={data} />)
+		const wrapper = shallow(<Html manifest={manifest} data={data} />)
 		JSON.parse(wrapper.find("#data").text()).should.contain(data)
 	})
 })
