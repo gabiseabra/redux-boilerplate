@@ -1,7 +1,7 @@
 import data from "../config/app.json"
 // eslint-disable-next-line import/no-unresolved
 import manifestJson from "../public/dist/manifest.json"
-import { renderWith } from "../src/containers/app"
+import { renderWith } from "../src/containers/app/Html"
 import Manifest from "../src/lib/Manifest"
 
 const out = renderWith({
