@@ -6,16 +6,32 @@ import Manifest from "./Manifest"
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
 
+const defaults = config => ({
+	rendering: false,
+	data: {},
+	Root: App,
+	...config
+})
+
+/**
+ * Application express middleware.
+ *
+ * @param {Object} config
+ * @param {Boolean} config.rendering Enable server-side rendering
+ * @param {Boolean} config.data      Application data embedded in [script#data]
+ * @param {Object} config.manifest   Webpack generated manifest.json
+ * @param {Root} config.Root         Root react component
+ */
 export default function middleware(config) {
 	const {
-		serverRendering,
-		data
-	} = config
+		rendering,
+		data,
+		Root
+	} = defaults(config)
 	const manifest = new Manifest(config.manifest)
-	console.log(serverRendering)
 	return (req, res, next) => {
 		const render = renderWith({ data, manifest })
-		if(!serverRendering) {
+		if(!rendering) {
 			res.send(render())
 		} else {
 			try {
@@ -23,21 +39,19 @@ export default function middleware(config) {
 				const body = render(
 					<Provider data={data}>
 						<StaticRouter
-							url={req.url}
+							location={req.url}
 							context={context}
 							basename={PUBLIC_PATH.replace(/\/*$/, "")}>
-							<App />
+							<Root />
 						</StaticRouter>
 					</Provider>
 				)
-				console.log(context)
 				if(context.url) {
 					res.redirect(302, context.url)
 				} else {
 					res.status(context.status || 200).send(body)
 				}
 			} catch(error) {
-				console.log(error)
 				res.status(500).send(error.message)
 			}
 		}

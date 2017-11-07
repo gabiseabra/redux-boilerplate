@@ -58,6 +58,7 @@
     "ignore-styles": "^5.0.1",
     "jsdom": "^11.3.0",
     "mocha": "^3.5.0",
+    "node-mocks-http": "^1.6.6",
     "normalize-css": "^2.3.1",
     "offline-plugin": "^4.8.4",
     "postcss": "^6.0.12",
