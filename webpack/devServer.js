@@ -51,7 +51,6 @@ if(HMR) {
 app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(appMiddleware({
-	serverRendering: false,
 	data: config,
 	manifest
 }))

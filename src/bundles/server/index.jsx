@@ -22,7 +22,7 @@ app.use(Express.static(path.join(__dirname, "../public")))
 app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 
 app.use(appMiddleware({
-	serverRendering: SSR,
+	rendering: SSR,
 	data: config,
 	manifest
 }))
