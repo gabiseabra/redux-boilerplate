@@ -9,7 +9,7 @@ const manifest = {
 	scripts: [ "script.js" ]
 }
 
-describe.only("<Html />", () => {
+describe("<Html />", () => {
 	it("renders assets from manifest.json", () => {
 		const wrapper = shallow(<Html manifest={manifest} />)
 		wrapper.find("script[src='main.js']").should.be.present()
