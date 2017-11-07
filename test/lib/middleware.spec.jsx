@@ -65,7 +65,7 @@ describe("appMiddleware", () => {
 				req.url = "/bar"
 				middleware(req, res)
 				res.statusCode.should.eql(302)
-				res._getRedirectUrl().should.eql("/foo")
+				res._getRedirectUrl().should.match(/\/foo$/)
 			})
 		})
 	})
