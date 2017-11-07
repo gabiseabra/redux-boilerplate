@@ -95,7 +95,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.7.1",
     "express": "^4.16.1",
-    "history": "^4.7.2",
+    "history": "^3.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
