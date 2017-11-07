@@ -1,4 +1,5 @@
 import { Shell } from "../../components/views"
-import { withAppData } from "../app"
+// TODO: Move App to views?
+import { withAppData } from "../app/Provider"
 
 export default withAppData(Shell)

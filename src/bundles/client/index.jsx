@@ -1,9 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { useBasename } from "history"
-import { Router, browserHistory } from "react-router"
-import { Provider } from "../../containers/app"
-import routes from "../../containers/routes"
+import { BrowserRouter } from "react-router-dom"
+import { Provider, App } from "../../containers/app"
 import sync from "./hmr"
 
 if(process.env.OFFLINE === "true") {
@@ -14,18 +12,14 @@ const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
-const history = useBasename(() => browserHistory)({
-	basename: PUBLIC_PATH
-})
-
 const root = document.getElementById("app")
 
 function render(hydrate = false) {
 	const component = (
 		<Provider data={appData}>
-			<Router history={history}>
-				{routes}
-			</Router>
+			<BrowserRouter basename={PUBLIC_PATH}>
+				<App />
+			</BrowserRouter>
 		</Provider>
 	)
 	if(hydrate) ReactDOM.hydrate(component, root)

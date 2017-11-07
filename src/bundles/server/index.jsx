@@ -6,7 +6,6 @@ import favicon from "serve-favicon"
 import manifest from "manifest.json"
 import config from "config/app.json"
 import appMiddleware from "../../lib/middleware"
-import routes from "../../containers/routes"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 80
@@ -25,7 +24,6 @@ app.use(favicon(path.join(__dirname, "../public/favicon.ico")))
 app.use(appMiddleware({
 	serverRendering: SSR,
 	data: config,
-	routes,
 	manifest
 }))
 
