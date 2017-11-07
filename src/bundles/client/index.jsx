@@ -18,14 +18,21 @@ const history = useBasename(() => browserHistory)({
 	basename: PUBLIC_PATH
 })
 
-ReactDOM.render(
-	<Provider data={appData}>
-		<Router history={history}>
-			{routes}
-		</Router>
-	</Provider>,
-	document.getElementById("app")
-)
+const root = document.getElementById("app")
+
+function render(hydrate = false) {
+	const component = (
+		<Provider data={appData}>
+			<Router history={history}>
+				{routes}
+			</Router>
+		</Provider>
+	)
+	if(hydrate) ReactDOM.hydrate(component, root)
+	else ReactDOM.render(component, root)
+}
+
+render(root.dataset.ssr && root.dataset.ssr !== "false")
 
 if(process.env.NODE_ENV === "development") {
 	window.Perf = require("react-addons-perf")
@@ -34,4 +41,5 @@ if(process.env.NODE_ENV === "development") {
 if(module.hot) {
 	// eslint-disable-next-line no-underscore-dangle
 	sync(window.__webpack_hot_middleware_reporter__)
+	module.hot.accept(() => render())
 }

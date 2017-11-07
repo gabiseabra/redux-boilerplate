@@ -24,7 +24,10 @@ const Html = ({ data, manifest, children }) => {
 				{manifest.scripts.map(src => <script key={src} src={src} />)}
 			</head>
 			<body>
-				<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
+				<div
+					id="app"
+					data-ssr={Boolean(content)}
+					dangerouslySetInnerHTML={{ __html: content }} />
 				<script src={manifest.entry} defer />
 			</body>
 		</html>
