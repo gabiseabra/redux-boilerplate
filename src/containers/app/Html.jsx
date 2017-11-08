@@ -4,6 +4,8 @@ import serialize from "serialize-javascript"
 import ReactDOM from "react-dom/server"
 import Helmet from "react-helmet"
 
+const stateInjector = state => `window.__state=${serialize(state)}`
+
 const Html = ({ store, data, manifest, children }) => {
 	const content = children ? ReactDOM.renderToString(children) : ""
 	const head = Helmet.rewind()
@@ -25,13 +27,14 @@ const Html = ({ store, data, manifest, children }) => {
 				{manifest.scripts.map(src => <script key={src} src={src} />)}
 			</head>
 			<body>
-				<div id="app" dangerouslySetInnerHTML={{ __html: content }} />
+				<div
+					id="app"
+					data-ssr={Boolean(content)}
+					dangerouslySetInnerHTML={{ __html: content }} />
 				{store &&
 				<script
 					type="text/javascript"
-					dangerouslySetInnerHTML={{
-						__html: `window.__state=${serialize(store.getState())}`
-					}} />}
+					dangerouslySetInnerHTML={{ __html: stateInjector(store.getState()) }} />}
 				<script src={manifest.entry} defer />
 			</body>
 		</html>

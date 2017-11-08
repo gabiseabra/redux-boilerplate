@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import { Post } from "../../components/views"
 import { getPost, getPostError, isPostLoaded } from "../../redux/selectors"
 import { load } from "../../redux/modules/content/posts"
-import { setStatus } from "../../redux/modules/status"
 import { ResponseError } from "../../lib/ApiClient"
 
 class PostPage extends Component {
@@ -16,7 +15,7 @@ class PostPage extends Component {
 		error: PropTypes.instanceOf(Error),
 		loading: PropTypes.bool.isRequired,
 		load: PropTypes.func.isRequired,
-		setStatus: PropTypes.func.isRequired
+		staticContext: PropTypes.object
 	}
 
 	componentWillMount() {
@@ -24,8 +23,10 @@ class PostPage extends Component {
 	}
 
 	componentWillReceiveProps({ error }) {
-		if(error && error instanceof ResponseError) {
-			this.props.setStatus(error.status, error.statusText)
+		const { staticContext } = this.props
+		if(staticContext && error && error instanceof ResponseError) {
+			staticContext.status = error.status
+			staticContext.statusText = error.statusText
 		}
 	}
 
@@ -41,4 +42,4 @@ const props = (state, { params: { id } }) => ({
 	loading: !isPostLoaded(state, id)
 })
 
-export default connect(props, { load, setStatus })(PostPage)
+export default connect(props, { load })(PostPage)

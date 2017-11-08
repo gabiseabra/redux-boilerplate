@@ -1,12 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { useBasename } from "history"
-import { Router, browserHistory } from "react-router"
-import { syncHistoryWithStore } from "react-router-redux"
-import Cookie from "js-cookie"
+import { createBrowserHistory as createHistory } from "history"
+import { ConnectedRouter } from "react-router-redux"
 import ApiClient from "../../lib/ApiClient"
-import { Provider } from "../../containers/app"
-import routes from "../../containers/routes"
+import { Provider, App } from "../../containers/app"
 import sync from "./hmr"
 import createStore from "../../redux/store"
 import createSaga from "../../redux/saga"
@@ -19,25 +16,29 @@ const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
 
 const appData = JSON.parse(document.getElementById("data").textContent)
 
-const store = createStore(Cookie, window.__state) // eslint-disable-line no-underscore-dangle
+const store = createStore(window.__state) // eslint-disable-line no-underscore-dangle
 
-const history = syncHistoryWithStore(
-	useBasename(() => browserHistory)({ basename: PUBLIC_PATH }),
-	store
-)
+const history = createHistory({ basename: PUBLIC_PATH })
 
 const apiClient = new ApiClient()
 
 let task = store.runSaga(createSaga(apiClient))
 
-ReactDOM.render(
-	<Provider data={appData} store={store}>
-		<Router history={history}>
-			{routes}
-		</Router>
-	</Provider>,
-	document.getElementById("app")
-)
+const root = document.getElementById("app")
+
+function render(hydrate = false) {
+	const component = (
+		<Provider data={appData} store={store}>
+			<ConnectedRouter history={history}>
+				<App />
+			</ConnectedRouter>
+		</Provider>
+	)
+	if(hydrate) ReactDOM.hydrate(component, root)
+	else ReactDOM.render(component, root)
+}
+
+render(root.dataset.ssr && root.dataset.ssr !== "false")
 
 if(process.env.NODE_ENV === "development") {
 	window.Perf = require("react-addons-perf")
@@ -51,4 +52,5 @@ if(module.hot) {
 		task.cancel()
 		task = store.runSaga(createSaga(apiClient))
 	})
+	module.hot.accept(() => render())
 }

@@ -1,5 +1,3 @@
-export const getStatus = state => state.status
-
 export const isFeedLoaded = state => state.content.feed.loaded
 
 export const getFeed = state => state.content.feed.data

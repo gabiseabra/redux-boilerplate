@@ -10,7 +10,6 @@ const vendorConfig = {
 		vendor: [
 			"isomorphic-fetch",
 			"es6-error",
-			"js-cookie",
 			"classnames",
 			"history"
 		],
@@ -19,11 +18,10 @@ const vendorConfig = {
 			"react-dom",
 			"react-helmet",
 			"react-redux",
-			"react-router",
+			"react-router-dom",
 			"react-router-redux",
 			"redux",
-			"redux-saga",
-			"redux-cookie"
+			"redux-saga"
 		]
 	},
 	output: {
@@ -39,13 +37,6 @@ const vendorConfig = {
 		new ManifestPlugin({
 			fileName: "manifest.json",
 			publicPath: config.output.publicPath
-		}),
-		new webpack.EnvironmentPlugin({
-			NODE_ENV: "production"
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			sourceMap: false
 		})
 	]
 }

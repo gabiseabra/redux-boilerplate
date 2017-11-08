@@ -1,2 +1,2 @@
-export { default as Html, renderWith } from "./Html"
+export { default as App } from "./App"
 export { default as Provider, withAppData } from "./Provider"

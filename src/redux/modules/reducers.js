@@ -1,2 +1,2 @@
+// eslint-disable-next-line import/prefer-default-export
 export { default as content } from "./content"
-export { default as status } from "./status"

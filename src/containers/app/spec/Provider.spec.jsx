@@ -2,8 +2,8 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { mount } from "enzyme"
-import Provider, { withAppData } from "./Provider"
-import createStore from "../../redux/store"
+import Provider, { withAppData } from "../Provider"
+import createStore from "../../../redux/store"
 
 const store = createStore()
 

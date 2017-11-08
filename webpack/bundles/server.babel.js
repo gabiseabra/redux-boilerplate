@@ -1,6 +1,7 @@
 import path from "path"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
+import ExtractTextPlugin from "extract-text-webpack-plugin"
 import appExternals from "../config/externals"
 import config, { loaders, context } from "../config"
 
@@ -20,9 +21,14 @@ export default merge.smart(config, {
 		libraryTarget: "commonjs"
 	},
 	module: {
-		rules: loaders()
+		rules: loaders({
+			styles: {
+				extract: ExtractTextPlugin
+			}
+		})
 	},
 	node: {
 		__dirname: false
-	}
+	},
+	plugins: [ new ExtractTextPlugin("styles.css") ]
 })

@@ -1,7 +1,6 @@
 import path from "path"
 import http from "http"
 import Express from "express"
-import Cookies from "cookies"
 import webpack from "webpack"
 import hotMiddleware from "webpack-hot-middleware"
 import devMiddleware from "webpack-dev-middleware"
@@ -34,8 +33,6 @@ const app = new Express()
 
 const server = http.Server(app)
 
-app.use(Cookies.connect())
-
 // Webpack dev server only servers files from it's publicPath
 // and the service worker should be on the root of the app's scope,
 // so rewrite url to make the relative path explicit.
@@ -54,7 +51,6 @@ if(HMR) {
 app.use(Express.static(path.join(__dirname, "../public")))
 
 app.use(appMiddleware({
-	serverRendering: false,
 	data: config,
 	manifest
 }))
