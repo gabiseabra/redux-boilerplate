@@ -1,3 +1,4 @@
+import "ignore-styles"
 import path from "path"
 import http from "http"
 import Express from "express"
