@@ -1,4 +1,4 @@
-import { put, call, fork, select, takeLatest } from "redux-saga/effects"
+import { put, call, fork, select, takeLatest, all } from "redux-saga/effects"
 import { isPostReady } from "./selectors"
 import * as actions from "./index"
 
@@ -23,8 +23,8 @@ export default function create(client) {
 
 
 	return function * watch() {
-		yield [
+		yield all([
 			takeLatest(actions.LOAD, load)
-		]
+		])
 	}
 }
