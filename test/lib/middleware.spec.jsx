@@ -1,9 +1,7 @@
 import React from "react"
-import promisify from "util.promisify"
 import { Switch, Route, Redirect } from "react-router-dom"
 import { renderToString } from "react-dom/server"
-import { createRequest, createResponse } from "node-mocks-http"
-import createMiddleware from "../../src/lib/middleware"
+import { apiClient, middleware } from "./context"
 
 const Root = props => (<div data-test="FOO" {...props} />)
 
@@ -16,57 +14,42 @@ const RouterRoot = () => (
 	</Switch>
 )
 
-const createTestMiddleware = (...args) => promisify(createMiddleware(...args))
-
 describe("appMiddleware", () => {
-	let middleware, req, res
-
-	beforeEach(() => {
-		req = createRequest({
-			method: "GET",
-			url: "/"
-		})
-		res = createResponse()
-	})
+	before(apiClient())
+	beforeEach(middleware({ rendering: false, Root }))
 
 	context("without server-side rendering", () => {
-		beforeEach(() => {
-			middleware = createTestMiddleware({ rendering: false, Root })
+		beforeEach(async function () {
+			const { res } = await this.middleware.run()
+			this.res = res
 		})
 
-		it("doesn't render Root component", async () => {
-			await middleware(req, res)
-			res.statusCode.should.eql(200)
-			res._getData().should.not.contain(renderToString(<Root />))
+		it("doesn't render Root component", function () {
+			this.res.statusCode.should.eql(200)
+			this.res._getData().should.not.contain(renderToString(<Root />))
 		})
 	})
 
 	context("with server-side rendering", () => {
-		beforeEach(() => {
-			middleware = createTestMiddleware({ rendering: true, Root })
-		})
+		beforeEach(middleware({ rendering: true, Root }))
 
-		it("renders Root component", async () => {
-			await middleware(req, res)
+		it("renders Root component", async function () {
+			const { res } = await this.middleware.run()
 			res.statusCode.should.eql(200)
 			res._getData().should.contain(renderToString(<Root />))
 		})
 
 		context("with routes", () => {
-			beforeEach(() => {
-				middleware = createTestMiddleware({ rendering: true, Root: RouterRoot })
-			})
+			beforeEach(middleware({ rendering: true, Root: RouterRoot }))
 
-			it("renders requested route", async () => {
-				req.url = "/foo"
-				await middleware(req, res)
+			it("renders requested route", async function () {
+				const { res } = await this.middleware.run({ path: "/foo" })
 				res.statusCode.should.eql(200)
 				res._getData().should.contain("TEST_FOO")
 			})
 
-			it("handles react-router Redirect", async () => {
-				req.url = "/bar"
-				await middleware(req, res)
+			it("handles react-router Redirect", async function () {
+				const { res } = await this.middleware.run({ path: "/bar" })
 				res.statusCode.should.eql(302)
 				res._getRedirectUrl().should.match(/\/foo$/)
 			})
