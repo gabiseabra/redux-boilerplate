@@ -2,12 +2,12 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Feed } from "../../components/views"
-import { load } from "../../redux/modules/content/feed"
+import { load } from "../../redux/modules/feed"
 import {
-	getFeed,
+	isFeedLoading,
 	getFeedError,
-	isFeedLoaded
-} from "../../redux/selectors"
+	getFeedPosts
+} from "../../redux/modules/feed/selectors"
 
 class FeedPage extends Component {
 	static propTypes = {
@@ -26,17 +26,16 @@ class FeedPage extends Component {
 		const {
 			feed,
 			error,
-			loading,
-			location: { query: { type } }
+			loading
 		} = this.props
-		return <Feed feed={feed} error={error} loading={loading} type={type} />
+		return <Feed feed={feed} error={error} loading={loading} />
 	}
 }
 
 const props = state => ({
 	error: getFeedError(state),
-	feed: getFeed(state),
-	loading: !isFeedLoaded(state)
+	feed: getFeedPosts(state),
+	loading: isFeedLoading(state)
 })
 
 export default connect(props, { load })(FeedPage)

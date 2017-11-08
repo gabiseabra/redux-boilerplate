@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as content } from "./content"
+export { default as feed } from "./feed"
+export { default as posts } from "./posts"

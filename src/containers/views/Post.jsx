@@ -2,32 +2,24 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { Post } from "../../components/views"
-import { getPost, getPostError, isPostLoaded } from "../../redux/selectors"
-import { load } from "../../redux/modules/content/posts"
-import { ResponseError } from "../../lib/ApiClient"
+import { load } from "../../redux/modules/posts"
+import {
+	getPost,
+	getPostError,
+	isPostLoading
+} from "../../redux/modules/posts/selectors"
 
 class PostPage extends Component {
 	static propTypes = {
-		params: PropTypes.shape({
-			id: PropTypes.string.isRequired
-		}).isRequired,
+		match: PropTypes.object.isRequired,
 		post: PropTypes.object,
 		error: PropTypes.instanceOf(Error),
 		loading: PropTypes.bool.isRequired,
-		load: PropTypes.func.isRequired,
-		staticContext: PropTypes.object
+		load: PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
-		this.props.load(this.props.params.id)
-	}
-
-	componentWillReceiveProps({ error }) {
-		const { staticContext } = this.props
-		if(staticContext && error && error instanceof ResponseError) {
-			staticContext.status = error.status
-			staticContext.statusText = error.statusText
-		}
+		this.props.load(this.props.match.params.id)
 	}
 
 	render() {
@@ -36,10 +28,10 @@ class PostPage extends Component {
 	}
 }
 
-const props = (state, { params: { id } }) => ({
-	post: getPost(state, id),
-	error: getPostError(state, id),
-	loading: !isPostLoaded(state, id)
+const props = (state, { match: { params } }) => ({
+	post: getPost(state, params),
+	error: getPostError(state, params),
+	loading: isPostLoading(state, params)
 })
 
 export default connect(props, { load })(PostPage)

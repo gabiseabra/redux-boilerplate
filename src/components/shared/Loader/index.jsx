@@ -14,7 +14,7 @@ Loader.propTypes = {
 	loading: PropTypes.bool.isRequired,
 	error: PropTypes.instanceOf(Error),
 	onRetry: PropTypes.func,
-	children: PropTypes.node.isRequired
+	children: PropTypes.node
 }
 
 export default Loader

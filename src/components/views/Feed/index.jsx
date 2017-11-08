@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { Link } from "react-router"
+import { Link } from "react-router-dom"
 import { Loader } from "../../shared"
 import styles from "./Feed.css"
 
@@ -25,7 +25,7 @@ const Feed = ({ feed, error, loading, type }) => (
 			<h1>Posts</h1>
 			{type && <h2>{type}</h2>}
 			{feed && <div className={styles.feed}>
-				{feed.map(post => <Post post={post} />)}
+				{feed.map(post => <Post key={post.id} post={post} />)}
 			</div>}
 		</Loader>
 	</section>

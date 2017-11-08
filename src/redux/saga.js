@@ -1,10 +1,11 @@
 import { fork } from "redux-saga/effects"
-import { content } from "./modules/sagas"
+import { feed, posts } from "./modules/sagas"
 
 export default function create(client) {
 	return function * root() {
 		yield [
-			fork(content(client))
+			fork(feed(client)),
+			fork(posts(client))
 		]
 	}
 }
