@@ -1,4 +1,5 @@
 import path from "path"
+import webpack from "webpack"
 import merge from "webpack-merge"
 import nodeExternals from "webpack-node-externals"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
@@ -30,5 +31,8 @@ export default merge.smart(config, {
 	node: {
 		__dirname: false
 	},
-	plugins: [ new ExtractTextPlugin("styles.css") ]
+	plugins: [
+		new ExtractTextPlugin("styles.css"),
+		new webpack.EnvironmentPlugin({ BUNDLE: "server" })
+	]
 })

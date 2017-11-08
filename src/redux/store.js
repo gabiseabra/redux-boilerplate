@@ -10,12 +10,14 @@ export default function create(state) {
 	const middleware = [
 		sagaMiddleware
 	]
-	/* eslint-disable no-underscore-dangle */
-	if(process.env.NODE_ENV === "development" && window.__REDUX_DEVTOOLS_EXTENSION__) {
+	if(process.env.NODE_ENV === "development" && process.env.BUNDLE === "client") {
 		middleware.push(createLoggerMiddleware())
-		enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__())
+		/* eslint-disable no-underscore-dangle */
+		if(window.__REDUX_DEVTOOLS_EXTENSION__) {
+			enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__())
+		}
+		/* eslint-enable */
 	}
-	/* eslint-enable */
 	const finalCreateStore = compose(
 		applyMiddleware(...middleware),
 		...enhancers

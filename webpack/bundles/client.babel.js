@@ -63,6 +63,7 @@ export default merge.smart(config, {
 			analyzerHost: process.env.HOST,
 			analyzerPort: process.env.ANALYZER_PORT
 		}),
+		new webpack.EnvironmentPlugin({ BUNDLE: "client" }),
 		...plugins
 	]
 })
