@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Post } from "../../components/views"
+import Helmet from "react-helmet"
+import { Post } from "../posts"
+import { Page } from "../../components/views"
 import { load } from "../../redux/modules/posts"
 import {
 	getPost,
@@ -12,24 +14,31 @@ import {
 class PostPage extends Component {
 	static propTypes = {
 		match: PropTypes.object.isRequired,
-		post: PropTypes.object,
 		error: PropTypes.instanceOf(Error),
+		post: PropTypes.object,
 		loading: PropTypes.bool.isRequired,
 		load: PropTypes.func.isRequired
 	}
 
 	componentWillMount() {
-		this.props.load(this.props.match.params.id)
+		this.props.load(this.id)
 	}
 
+	get id() { return this.props.match.params.id }
+
 	render() {
-		const { loading, post, error } = this.props
-		return <Post loading={loading} post={post} error={error} />
+		const { loading, error, post } = this.props
+		return (
+			<Page error={error} loading={loading}>
+				<Helmet title={post.title} />
+				<Post id={this.id} />
+			</Page>
+		)
 	}
 }
 
 const props = (state, { match: { params } }) => ({
-	post: getPost(state, params),
+	post: getPost(state, params) || {},
 	error: getPostError(state, params),
 	loading: isPostLoading(state, params)
 })

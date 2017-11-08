@@ -1,19 +1,18 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { Feed } from "../../components/views"
+import Helmet from "react-helmet"
+import { Feed } from "../posts"
+import { Page } from "../../components/views"
 import { load } from "../../redux/modules/feed"
 import {
 	isFeedLoading,
-	getFeedError,
-	getFeedPosts
+	getFeedError
 } from "../../redux/modules/feed/selectors"
 
 class FeedPage extends Component {
 	static propTypes = {
-		location: PropTypes.object.isRequired,
 		loading: PropTypes.bool.isRequired,
-		feed: PropTypes.arrayOf(PropTypes.object).isRequired,
 		error: PropTypes.object,
 		load: PropTypes.func.isRequired
 	}
@@ -23,18 +22,19 @@ class FeedPage extends Component {
 	}
 
 	render() {
-		const {
-			feed,
-			error,
-			loading
-		} = this.props
-		return <Feed feed={feed} error={error} loading={loading} />
+		const { error, loading } = this.props
+		return (
+			<Page error={error} loading={loading}>
+				<Helmet title="Feed" />
+				<Page.Title>Feed</Page.Title>
+				<Feed />
+			</Page>
+		)
 	}
 }
 
 const props = state => ({
 	error: getFeedError(state),
-	feed: getFeedPosts(state),
 	loading: isFeedLoading(state)
 })
 

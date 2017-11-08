@@ -1,11 +1,12 @@
 import React from "react"
 import Helmet from "react-helmet"
+import Page from "../Page"
 
 export default function Hello() {
 	return (
-		<section>
+		<Page>
 			<Helmet title="Hello" />
-			<h1>Hello</h1>
+			<Page.Title>Hello</Page.Title>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur
 				commodo libero. Aliquam eu dignissim ligula, quis lacinia lorem. <a href="/">In ultricies
@@ -34,6 +35,6 @@ export default function Hello() {
 				purus, id mattis tortor malesuada sit amet. Sed sit amet mi metus. Quisque quis
 				euismod nunc.
 			</blockquote>
-		</section>
+		</Page>
 	)
 }

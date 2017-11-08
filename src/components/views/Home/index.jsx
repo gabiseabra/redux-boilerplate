@@ -1,8 +1,9 @@
 import React from "react"
+import Page from "../Page"
 
 export default function Home() {
 	return (
-		<section>
+		<Page>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur efficitur
 				commodo libero. Aliquam eu dignissim ligula, quis lacinia lorem. In ultricies
@@ -22,6 +23,6 @@ export default function Home() {
 				purus, id mattis tortor malesuada sit amet. Sed sit amet mi metus. Quisque quis
 				euismod nunc.
 			</p>
-		</section>
+		</Page>
 	)
 }
