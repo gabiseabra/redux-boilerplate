@@ -3,6 +3,7 @@ import "ignore-styles"
 import { JSDOM } from "jsdom"
 import chai from "chai"
 import chaiEnzyme from "chai-enzyme"
+import chaiThings from "chai-things"
 import enzyme from "enzyme"
 import Adapter from "enzyme-adapter-react-16"
 import Helmet from "react-helmet"
@@ -16,6 +17,7 @@ global.document = dom.window.document
 global.navigator = { userAgent: "node.js" }
 
 chai.use(chaiEnzyme())
+chai.use(chaiThings)
 
 global.should = chai.should()
 global.expect = chai.expect
