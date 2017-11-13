@@ -4,7 +4,7 @@ import Express from "express"
 import compression from "compression"
 import favicon from "serve-favicon"
 import manifest from "manifest.json"
-import config from "config/app.json"
+import config from "@config/app.json"
 import appMiddleware from "../../lib/middleware"
 
 const HOST = process.env.HOST || "localhost"
