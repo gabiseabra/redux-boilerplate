@@ -1,7 +1,5 @@
-@import "../fonts.css";
-
 body {
-	font-family: var(--fontBody);
+	font-family: var(--font-body);
 	line-height: 1.5em;
 }
 
@@ -13,7 +11,7 @@ h5,
 h6 {
 	margin: .5em 0;
 	line-height: 110%;
-	font-family: var(--fontHeading);
+	font-family: var(--font-heading);
 	font-weight: 400;
 }
 
@@ -32,13 +30,13 @@ h5 { font-size: .83em; }
 
 h6 {
 	font-size: .75em;
-	font-family: var(--fontBody);
+	font-family: var(--font-body);
 }
 
 p { margin: 1em 0; }
 
 blockquote,
-.blockQuote {
+.blockquote {
 	margin: 1em 2em;
 	border-left: 4px solid;
 	padding-left: 1em;

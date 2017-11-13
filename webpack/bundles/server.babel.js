@@ -30,5 +30,5 @@ export default merge.smart(config, {
 	node: {
 		__dirname: false
 	},
-	plugins: [ new ExtractTextPlugin("styles.css") ]
+	plugins: [ new ExtractTextPlugin(".styles.css") ]
 })

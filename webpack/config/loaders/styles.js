@@ -17,7 +17,6 @@ const defaults = context => ({
 	},
 	modules: {
 		include: [
-			path.join(context, "styles"),
 			path.join(context, "src")
 		],
 		exclude: [

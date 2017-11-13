@@ -1,4 +1,5 @@
 const config = require("./webpack/config").default
+const variables = require("./styles/variables.json")
 const {
 	ResolverFactory,
 	NodeJsInputFileSystem,
@@ -25,6 +26,10 @@ module.exports = {
 		"postcss-global-import": {},
 		"postcss-import-url": {},
 		"postcss-url": {},
-		"postcss-cssnext": {}
+		"postcss-cssnext": {
+			features: {
+				customProperties: { variables }
+			}
+		}
 	}
 }
