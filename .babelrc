@@ -4,6 +4,9 @@
 		"stage-1",
 		"react"
 	],
+	"plugins": [
+		["webpack-alias", {"config": "webpack/bundles/server.babel.js"}]
+	],
 	"env": {
 		"production": {
 			"plugins": [
