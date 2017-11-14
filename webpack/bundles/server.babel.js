@@ -32,7 +32,7 @@ export default merge.smart(config, {
 		__dirname: false
 	},
 	plugins: [
-		new ExtractTextPlugin("styles.css"),
+		new ExtractTextPlugin(".styles.css"),
 		new webpack.EnvironmentPlugin({ BUNDLE: "server" })
 	]
 })

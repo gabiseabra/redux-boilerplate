@@ -29,6 +29,7 @@ export default merge.smart(config, {
 	entry: {
 		common: [
 			"babel-polyfill",
+			"./styles/app.css",
 			...common
 		],
 		main: "./src/bundles/client"

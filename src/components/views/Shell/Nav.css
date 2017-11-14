@@ -1,14 +1,10 @@
-@import "styles/colors.css";
-
 :root {
-	--handleSize: 24px;
-	--handleSpacing: calc(var(--handleSize) / 3);
+	--handle-size: 24px;
+	--handle-spacing: calc(var(--handle-size) / 3);
 	--animation: 200ms ease-in-out;
 }
 
 .icon {
-	composes: background from "styles/components/links.css";
-
 	&::before,
 	&::after {
 		background: inherit;
@@ -18,8 +14,8 @@
 .handle {
 	position: relative;
 	display: none;
-	width: var(--handleSize);
-	height: var(--handleSize);
+	width: var(--handle-size);
+	height: var(--handle-size);
 	z-index: 10;
 	cursor: pointer;
 
@@ -30,18 +26,18 @@
 		display: block;
 		content: "\0A";
 		height: 2px;
-		width: var(--handleSize);
+		width: var(--handle-size);
 		text-align: center;
 		border-radius: 2px;
 		transition: all var(--animation);
 	}
 	& .icon {
-		margin-top: var(--handleSpacing);
+		margin-top: var(--handle-spacing);
 
-		&::before { top: -var(--handleSpacing); }
+		&::before { top: -var(--handle-spacing); }
 		&::after {
-			bottom: -var(--handleSpacing);
-			width: calc(var(--handleSize) / 100 * 70);
+			bottom: -var(--handle-spacing);
+			width: calc(var(--handle-size) / 100 * 70);
 		}
 	}
 }
@@ -53,7 +49,7 @@
 	& .icon::before,
 	& .icon::after {
 		top: 0;
-		width: var(--handleSize);
+		width: var(--handle-size);
 	}
 }
 
@@ -83,7 +79,7 @@
 		right: 0;
 		justify-content: center;
 		align-items: center;
-		background: var(--primaryColor);
+		background: var(--color-primary);
 		transition: all var(--animation);
 
 		& ul {

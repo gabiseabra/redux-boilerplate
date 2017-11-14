@@ -1,6 +1,7 @@
-@import "styles/app.css";
-@import "styles/colors.css";
-@import "styles/layout.css";
+:root {
+	--min-width: 300px;
+	--max-width: 700px;
+}
 
 html,
 body {
@@ -13,7 +14,7 @@ body,
 .Shell {
 	width: 100%;
 	min-height: 100%;
-	min-width: var(--minWidth);
+	min-width: var(--min-width);
 	margin: 0;
 	padding: 0;
 }
@@ -25,8 +26,8 @@ body,
 .Shell {
 	display: flex;
 	flex-direction: column;
-	background: var(--backgroundColor);
-	color: var(--textColor);
+	background: var(--color-bg);
+	color: var(--color-text);
 }
 
 .header,
@@ -39,6 +40,6 @@ body,
 	width: 100%;
 	margin: 0 auto;
 	padding: 1em 2em;
-	max-width: var(--maxWidth);
+	max-width: var(--max-width);
 	box-sizing: border-box;
 }

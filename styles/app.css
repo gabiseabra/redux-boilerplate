@@ -1,7 +1,7 @@
-@import "normalize-css/normalize.css";
-@import "./components/links.css";
-@import "./components/selection.css";
-@import "./components/typography.css";
+@import "./app/fonts.css";
+@import "./app/links.css";
+@import "./app/selection.css";
+@import "./app/typography.css";
 
 html {
 	touch-action: manipulation;

@@ -40,9 +40,9 @@ export default merge.smart({
 		extensions: [ ".json", ".js", ".jsx" ],
 		alias: {
 			"manifest.json$": path.join(context, "public/dist/manifest.json"),
-			config: path.join(context, "config"),
-			public: path.join(context, "public"),
-			styles: path.join(context, "styles")
+			"@config": path.join(context, "config"),
+			"@styles": path.join(context, "styles"),
+			"@root": path.join(context, "root")
 		}
 	},
 	plugins

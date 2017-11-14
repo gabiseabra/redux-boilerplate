@@ -1,31 +1,29 @@
-@import "styles/colors.css";
-@import "styles/layout.css";
-
 :root {
-	--brandSize: 1.4em;
+	--brand-size: 1.4em;
+	--max-width: 700px;
 }
 
 .Header {
-	composes: inverse from "styles/components/links.css";
+	composes: inverse from global;
 	padding: 10px 20px;
-	background: var(--primaryColor);
-	color: var(--primaryTextColor);
+	background: var(--color-primary);
+	color: var(--color-primary-text);
 }
 
 .container {
 	width: 100%;
 	margin: 0 auto;
-	max-width: var(--maxWidth);
+	max-width: var(--max-width);
 }
 
 .brand {
-	font-size: var(--brandSize);
+	font-size: var(--brand-size);
 	white-space: nowrap;
 	float: left;
 }
 
 .nav {
 	float: right;
-	height: var(--brandSize);
-	line-height: var(--brandSize);
+	height: var(--brand-size);
+	line-height: var(--brand-size);
 }
