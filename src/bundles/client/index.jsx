@@ -5,6 +5,7 @@ import { Provider, App } from "../../containers/app"
 import sync from "./hmr"
 
 if(process.env.OFFLINE === "true") {
+	// eslint-disable-next-line global-require
 	require("offline-plugin/runtime").install()
 }
 

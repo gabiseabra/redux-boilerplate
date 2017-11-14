@@ -23,6 +23,7 @@ export default class Provider extends React.Component {
 
 	render() {
 		if(module.hot) {
+			// eslint-disable-next-line global-require
 			const { AppContainer } = require("react-hot-loader")
 			return <AppContainer>{this.props.children}</AppContainer>
 		}

@@ -6,7 +6,7 @@
     "start": "npm run server",
     "watch": "babel-node webpack/devServer.js --hot",
     "test": "mocha \"./{test,src}/**/*.spec.{js,jsx}\"",
-    "lint": "eslint src test scripts",
+    "lint": "eslint 'src/**' 'scripts/**'",
     "prebuild": "cross-env NODE_ENV=production npm run build:vendor",
     "build": "webpack --config=webpack/config.babel.js",
     "build:dev": "cross-env NODE_ENV=development npm run build --",

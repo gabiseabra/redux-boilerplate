@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import path from "path"
 import http from "http"
 import Express from "express"
 import compression from "compression"
 import favicon from "serve-favicon"
 import manifest from "manifest.json"
-import config from "@config/app.json"
+import config from "_config/app.json"
 import appMiddleware from "../../lib/middleware"
 
 const HOST = process.env.HOST || "localhost"
