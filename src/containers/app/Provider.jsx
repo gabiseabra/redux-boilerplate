@@ -31,6 +31,7 @@ export default class ContextProvider extends React.Component {
 			</Provider>
 		)
 		if(module.hot) {
+			// eslint-disable-next-line global-require
 			const { AppContainer } = require("react-hot-loader")
 			return <AppContainer>{component}</AppContainer>
 		}

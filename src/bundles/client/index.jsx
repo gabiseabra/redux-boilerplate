@@ -9,6 +9,7 @@ import createStore from "../../redux/store"
 import createSaga from "../../redux/saga"
 
 if(process.env.OFFLINE === "true") {
+	// eslint-disable-next-line global-require
 	require("offline-plugin/runtime").install()
 }
 

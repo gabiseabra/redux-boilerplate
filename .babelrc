@@ -5,7 +5,8 @@
 		"react"
 	],
 	"plugins": [
-		"transform-decorators"
+		"transform-decorators",
+		["webpack-alias", {"config": "webpack/bundles/server.babel.js"}]
 	],
 	"env": {
 		"production": {

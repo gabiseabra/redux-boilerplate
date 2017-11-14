@@ -10,6 +10,7 @@ const Html = ({ store, data, manifest, children }) => {
 	const content = children ? ReactDOM.renderToString(children) : ""
 	const head = Helmet.rewind()
 	const html = head.htmlAttributes.toComponent()
+	/* eslint-disable react/no-danger */
 	return (
 		<html lang="en" {...html}>
 			<head>
@@ -39,6 +40,7 @@ const Html = ({ store, data, manifest, children }) => {
 			</body>
 		</html>
 	)
+	/* eslint-enable */
 }
 
 Html.propTypes = {
