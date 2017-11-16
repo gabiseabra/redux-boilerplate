@@ -2,11 +2,10 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { createBrowserHistory as createHistory } from "history"
 import { ConnectedRouter } from "react-router-redux"
-import ApiClient from "../../lib/ApiClient"
-import { Provider, App } from "../../containers/app"
-import sync from "./hmr"
-import createStore from "../../redux/store"
-import createSaga from "../../redux/saga"
+import ApiClient from "../lib/ApiClient"
+import { Provider, App } from "../containers/app"
+import createStore from "../redux/store"
+import createSaga from "../redux/saga"
 
 if(process.env.OFFLINE === "true") {
 	// eslint-disable-next-line global-require
@@ -42,9 +41,6 @@ function render(hydrate = false) {
 render(root.dataset.ssr && root.dataset.ssr !== "false")
 
 if(module.hot) {
-	// eslint-disable-next-line no-underscore-dangle
-	sync(window.__webpack_hot_middleware_reporter__)
-
 	module.hot.accept("../../redux/saga", () => {
 		task.cancel()
 		task = store.runSaga(createSaga(apiClient))
