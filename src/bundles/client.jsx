@@ -41,7 +41,7 @@ function render(hydrate = false) {
 render(root.dataset.ssr && root.dataset.ssr !== "false")
 
 if(module.hot) {
-	module.hot.accept("../../redux/saga", () => {
+	module.hot.accept("../redux/saga", () => {
 		task.cancel()
 		task = store.runSaga(createSaga(apiClient))
 	})
