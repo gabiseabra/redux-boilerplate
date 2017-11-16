@@ -6,7 +6,7 @@ import compression from "compression"
 import favicon from "serve-favicon"
 import manifest from "manifest.json"
 import config from "@/config/app.json"
-import appMiddleware from "../../lib/middleware"
+import appMiddleware from "../lib/middleware"
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 80

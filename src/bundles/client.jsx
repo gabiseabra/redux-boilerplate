@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
-import { Provider, App } from "../../containers/app"
-import sync from "./hmr"
+import { Provider, App } from "../containers/app"
 
 if(process.env.OFFLINE === "true") {
 	// eslint-disable-next-line global-require
@@ -30,7 +29,5 @@ function render(hydrate = false) {
 render(root.dataset.ssr && root.dataset.ssr !== "false")
 
 if(module.hot) {
-	// eslint-disable-next-line no-underscore-dangle
-	sync(window.__webpack_hot_middleware_reporter__)
 	module.hot.accept(() => render())
 }
