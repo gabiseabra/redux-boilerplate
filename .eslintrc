@@ -16,9 +16,7 @@
 	},
 	"settings": {
 		"import/resolver": {
-			"webpack": {
-				"config": "webpack/bundles/server.babel.js"
-			}
+			"babel-module": {}
 		}
 	},
 	"rules": {

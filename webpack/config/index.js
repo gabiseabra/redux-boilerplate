@@ -37,11 +37,7 @@ export default merge.smart({
 		filename: "[name].js"
 	},
 	resolve: {
-		extensions: [ ".json", ".js", ".jsx" ],
-		alias: {
-			"manifest.json$": path.join(context, "public/dist/manifest.json"),
-			"@": context
-		}
+		extensions: [ ".json", ".js", ".jsx" ]
 	},
 	plugins
 }, envConfig)

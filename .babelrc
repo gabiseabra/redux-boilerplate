@@ -5,7 +5,12 @@
 		"react"
 	],
 	"plugins": [
-		"transform-decorators"
+		"transform-decorators",
+		["module-resolver", {
+			"alias": {
+				"@": "./"
+			}
+		}]
 	],
 	"env": {
 		"production": {
