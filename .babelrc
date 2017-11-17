@@ -4,7 +4,13 @@
 		"stage-1",
 		"react"
 	],
-	"plugins": [],
+	"plugins": [
+		["module-resolver", {
+			"alias": {
+				"@": "./"
+			}
+		}]
+	],
 	"env": {
 		"production": {
 			"plugins": [
