@@ -43,7 +43,7 @@ const vendorConfig = {
 export default vendorConfig
 
 export function entryPath(entry) {
-	return url.resolve(vendorConfig.output.publicPath, entry)
+	return url.resolve(vendorConfig.output.publicPath, `${entry}.dll.js`)
 }
 
 export function manifest(entry) {
