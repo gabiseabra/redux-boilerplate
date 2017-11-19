@@ -30,6 +30,11 @@ const vendorConfig = {
 		library: "[name]_dll"
 	},
 	plugins: [
+		new webpack.EnvironmentPlugin([ "NODE_ENV" ]),
+		new webpack.optimize.UglifyJsPlugin({
+			minimize: (process.env.NODE_ENV === "production"),
+			sourceMap: false
+		}),
 		new webpack.DllPlugin({
 			path: path.join(__dirname, "../../public/dist/[name].manifest.json"),
 			name: "[name]_dll"
@@ -44,7 +49,7 @@ const vendorConfig = {
 export default vendorConfig
 
 export function entryPath(entry) {
-	return url.resolve(vendorConfig.output.publicPath, entry)
+	return url.resolve(vendorConfig.output.publicPath, `${entry}.dll.js`)
 }
 
 export function manifest(entry) {

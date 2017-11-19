@@ -7,7 +7,7 @@ export default externals => ({
 	caches: {
 		main: [
 			"main.*",
-			"common.js",
+			"common.*",
 			url.resolve(PUBLIC_PATH, "index.html"),
 			...externals
 		],

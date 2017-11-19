@@ -20,7 +20,7 @@ if(process.argv.indexOf("--hot") !== -1) {
 	)
 }
 
-if(process.env.OFFLINE === "true") {
+if(process.env.OFFLINE === "true" && process.env.NODE_ENV === "production") {
 	const offlineOptions = offline(vendor.scripts)
 	plugins.unshift(new OfflinePlugin(offlineOptions))
 }
