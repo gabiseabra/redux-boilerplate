@@ -2,10 +2,10 @@ import { put, call, fork, select, takeLatest, all } from "redux-saga/effects"
 import { isFeedReady } from "./selectors"
 import * as actions from "./index"
 
-export default function create(client) {
+export default function create({ apiClient }) {
 	function * request() {
 		yield put(actions.request())
-		const response = yield call(client.feed)
+		const response = yield call(apiClient.feed)
 		if(response.error) {
 			yield put(actions.fail(response.error))
 		} else {

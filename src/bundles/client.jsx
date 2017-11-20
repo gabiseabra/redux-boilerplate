@@ -22,7 +22,7 @@ const history = createHistory({ basename: PUBLIC_PATH })
 
 const apiClient = new ApiClient()
 
-let task = store.runSaga(createSaga(apiClient))
+let task = store.runSaga(createSaga({ apiClient }))
 
 const root = document.getElementById("app")
 

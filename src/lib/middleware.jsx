@@ -33,11 +33,12 @@ export default function middleware(config) {
 	} = defaults(config)
 	const manifest = new Manifest(config.manifest)
 	const render = renderWith({ data, manifest })
+	const apiClient = new ApiClient()
 	return (req, res, next) => {
 		if(!rendering) {
 			res.send(render())
 		} else {
-			const saga = createSaga(new ApiClient())
+			const saga = createSaga({ apiClient })
 			const store = createStore()
 			const context = {}
 			const body = render(

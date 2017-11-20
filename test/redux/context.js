@@ -4,7 +4,9 @@ import { apiClient } from "../lib/context"
 
 export function saga() {
 	if(!this.apiClient) apiClient.call(this)
-	this.saga = createSaga(this.apiClient)
+	this.saga = createSaga({
+		apiClient: this.apiClient
+	})
 }
 
 export const store = state => function () {
