@@ -1,0 +1,14 @@
+{
+  "react.js": "/redux-boilerplate/dist/react.dll.js",
+  "vendor.js": "/redux-boilerplate/dist/vendor.dll.js",
+  "common.css": "/redux-boilerplate/dist/common.css",
+  "common.js": "/redux-boilerplate/dist/common.js",
+  "icons.css": "/redux-boilerplate/dist/icons.css",
+  "icons.eot": "/redux-boilerplate/dist/font/icons.eot",
+  "icons.svg": "/redux-boilerplate/dist/font/icons.svg",
+  "icons.ttf": "/redux-boilerplate/dist/font/icons.ttf",
+  "icons.woff": "/redux-boilerplate/dist/font/icons.woff",
+  "icons.woff2": "/redux-boilerplate/dist/font/icons.woff2",
+  "main.css": "/redux-boilerplate/dist/main.css",
+  "main.js": "/redux-boilerplate/dist/main.js"
+}
