@@ -12,7 +12,6 @@ const Header = ({ appData, className }) => (
 			<Nav className={styles.nav}>
 				<Link to="/" key="home">Home</Link>
 				<Link to="/hello" key="hello">Hello</Link>
-				<Link to="/posts" key="posts">Posts</Link>
 			</Nav>
 		</div>
 	</header>
