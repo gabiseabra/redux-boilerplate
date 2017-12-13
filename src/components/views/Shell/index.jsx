@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
+import { withAppData } from "../../../containers/shared"
 import Header from "./Header"
 import Footer from "./Footer"
 import styles from "./Shell.css"
@@ -19,4 +20,4 @@ Shell.propTypes = {
 	appData: PropTypes.object.isRequired
 }
 
-export default Shell
+export default withAppData(Shell)

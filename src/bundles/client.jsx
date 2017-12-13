@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
-import { Provider, App } from "../containers/app"
+import { Provider } from "../containers/shared"
+import App from "../containers/app/App"
 
 if(process.env.OFFLINE === "true") {
 	// eslint-disable-next-line global-require

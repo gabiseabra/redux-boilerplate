@@ -1,7 +1,8 @@
 import React from "react"
 import { StaticRouter } from "react-router-dom"
-import { App, Provider } from "../containers/app"
+import { Provider } from "../containers/shared"
 import { renderWith } from "../containers/app/Html"
+import App from "../containers/app/App"
 import Manifest from "./Manifest"
 
 const PUBLIC_PATH = process.env.PUBLIC_PATH || "/"
